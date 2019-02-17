@@ -36,6 +36,7 @@ public class frmTrabajador extends javax.swing.JFrame {
         tablalistado.getColumnModel().getColumn(0).setMaxWidth(0);
         tablalistado.getColumnModel().getColumn(0).setMinWidth(0);
         tablalistado.getColumnModel().getColumn(0).setPreferredWidth(0);
+        
     }   
     
     void inhabilitar (){
@@ -72,6 +73,20 @@ public class frmTrabajador extends javax.swing.JFrame {
         btnEliminar.setEnabled(true);
     }    
 
+    
+    void limpiar(){
+    
+        txtCedulaTrabajador.setText("");
+        txtNombreTrabajador.setText("");
+        txtDireccionTrabajador.setText("");
+        cbSexo.setSelectedIndex(0);
+        txtTelefonoTrabajador.setText("");
+        txtCorreoTrabajador.setText("");
+        cbAcceso.setSelectedIndex(0);
+        txtContraseñaTrabajador.setText("");
+        txtConfirmacionTrabajador.setText("");
+    }
+    
 
     void mostrar (String buscar){
         
@@ -228,6 +243,11 @@ public class frmTrabajador extends javax.swing.JFrame {
         btnCancelar.setBackground(new java.awt.Color(255, 255, 255));
         btnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Files/cancelar.png"))); // NOI18N
         btnCancelar.setText("Cancelar");
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
 
         txtCorreoTrabajador.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -586,15 +606,19 @@ public class frmTrabajador extends javax.swing.JFrame {
             if (func.insertar(dts)) {
                 JOptionPane.showMessageDialog(rootPane, "Se guardo correctamente");
                 mostrar("");
+                limpiar();
                 inhabilitar();
             }
         }else if(accion.equals("Editar")){
-            dts.setId_trabajador(txtCedulaTrabajador.getText());
+            //dts.setId_trabajador(txtCedulaTrabajador.getText());
+            
         
             if (func.editar(dts)) {
                 JOptionPane.showMessageDialog(rootPane, "El trabajador fue registrado exitosamente");
                 mostrar("");
+                limpiar();
                 inhabilitar();
+                
             }
         
         }
@@ -703,6 +727,11 @@ public class frmTrabajador extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_btnSalirActionPerformed
+
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        limpiar();
+        inhabilitar();
+    }//GEN-LAST:event_btnCancelarActionPerformed
 
     /**
      * @param args the command line arguments
