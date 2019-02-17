@@ -5,7 +5,8 @@
  */
 package Logica;
 
-import Datos.vproveedor;
+
+import Datos.vcliente;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -13,14 +14,12 @@ import java.sql.Statement;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-
-
 /**
  *
  * @author Raimon
  */
-public class fproveedor {
-    
+public class fcliente {
+        
     private conexion mysql=new conexion();
     private Connection cn=mysql.conectar();
     private String sSQL="";
@@ -30,15 +29,15 @@ public class fproveedor {
     {
         DefaultTableModel modelo;
         
-        String [] titulos = {"ID","Cedula", "Nombre", "Direccion", "Rif", "Empresa", "Telefono", "Correo"};
+        String [] titulos = {"ID", "Nombre", "Direccion", "Telefono", "Correo", "Sexo"};
         
-        String [] registro = new String [8];
+        String [] registro = new String [6];
         
         totalregistros=0;
         
         modelo= new DefaultTableModel(null, titulos);
         
-        sSQL="select * from proveedor where id_trabajador like '%" + buscar + "%' order  by id_proveedor";
+        sSQL="select * from cliente where id_cliente like '%" + buscar + "%' order  by id_cliente";
         
         try {
             Statement st= cn.createStatement();
@@ -46,14 +45,13 @@ public class fproveedor {
             
             while(rs.next())
             {
-                registro [0]= rs.getString("id_proveedor");
-                registro [1]= rs.getString("cedula");
-                registro [2]= rs.getString("nombre");
-                registro [3]= rs.getString("direccion");
-                registro [4]= rs.getString("rif");
-                registro [5]= rs.getString("empresa");
-                registro [6]= rs.getString("telefono");
-                registro [7]= rs.getString("correo");
+                registro [0]= rs.getString("id_cliente");
+                registro [1]= rs.getString("nombre");
+                registro [2]= rs.getString("direccion");;
+                registro [3]= rs.getString("telefono");
+                registro [4]= rs.getString("correo");
+                registro [5]= rs.getString("sexo");
+                
                 
                 totalregistros= totalregistros+1;
                 modelo.addRow(registro);
@@ -68,20 +66,19 @@ public class fproveedor {
     }
         
         
-        public boolean insertar (vproveedor dts)
+        public boolean insertar (vcliente dts)
         {
-            sSQL="Insert into proveedor (id_proveedor,cedula, nombre, direccion, rif, empresa, telefono, correo)" + "values (?,?,?,?,?,?,?,?)";
+            sSQL="Insert into cliente (id_cliente,nombre, direccion, telefono, correo, sexo)" + "values (?,?,?,?,?,?)";
             try {
                 
                 PreparedStatement pst=cn.prepareStatement(sSQL);
-                pst.setInt(1, dts.getId_proveedor());
-                pst.setString(2, dts.getCedula());
-                pst.setString(3, dts.getNombre());
-                pst.setString(4, dts.getDireccion());
-                pst.setString(5, dts.getRif());
-                pst.setString(6, dts.getEmpresa());
-                pst.setString(7, dts.getTelefono());
-                pst.setString(8, dts.getCorreo());
+                pst.setString(1, dts.getId_cliente());
+                pst.setString(2, dts.getNombre());
+                pst.setString(3, dts.getDireccion());;
+                pst.setString(4, dts.getTelefono());
+                pst.setString(5, dts.getCorreo());
+                pst.setString(6, dts.getSexo());
+                
                 
                 int n=pst.executeUpdate();
                 
@@ -100,20 +97,18 @@ public class fproveedor {
             }
         }
         
-        public boolean editar (vproveedor dts)
+        public boolean editar (vcliente dts)
         {
-            sSQL= "Update proveedor set cedula=?, nombre=?, direccion=?, rif=?, empresa=?, telefono=?, correo=?" + "where id_proveedor=?";
+            sSQL= "Update cliente set nombre=?, direccion=?, telefono=?, correo=?, sexo=?" + "where id_cliente=?";
             
             try {
                 
                 PreparedStatement pst=cn.prepareStatement(sSQL);
-                pst.setString(1, dts.getCedula());
-                pst.setString(2, dts.getNombre());
-                pst.setString(3, dts.getDireccion());
-                pst.setString(4, dts.getRif());
-                pst.setString(5, dts.getEmpresa());
-                pst.setString(6, dts.getTelefono());
-                pst.setString(7, dts.getCorreo());
+                pst.setString(1, dts.getNombre());
+                pst.setString(2, dts.getDireccion());
+                pst.setString(3, dts.getTelefono());
+                pst.setString(4, dts.getCorreo());
+                pst.setString(5, dts.getSexo());
                 
                 int n=pst.executeUpdate();
                 
@@ -133,14 +128,13 @@ public class fproveedor {
             }
         }
         
-        
-        public boolean eliminar (vproveedor dts)
+         public boolean eliminar (vcliente dts)
         {
-            sSQL="delete from proveedor where id_proveedor=?";
+            sSQL="delete from cliente where id_cliente=?";
             try {
                 
                 PreparedStatement pst=cn.prepareStatement(sSQL);
-                pst.setInt(1, dts.getId_proveedor());
+                pst.setString(1, dts.getId_cliente());
 
                 int n=pst.executeUpdate();
                 
@@ -158,9 +152,6 @@ public class fproveedor {
                 return false;
             }
         }
-        
-        
-        
         
         
 }
