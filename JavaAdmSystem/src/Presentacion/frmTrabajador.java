@@ -531,7 +531,7 @@ public class frmTrabajador extends javax.swing.JFrame {
 
     private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
         // TODO add your handling code here:
-        
+        limpiar();
         habilitar();
         btnGuardar.setText("Guardar");
         accion="Guardar";
@@ -610,7 +610,8 @@ public class frmTrabajador extends javax.swing.JFrame {
                 inhabilitar();
             }
         }else if(accion.equals("Editar")){
-            //dts.setId_trabajador(txtCedulaTrabajador.getText());
+            dts.setId_trabajador(txtCedulaTrabajador.getText());
+            
             
         
             if (func.editar(dts)) {
@@ -703,6 +704,7 @@ public class frmTrabajador extends javax.swing.JFrame {
 
         btnGuardar.setText("Editar");
         habilitar();
+        
         btnEliminar.setEnabled(true);
         accion="Editar";
         
@@ -711,6 +713,9 @@ public class frmTrabajador extends javax.swing.JFrame {
         int fila = tablalistado.rowAtPoint(evt.getPoint());
         
         txtCedulaTrabajador.setText(tablalistado.getValueAt(fila,0).toString());
+        
+        txtCedulaTrabajador.setEnabled(false);
+        
         txtNombreTrabajador.setText(tablalistado.getValueAt(fila,1).toString());
         txtDireccionTrabajador.setText(tablalistado.getValueAt(fila,2).toString());        
         cbSexo.setSelectedItem(tablalistado.getValueAt(fila,3).toString());

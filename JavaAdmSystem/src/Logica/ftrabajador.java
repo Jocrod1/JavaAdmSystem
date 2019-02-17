@@ -101,7 +101,7 @@ public class ftrabajador {
     
         public boolean editar (vtrabajador dts)
         {
-            sSQL= "Update trabajador set nombre=?, direccion=?, sexo=?, contraseña=?, telefono=?, correo=?" + "where id_trabajador=?";
+            sSQL= "Update trabajador set nombre=?, direccion=?, sexo=?,acceso=?, contraseña=?, telefono=?, correo=?" + "where id_trabajador=?";
             
             try {
                 
@@ -113,6 +113,7 @@ public class ftrabajador {
                 pst.setString(5, dts.getContraseña());
                 pst.setString(6, dts.getTelefono());
                 pst.setString(7, dts.getCorreo());
+                pst.setString(8, dts.getId_trabajador());
                 
                 int n=pst.executeUpdate();
                 
