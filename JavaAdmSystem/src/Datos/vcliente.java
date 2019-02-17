@@ -9,37 +9,33 @@ package Datos;
  *
  * @author Raimon
  */
-public class vtrabajador {
+public class vcliente {
     
-    private String id_trabajador;
+    private String id_cliente;
     private String nombre;
     private String direccion;
-    private String sexo;
-    private int acceso;
-    private String contraseña;
     private String telefono;
     private String correo;
+    private String sexo;
 
-    public vtrabajador(String id_trabajador, String nombre, String direccion, String sexo, int acceso, String contraseña, String telefono, String correo) {
-        this.id_trabajador = id_trabajador;
+    public vcliente(String id_cliente, String nombre, String direccion, String telefono, String correo, String sexo) {
+        this.id_cliente = id_cliente;
         this.nombre = nombre;
         this.direccion = direccion;
-        this.sexo = sexo;
-        this.acceso = acceso;
-        this.contraseña = contraseña;
         this.telefono = telefono;
         this.correo = correo;
+        this.sexo = sexo;
     }
 
-    public vtrabajador() {
+    public vcliente() {
     }
 
-    public String getId_trabajador() {
-        return id_trabajador;
+    public String getId_cliente() {
+        return id_cliente;
     }
 
-    public void setId_trabajador(String id_trabajador) {
-        this.id_trabajador = id_trabajador;
+    public void setId_cliente(String id_cliente) {
+        this.id_cliente = id_cliente;
     }
 
     public String getNombre() {
@@ -58,30 +54,6 @@ public class vtrabajador {
         this.direccion = direccion;
     }
 
-    public String getSexo() {
-        return sexo;
-    }
-
-    public void setSexo(String sexo) {
-        this.sexo = sexo;
-    }
-
-    public int getAcceso() {
-        return acceso;
-    }
-
-    public void setAcceso(int acceso) {
-        this.acceso = acceso;
-    }
-
-    public String getContraseña() {
-        return contraseña;
-    }
-
-    public void setContraseña(String contraseña) {
-        this.contraseña = contraseña;
-    }
-
     public String getTelefono() {
         return telefono;
     }
@@ -97,6 +69,15 @@ public class vtrabajador {
     public void setCorreo(String correo) {
         this.correo = correo;
     }
+
+    public String getSexo() {
+        return sexo;
+    }
+
+    public void setSexo(String sexo) {
+        this.sexo = sexo;
+    }
+    
     
     
     
