@@ -9,37 +9,45 @@ package Datos;
  *
  * @author Raimon
  */
-public class vtrabajador {
+public class vproveedor {
     
-    private String id_trabajador;
+    private int id_proveedor;
+    private String cedula;
     private String nombre;
     private String direccion;
-    private String sexo;
-    private int acceso;
-    private String contraseña;
+    private String rif;
+    private String empresa;
     private String telefono;
     private String correo;
 
-    public vtrabajador(String id_trabajador, String nombre, String direccion, String sexo, int acceso, String contraseña, String telefono, String correo) {
-        this.id_trabajador = id_trabajador;
+    public vproveedor(int id_proveedor, String cedula, String nombre, String direccion, String rif, String empresa, String telefono, String correo) {
+        this.id_proveedor = id_proveedor;
+        this.cedula = cedula;
         this.nombre = nombre;
         this.direccion = direccion;
-        this.sexo = sexo;
-        this.acceso = acceso;
-        this.contraseña = contraseña;
+        this.rif = rif;
+        this.empresa = empresa;
         this.telefono = telefono;
         this.correo = correo;
     }
 
-    public vtrabajador() {
+    public vproveedor() {
     }
 
-    public String getId_trabajador() {
-        return id_trabajador;
+    public int getId_proveedor() {
+        return id_proveedor;
     }
 
-    public void setId_trabajador(String id_trabajador) {
-        this.id_trabajador = id_trabajador;
+    public void setId_proveedor(int id_proveedor) {
+        this.id_proveedor = id_proveedor;
+    }
+
+    public String getCedula() {
+        return cedula;
+    }
+
+    public void setCedula(String cedula) {
+        this.cedula = cedula;
     }
 
     public String getNombre() {
@@ -58,28 +66,20 @@ public class vtrabajador {
         this.direccion = direccion;
     }
 
-    public String getSexo() {
-        return sexo;
+    public String getRif() {
+        return rif;
     }
 
-    public void setSexo(String sexo) {
-        this.sexo = sexo;
+    public void setRif(String rif) {
+        this.rif = rif;
     }
 
-    public int getAcceso() {
-        return acceso;
+    public String getEmpresa() {
+        return empresa;
     }
 
-    public void setAcceso(int acceso) {
-        this.acceso = acceso;
-    }
-
-    public String getContraseña() {
-        return contraseña;
-    }
-
-    public void setContraseña(String contraseña) {
-        this.contraseña = contraseña;
+    public void setEmpresa(String empresa) {
+        this.empresa = empresa;
     }
 
     public String getTelefono() {
@@ -97,6 +97,7 @@ public class vtrabajador {
     public void setCorreo(String correo) {
         this.correo = correo;
     }
+    
     
     
     
