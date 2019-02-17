@@ -15,12 +15,12 @@ public class vtrabajador {
     private String nombre;
     private String direccion;
     private String sexo;
-    private int acceso;
+    private String acceso;
     private String contraseña;
     private String telefono;
     private String correo;
 
-    public vtrabajador(String id_trabajador, String nombre, String direccion, String sexo, int acceso, String contraseña, String telefono, String correo) {
+    public vtrabajador(String id_trabajador, String nombre, String direccion, String sexo, String acceso, String contraseña, String telefono, String correo) {
         this.id_trabajador = id_trabajador;
         this.nombre = nombre;
         this.direccion = direccion;
@@ -66,11 +66,11 @@ public class vtrabajador {
         this.sexo = sexo;
     }
 
-    public int getAcceso() {
+    public String getAcceso() {
         return acceso;
     }
 
-    public void setAcceso(int acceso) {
+    public void setAcceso(String acceso) {
         this.acceso = acceso;
     }
 

@@ -77,7 +77,7 @@ public class ftrabajador {
                 pst.setString(2, dts.getNombre());
                 pst.setString(3, dts.getDireccion());
                 pst.setString(4, dts.getSexo());
-                pst.setInt(5, dts.getAcceso());
+                pst.setString(5, dts.getAcceso());
                 pst.setString(6, dts.getContraseña());
                 pst.setString(7, dts.getTelefono());
                 pst.setString(8, dts.getCorreo());
