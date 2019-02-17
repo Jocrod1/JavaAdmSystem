@@ -5,6 +5,11 @@
  */
 package Presentacion;
 
+import Datos.vtrabajador;
+import Logica.ftrabajador;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Mirlu
@@ -16,8 +21,79 @@ public class frmTrabajador extends javax.swing.JFrame {
      */
     public frmTrabajador() {
         initComponents();
+        
+        mostrar("");
+        
+        inhabilitar();
+        
     }
 
+    
+    
+    private String accion="Guardar";
+    
+    void ocultar_columnas(){
+        tablalistado.getColumnModel().getColumn(0).setMaxWidth(0);
+        tablalistado.getColumnModel().getColumn(0).setMinWidth(0);
+        tablalistado.getColumnModel().getColumn(0).setPreferredWidth(0);
+    }   
+    
+    void inhabilitar (){
+        txtCedulaTrabajador.setEnabled(false);
+        txtNombreTrabajador.setEnabled(false);
+        txtDireccionTrabajador.setEnabled(false);
+        cbSexo.setEnabled(false);
+        txtTelefonoTrabajador.setEnabled(false);
+        txtCorreoTrabajador.setEnabled(false);
+        cbAcceso.setEnabled(false);
+        txtContraseñaTrabajador.setEnabled(false);
+        txtConfirmacionTrabajador.setEnabled(false);
+        
+        btnGuardar.setEnabled(false);
+        btnCancelar.setEnabled(false);
+        btnEliminar.setEnabled(false);
+    }
+    
+    
+    
+    void habilitar (){
+        txtCedulaTrabajador.setEnabled(true);
+        txtNombreTrabajador.setEnabled(true);
+        txtDireccionTrabajador.setEnabled(true);
+        cbSexo.setEnabled(true);
+        txtTelefonoTrabajador.setEnabled(true);
+        txtCorreoTrabajador.setEnabled(true);
+        cbAcceso.setEnabled(true);
+        txtContraseñaTrabajador.setEnabled(true);
+        txtConfirmacionTrabajador.setEnabled(true);
+        
+        btnGuardar.setEnabled(true);
+        btnCancelar.setEnabled(true);
+        btnEliminar.setEnabled(true);
+    }    
+
+
+    void mostrar (String buscar){
+        
+        try {
+            DefaultTableModel modelo;
+            ftrabajador func= new ftrabajador();
+            modelo = func.mostrar(buscar);
+            
+            tablalistado.setModel(modelo);
+            ocultar_columnas();
+            lblTotal.setText(Integer.toString(func.totalregistros));
+            
+        } catch (Exception e) {
+            JOptionPane.showConfirmDialog(rootPane, e);
+        }
+        
+    }
+
+    
+    
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -43,7 +119,6 @@ public class frmTrabajador extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         btnNuevo = new javax.swing.JButton();
         btnGuardar = new javax.swing.JButton();
-        btnEditar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
         txtCorreoTrabajador = new javax.swing.JTextField();
         txtTelefonoTrabajador = new javax.swing.JTextField();
@@ -71,6 +146,12 @@ public class frmTrabajador extends javax.swing.JFrame {
         jLabel5.setForeground(new java.awt.Color(0, 51, 0));
         jLabel5.setText("Registro de Trabajador");
 
+        txtContraseñaTrabajador.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtContraseñaTrabajadorActionPerformed(evt);
+            }
+        });
+
         jLabel7.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(0, 51, 0));
         jLabel7.setText("Contraseña");
@@ -79,11 +160,40 @@ public class frmTrabajador extends javax.swing.JFrame {
         jLabel6.setForeground(new java.awt.Color(0, 51, 0));
         jLabel6.setText("Acceso");
 
-        cbAcceso.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Administrador", "Usuario" }));
+        cbAcceso.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Usuario", "Administrador" }));
+        cbAcceso.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbAccesoActionPerformed(evt);
+            }
+        });
+
+        txtConfirmacionTrabajador.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtConfirmacionTrabajadorActionPerformed(evt);
+            }
+        });
 
         jLabel8.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(0, 51, 0));
         jLabel8.setText("Confirmación de contraseña");
+
+        txtCedulaTrabajador.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCedulaTrabajadorActionPerformed(evt);
+            }
+        });
+
+        txtDireccionTrabajador.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtDireccionTrabajadorActionPerformed(evt);
+            }
+        });
+
+        txtNombreTrabajador.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNombreTrabajadorActionPerformed(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(0, 51, 0));
@@ -100,18 +210,36 @@ public class frmTrabajador extends javax.swing.JFrame {
         btnNuevo.setBackground(new java.awt.Color(255, 255, 255));
         btnNuevo.setIcon(new javax.swing.ImageIcon("C:\\Users\\Mirlu\\Documents\\Complementos\\Images\\nuevo.GIF")); // NOI18N
         btnNuevo.setText("Nuevo");
+        btnNuevo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNuevoActionPerformed(evt);
+            }
+        });
 
         btnGuardar.setBackground(new java.awt.Color(255, 255, 255));
         btnGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Files/guardar.png"))); // NOI18N
         btnGuardar.setText("Guardar");
-
-        btnEditar.setBackground(new java.awt.Color(255, 255, 255));
-        btnEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Files/edit.png"))); // NOI18N
-        btnEditar.setText("Editar");
+        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarActionPerformed(evt);
+            }
+        });
 
         btnCancelar.setBackground(new java.awt.Color(255, 255, 255));
         btnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Files/cancelar.png"))); // NOI18N
         btnCancelar.setText("Cancelar");
+
+        txtCorreoTrabajador.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCorreoTrabajadorActionPerformed(evt);
+            }
+        });
+
+        txtTelefonoTrabajador.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtTelefonoTrabajadorActionPerformed(evt);
+            }
+        });
 
         jLabel11.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(0, 51, 0));
@@ -126,6 +254,11 @@ public class frmTrabajador extends javax.swing.JFrame {
         jLabel13.setText("Correo");
 
         cbSexo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Hombre", "Mujer" }));
+        cbSexo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbSexoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -162,8 +295,6 @@ public class frmTrabajador extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(jPanel2Layout.createSequentialGroup()
@@ -182,10 +313,10 @@ public class frmTrabajador extends javax.swing.JFrame {
                             .addComponent(jLabel11)
                             .addGap(18, 18, 18)
                             .addComponent(cbSexo, javax.swing.GroupLayout.PREFERRED_SIZE, 313, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
 
-        jPanel2Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnCancelar, btnEditar, btnGuardar, btnNuevo});
+        jPanel2Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnCancelar, btnGuardar, btnNuevo});
 
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -216,7 +347,7 @@ public class frmTrabajador extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtCorreoTrabajador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cbAcceso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -232,12 +363,11 @@ public class frmTrabajador extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnGuardar)
-                    .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnCancelar))
                 .addContainerGap())
         );
 
-        jPanel2Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnCancelar, btnEditar, btnGuardar, btnNuevo});
+        jPanel2Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnCancelar, btnGuardar, btnNuevo});
 
         jPanel1.setBackground(new java.awt.Color(0, 102, 0));
         jPanel1.setForeground(new java.awt.Color(204, 255, 204));
@@ -257,6 +387,11 @@ public class frmTrabajador extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tablalistado.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tablalistadoMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tablalistado);
 
         jLabel10.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
@@ -266,14 +401,29 @@ public class frmTrabajador extends javax.swing.JFrame {
         btnBuscar.setBackground(new java.awt.Color(255, 255, 255));
         btnBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Files/buscar.png"))); // NOI18N
         btnBuscar.setText("Buscar");
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarActionPerformed(evt);
+            }
+        });
 
         btnEliminar.setBackground(new java.awt.Color(255, 255, 255));
         btnEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Files/eliminar.png"))); // NOI18N
         btnEliminar.setText("Eliminar");
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarActionPerformed(evt);
+            }
+        });
 
         btnSalir.setBackground(new java.awt.Color(255, 255, 255));
         btnSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Files/salir.gif"))); // NOI18N
         btnSalir.setText("Salir");
+        btnSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalirActionPerformed(evt);
+            }
+        });
 
         jLabel1.setForeground(new java.awt.Color(204, 255, 204));
         jLabel1.setText("Cantidad de Registros: ");
@@ -359,6 +509,201 @@ public class frmTrabajador extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
+        // TODO add your handling code here:
+        
+        habilitar();
+        btnGuardar.setText("Guardar");
+        accion="Guardar";
+        
+    }//GEN-LAST:event_btnNuevoActionPerformed
+
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+
+        //valida si los campos estan vacios
+        
+        if(txtCedulaTrabajador.getText().length() == 0){
+        
+            JOptionPane.showMessageDialog(rootPane, "Debes ingresar la cedula del trabajador");
+            txtCedulaTrabajador.requestFocus();
+            return;
+        }
+        
+        if(txtNombreTrabajador.getText().length() == 0){
+        
+            JOptionPane.showMessageDialog(rootPane, "Debes ingresar el nombre del trabajador");
+            txtNombreTrabajador.requestFocus();
+            return;
+        }
+        
+        
+        if(txtDireccionTrabajador.getText().length() == 0){
+        
+            JOptionPane.showMessageDialog(rootPane, "Debes ingresar la direccion del trabajador");
+            txtDireccionTrabajador.requestFocus();
+            return;
+        }
+        
+        if(txtContraseñaTrabajador.getText().length() == 0){
+        
+            JOptionPane.showMessageDialog(rootPane, "Debes ingresar la contraseña del trabajador");
+            txtContraseñaTrabajador.requestFocus();
+            return;
+        }
+        
+        if(txtConfirmacionTrabajador.getText().length() == 0){
+        
+            JOptionPane.showMessageDialog(rootPane, "Debes ingresar la contraseña de nuevo");
+            txtDireccionTrabajador.requestFocus();
+            return;
+        }
+        
+        
+        if(  !(txtContraseñaTrabajador.getText().equals(txtConfirmacionTrabajador.getText()))  ){
+        
+            JOptionPane.showMessageDialog(rootPane, "La confirmacion de la contraseña no coincide. Porfavor vuelva a escribirla");
+            txtConfirmacionTrabajador.requestFocus();
+            return;
+        }
+        
+        vtrabajador dts = new vtrabajador();
+        ftrabajador func = new ftrabajador();
+        
+        dts.setId_trabajador(txtCedulaTrabajador.getText());
+        dts.setNombre(txtNombreTrabajador.getText());
+        dts.setDireccion(txtDireccionTrabajador.getText());
+        dts.setTelefono(txtTelefonoTrabajador.getText());
+        dts.setCorreo(txtCorreoTrabajador.getText());
+        dts.setContraseña(txtContraseñaTrabajador.getText());
+      
+        int seleccionado_sexo = cbSexo.getSelectedIndex();
+        dts.setSexo((String) cbSexo.getItemAt(seleccionado_sexo) );
+  
+        int seleccionado_acceso = cbAcceso.getSelectedIndex();
+        dts.setAcceso((String) cbAcceso.getItemAt(seleccionado_acceso) );
+        
+        if(accion.equals("Guardar")){
+            if (func.insertar(dts)) {
+                JOptionPane.showMessageDialog(rootPane, "Se guardo correctamente");
+                mostrar("");
+                inhabilitar();
+            }
+        }else if(accion.equals("Editar")){
+            dts.setId_trabajador(txtCedulaTrabajador.getText());
+        
+            if (func.editar(dts)) {
+                JOptionPane.showMessageDialog(rootPane, "El trabajador fue registrado exitosamente");
+                mostrar("");
+                inhabilitar();
+            }
+        
+        }
+  
+        
+    }//GEN-LAST:event_btnGuardarActionPerformed
+
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+
+        if (!txtCedulaTrabajador.getText().equals("")) {
+            int confirmacion = JOptionPane.showConfirmDialog(rootPane,"Estas seguro de eliminar este trabajador?");
+            
+            if (confirmacion==0) {  //significa que SI desea que se elimine
+                ftrabajador func = new ftrabajador();
+                vtrabajador dts = new vtrabajador();
+                
+                dts.setId_trabajador(txtCedulaTrabajador.getText());
+                func.eliminar(dts); //se envian los datos para la elimacion, osea solo la id
+                mostrar(""); //se envia una cadena en blanco para que se muestren todos
+                inhabilitar();
+                
+                
+                
+            }
+            
+        }
+        
+    }//GEN-LAST:event_btnEliminarActionPerformed
+
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+
+        mostrar(txtBuscarTrabajador.getText());
+        
+        
+    }//GEN-LAST:event_btnBuscarActionPerformed
+
+    private void txtCedulaTrabajadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCedulaTrabajadorActionPerformed
+        txtCedulaTrabajador.transferFocus();
+    }//GEN-LAST:event_txtCedulaTrabajadorActionPerformed
+
+    private void txtNombreTrabajadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreTrabajadorActionPerformed
+        // TODO add your handling code here:
+        txtNombreTrabajador.transferFocus();
+    }//GEN-LAST:event_txtNombreTrabajadorActionPerformed
+
+    private void txtDireccionTrabajadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDireccionTrabajadorActionPerformed
+        // TODO add your handling code here:
+        txtDireccionTrabajador.transferFocus();
+    }//GEN-LAST:event_txtDireccionTrabajadorActionPerformed
+
+    private void cbSexoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbSexoActionPerformed
+        // TODO add your handling code here:
+        cbSexo.transferFocus();
+    }//GEN-LAST:event_cbSexoActionPerformed
+
+    private void txtTelefonoTrabajadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTelefonoTrabajadorActionPerformed
+        // TODO add your handling code here:
+        txtTelefonoTrabajador.transferFocus();
+    }//GEN-LAST:event_txtTelefonoTrabajadorActionPerformed
+
+    private void txtCorreoTrabajadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCorreoTrabajadorActionPerformed
+        // TODO add your handling code here:
+        txtCorreoTrabajador.transferFocus();
+    }//GEN-LAST:event_txtCorreoTrabajadorActionPerformed
+
+    private void cbAccesoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbAccesoActionPerformed
+        // TODO add your handling code here:
+        cbAcceso.transferFocus();
+    }//GEN-LAST:event_cbAccesoActionPerformed
+
+    private void txtContraseñaTrabajadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtContraseñaTrabajadorActionPerformed
+        // TODO add your handling code here:
+        txtContraseñaTrabajador.transferFocus();
+    }//GEN-LAST:event_txtContraseñaTrabajadorActionPerformed
+
+    private void txtConfirmacionTrabajadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtConfirmacionTrabajadorActionPerformed
+        // TODO add your handling code here:
+        txtConfirmacionTrabajador.transferFocus();
+    }//GEN-LAST:event_txtConfirmacionTrabajadorActionPerformed
+
+    private void tablalistadoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablalistadoMouseClicked
+
+        btnGuardar.setText("Editar");
+        habilitar();
+        btnEliminar.setEnabled(true);
+        accion="Editar";
+        
+        //esto es para pasar los datos de la tabla a los txtbox del form
+        
+        int fila = tablalistado.rowAtPoint(evt.getPoint());
+        
+        txtCedulaTrabajador.setText(tablalistado.getValueAt(fila,0).toString());
+        txtNombreTrabajador.setText(tablalistado.getValueAt(fila,1).toString());
+        txtDireccionTrabajador.setText(tablalistado.getValueAt(fila,2).toString());        
+        cbSexo.setSelectedItem(tablalistado.getValueAt(fila,3).toString());
+        cbAcceso.setSelectedItem(tablalistado.getValueAt(fila,4).toString());
+        txtContraseñaTrabajador.setText(tablalistado.getValueAt(fila,5).toString()); 
+        txtTelefonoTrabajador.setText(tablalistado.getValueAt(fila,6).toString()); 
+        txtCorreoTrabajador.setText(tablalistado.getValueAt(fila,7).toString()); 
+       
+        
+             
+    }//GEN-LAST:event_tablalistadoMouseClicked
+
+    private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_btnSalirActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -397,7 +742,6 @@ public class frmTrabajador extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnCancelar;
-    private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnNuevo;
