@@ -33,9 +33,10 @@ public class frmTrabajador extends javax.swing.JFrame {
     private String accion="Guardar";
     
     void ocultar_columnas(){
-        tablalistado.getColumnModel().getColumn(0).setMaxWidth(0);
-        tablalistado.getColumnModel().getColumn(0).setMinWidth(0);
-        tablalistado.getColumnModel().getColumn(0).setPreferredWidth(0);
+        //esto OCULTA LA CONTRASEÑA DE LA TABLA
+        tablalistado.getColumnModel().getColumn(5).setMaxWidth(0);
+        tablalistado.getColumnModel().getColumn(5).setMinWidth(0);
+        tablalistado.getColumnModel().getColumn(5).setPreferredWidth(0);
         
     }   
     

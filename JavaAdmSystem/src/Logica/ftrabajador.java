@@ -6,6 +6,7 @@
 package Logica;
 
 import Datos.vtrabajador;
+import datechooser.beans.customizer.PropertyTableModel;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -29,7 +30,7 @@ public class ftrabajador {
     {
         DefaultTableModel modelo;
         
-        String [] titulos = {"ID", "Nombre", "Direccion", "Sexo", "Acceso", "Contraseña", "Telefono", "Correo"};
+        String [] titulos = {"Cedula", "Nombre", "Direccion", "Sexo", "Acceso", "Contraseña", "Telefono", "Correo"};
         
         String [] registro = new String [8];
         
@@ -43,6 +44,7 @@ public class ftrabajador {
             Statement st= cn.createStatement();
             ResultSet rs=st.executeQuery(sSQL);
             
+                 
             while(rs.next())
             {
                 registro [0]= rs.getString("id_trabajador");
@@ -57,6 +59,8 @@ public class ftrabajador {
                 totalregistros= totalregistros+1;
                 modelo.addRow(registro);
             }
+                 
+                 
             
             return modelo;
             
