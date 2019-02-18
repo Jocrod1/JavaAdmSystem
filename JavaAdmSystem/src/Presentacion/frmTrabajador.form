@@ -255,6 +255,7 @@
               <Color blue="0" green="33" red="0" type="rgb"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Confirmaci&#xf3;n de contrase&#xf1;a"/>
+            <Property name="name" type="java.lang.String" value="" noResource="true"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtCedulaTrabajador">
