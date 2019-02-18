@@ -192,6 +192,7 @@ public class frmTrabajador extends javax.swing.JFrame {
         jLabel8.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(0, 51, 0));
         jLabel8.setText("Confirmación de contraseña");
+        jLabel8.setName(""); // NOI18N
 
         txtCedulaTrabajador.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -224,7 +225,6 @@ public class frmTrabajador extends javax.swing.JFrame {
         jLabel4.setText("Dirección");
 
         btnNuevo.setBackground(new java.awt.Color(255, 255, 255));
-        btnNuevo.setIcon(new javax.swing.ImageIcon("C:\\Users\\Mirlu\\Documents\\Complementos\\Images\\nuevo.GIF")); // NOI18N
         btnNuevo.setText("Nuevo");
         btnNuevo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -532,10 +532,15 @@ public class frmTrabajador extends javax.swing.JFrame {
 
     private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
         // TODO add your handling code here:
+        
+        //vuelve la confirmacion verdadera
+        txtConfirmacionTrabajador.setEnabled(true);
+        jLabel8.setEnabled(true);
         limpiar();
         habilitar();
         btnGuardar.setText("Guardar");
         accion="Guardar";
+        
         
     }//GEN-LAST:event_btnNuevoActionPerformed
 
@@ -716,6 +721,11 @@ public class frmTrabajador extends javax.swing.JFrame {
         txtCedulaTrabajador.setText(tablalistado.getValueAt(fila,0).toString());
         
         txtCedulaTrabajador.setEnabled(false);
+        
+        //vuelve la confirmacion falsa
+        txtConfirmacionTrabajador.setEnabled(false);
+        jLabel8.setEnabled(false);
+
         
         txtNombreTrabajador.setText(tablalistado.getValueAt(fila,1).toString());
         txtDireccionTrabajador.setText(tablalistado.getValueAt(fila,2).toString());        
