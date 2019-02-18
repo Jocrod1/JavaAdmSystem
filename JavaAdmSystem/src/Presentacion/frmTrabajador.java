@@ -224,7 +224,6 @@ public class frmTrabajador extends javax.swing.JFrame {
         jLabel4.setText("Dirección");
 
         btnNuevo.setBackground(new java.awt.Color(255, 255, 255));
-        btnNuevo.setIcon(new javax.swing.ImageIcon("C:\\Users\\Mirlu\\Documents\\Complementos\\Images\\nuevo.GIF")); // NOI18N
         btnNuevo.setText("Nuevo");
         btnNuevo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -305,8 +304,9 @@ public class frmTrabajador extends javax.swing.JFrame {
                         .addContainerGap()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(11, 11, 11)
                                 .addComponent(jLabel8)
-                                .addGap(15, 15, 15)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                     .addComponent(txtContraseñaTrabajador, javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(cbAcceso, javax.swing.GroupLayout.Alignment.LEADING, 0, 315, Short.MAX_VALUE)
@@ -572,6 +572,10 @@ public class frmTrabajador extends javax.swing.JFrame {
             return;
         }
         
+        if(btnGuardar.getText().equals("Guardar")){  //esto valida si el boton es de guardar o editar
+            
+            
+        
         if(txtConfirmacionTrabajador.getText().length() == 0){
         
             JOptionPane.showMessageDialog(rootPane, "Debes ingresar la contraseña de nuevo");
@@ -579,12 +583,13 @@ public class frmTrabajador extends javax.swing.JFrame {
             return;
         }
         
-        
         if(  !(txtContraseñaTrabajador.getText().equals(txtConfirmacionTrabajador.getText()))  ){
         
             JOptionPane.showMessageDialog(rootPane, "La confirmacion de la contraseña no coincide. Porfavor vuelva a escribirla");
             txtConfirmacionTrabajador.requestFocus();
             return;
+        }
+        
         }
         
         vtrabajador dts = new vtrabajador();
@@ -705,8 +710,12 @@ public class frmTrabajador extends javax.swing.JFrame {
 
         btnGuardar.setText("Editar");
         habilitar();
+        txtConfirmacionTrabajador.setEnabled(false);
+        
+        
         
         btnEliminar.setEnabled(true);
+        
         accion="Editar";
         
         //esto es para pasar los datos de la tabla a los txtbox del form
@@ -724,7 +733,9 @@ public class frmTrabajador extends javax.swing.JFrame {
         txtContraseñaTrabajador.setText(tablalistado.getValueAt(fila,5).toString()); 
         txtTelefonoTrabajador.setText(tablalistado.getValueAt(fila,6).toString()); 
         txtCorreoTrabajador.setText(tablalistado.getValueAt(fila,7).toString()); 
-       
+        
+        
+
         
              
     }//GEN-LAST:event_tablalistadoMouseClicked
