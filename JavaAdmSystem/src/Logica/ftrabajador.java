@@ -161,4 +161,60 @@ public class ftrabajador {
                 return false;
             }
         }
+        
+        
+        
+        public DefaultTableModel usuario(String id_trabajador, String contraseña)
+    {
+        DefaultTableModel modelo;
+        
+        String [] titulos = {"Cedula", "Nombre", "Acceso", "Contraseña"};
+        
+        String [] registro = new String [4];
+        
+        totalregistros=0;
+        
+        modelo= new DefaultTableModel(null, titulos);
+        
+        sSQL="select id_trabajador,contraseña from trabajador where id_trabajador='" + id_trabajador + "' and contraseña='" + contraseña;
+        
+        try {
+            Statement st= cn.createStatement();
+            ResultSet rs=st.executeQuery(sSQL);
+            
+                 
+            while(rs.next())
+            {
+                registro [0]= rs.getString("id_trabajador");
+                registro [1]= rs.getString("contraseña");
+                
+                totalregistros= totalregistros+1;
+                modelo.addRow(registro);
+            }
+                 
+                 
+            
+            return modelo;
+            
+        } catch (Exception e) {
+            JOptionPane.showConfirmDialog(null, e);
+            return null;
+        }  
+    }
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
 }
