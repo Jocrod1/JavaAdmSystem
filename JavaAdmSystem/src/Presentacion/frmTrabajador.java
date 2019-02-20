@@ -55,6 +55,8 @@ public class frmTrabajador extends javax.swing.JFrame {
         cbAcceso.setEnabled(false);
         pwdContraseñaTrabajador.setEnabled(false);
         pwdConfirmacionTrabajador.setEnabled(false);
+        cbPreguntaSeguridad.setEnabled(false);
+        txtRespuesta.setEnabled(false);
         
         btnGuardar.setEnabled(false);
         btnCancelar.setEnabled(false);
@@ -73,6 +75,8 @@ public class frmTrabajador extends javax.swing.JFrame {
         cbAcceso.setEnabled(true);
         pwdContraseñaTrabajador.setEnabled(true);
         pwdConfirmacionTrabajador.setEnabled(true);
+        cbPreguntaSeguridad.setEnabled(true);
+        txtRespuesta.setEnabled(true);        
         
         btnGuardar.setEnabled(true);
         btnCancelar.setEnabled(true);
@@ -91,6 +95,8 @@ public class frmTrabajador extends javax.swing.JFrame {
         cbAcceso.setSelectedIndex(0);
         pwdContraseñaTrabajador.setText("");
         pwdConfirmacionTrabajador.setText("");
+        cbPreguntaSeguridad.setSelectedIndex(0);
+        txtRespuesta.setText("");        
     }
     
 
@@ -148,6 +154,10 @@ public class frmTrabajador extends javax.swing.JFrame {
         cbSexo = new javax.swing.JComboBox<>();
         pwdContraseñaTrabajador = new javax.swing.JPasswordField();
         pwdConfirmacionTrabajador = new javax.swing.JPasswordField();
+        jLabel14 = new javax.swing.JLabel();
+        cbPreguntaSeguridad = new javax.swing.JComboBox<>();
+        jLabel15 = new javax.swing.JLabel();
+        txtRespuesta = new javax.swing.JTextField();
         jPanel1 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -283,13 +293,45 @@ public class frmTrabajador extends javax.swing.JFrame {
             }
         });
 
+        jLabel14.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        jLabel14.setForeground(new java.awt.Color(0, 51, 0));
+        jLabel14.setText("Pregunta de seguridad");
+        jLabel14.setName(""); // NOI18N
+
+        cbPreguntaSeguridad.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nombre de tu abuelo paterno", "Nombre de tu primera mascota", "Libro favorito" }));
+        cbPreguntaSeguridad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbPreguntaSeguridadActionPerformed(evt);
+            }
+        });
+
+        jLabel15.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        jLabel15.setForeground(new java.awt.Color(0, 51, 0));
+        jLabel15.setText("Respuesta");
+        jLabel15.setName(""); // NOI18N
+
+        txtRespuesta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtRespuestaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel7))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(cbAcceso, 0, 280, Short.MAX_VALUE)
+                            .addComponent(pwdContraseñaTrabajador)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
                         .addGap(127, 127, 127)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel3)
@@ -300,43 +342,49 @@ public class frmTrabajador extends javax.swing.JFrame {
                             .addComponent(txtNombreTrabajador, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 280, Short.MAX_VALUE)
                             .addComponent(txtDireccionTrabajador)
                             .addComponent(txtCedulaTrabajador)))
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel2Layout.createSequentialGroup()
-                            .addGap(107, 107, 107)
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jLabel12)
-                                .addComponent(jLabel13)
-                                .addComponent(jLabel6)
-                                .addComponent(jLabel7))
-                            .addGap(18, 18, 18)
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(pwdContraseñaTrabajador, javax.swing.GroupLayout.DEFAULT_SIZE, 282, Short.MAX_VALUE)
-                                .addComponent(txtCorreoTrabajador)
-                                .addComponent(txtTelefonoTrabajador)))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                            .addGap(64, 64, 64)
-                            .addComponent(jLabel11)
-                            .addGap(18, 18, 18)
-                            .addComponent(cbSexo, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(177, 177, 177)
-                        .addComponent(jLabel5))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(11, 11, 11)
-                                .addComponent(jLabel8)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(cbAcceso, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(pwdConfirmacionTrabajador, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jPanel2Layout.createSequentialGroup()
+                                    .addGap(127, 127, 127)
+                                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(jLabel12)
+                                        .addComponent(jLabel13))
+                                    .addGap(18, 18, 18)
+                                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(txtCorreoTrabajador, javax.swing.GroupLayout.DEFAULT_SIZE, 282, Short.MAX_VALUE)
+                                        .addComponent(txtTelefonoTrabajador)))
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                    .addGap(64, 64, 64)
+                                    .addComponent(jLabel11)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(cbSexo, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
+                                .addGap(177, 177, 177)
+                                .addComponent(jLabel5))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
+                                .addContainerGap()
                                 .addComponent(btnNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel14)
+                                    .addComponent(jLabel8)
+                                    .addComponent(jLabel15))
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                        .addGap(15, 15, 15)
+                                        .addComponent(pwdConfirmacionTrabajador, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                        .addGap(18, 18, 18)
+                                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(cbPreguntaSeguridad, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(txtRespuesta))))))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addGap(35, 35, 35))
         );
 
@@ -371,19 +419,29 @@ public class frmTrabajador extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtCorreoTrabajador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cbAcceso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
-                    .addComponent(pwdContraseñaTrabajador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(cbAcceso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(pwdContraseñaTrabajador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel7)))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(pwdConfirmacionTrabajador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbPreguntaSeguridad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtRespuesta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnGuardar)
@@ -601,6 +659,13 @@ public class frmTrabajador extends javax.swing.JFrame {
         }
         
         
+        if(txtRespuesta.getText().length() == 0){
+        
+            JOptionPane.showMessageDialog(rootPane, "Debes ingresar la respuesta a la pregunta de seguridad");
+            txtRespuesta.requestFocus();
+            return;
+        }        
+        
         if(txtDireccionTrabajador.getText().length() == 0){
         
             JOptionPane.showMessageDialog(rootPane, "Debes ingresar la direccion del trabajador");
@@ -722,12 +787,16 @@ public class frmTrabajador extends javax.swing.JFrame {
         dts.setTelefono(txtTelefonoTrabajador.getText());
         dts.setCorreo(txtCorreoTrabajador.getText());
         dts.setContraseña(pwdContraseñaTrabajador.getPassword().toString());
-      
+        dts.setRespuesta(txtRespuesta.getText());
         int seleccionado_sexo = cbSexo.getSelectedIndex();
         dts.setSexo((String) cbSexo.getItemAt(seleccionado_sexo) );
   
         int seleccionado_acceso = cbAcceso.getSelectedIndex();
         dts.setAcceso((String) cbAcceso.getItemAt(seleccionado_acceso) );
+        
+        int seleccionado_pregunta = cbPreguntaSeguridad.getSelectedIndex();
+        dts.setPregunta((String) cbPreguntaSeguridad.getItemAt(seleccionado_pregunta) );
+        
         
         if(accion.equals("Guardar")){
                       
@@ -884,6 +953,14 @@ public class frmTrabajador extends javax.swing.JFrame {
     
     }//GEN-LAST:event_pwdContraseñaTrabajadorActionPerformed
 
+    private void cbPreguntaSeguridadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbPreguntaSeguridadActionPerformed
+        cbPreguntaSeguridad.transferFocus();
+    }//GEN-LAST:event_cbPreguntaSeguridadActionPerformed
+
+    private void txtRespuestaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtRespuestaActionPerformed
+        txtRespuesta.transferFocus();
+    }//GEN-LAST:event_txtRespuestaActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -927,12 +1004,15 @@ public class frmTrabajador extends javax.swing.JFrame {
     private javax.swing.JButton btnNuevo;
     private javax.swing.JButton btnSalir;
     private javax.swing.JComboBox<String> cbAcceso;
+    private javax.swing.JComboBox<String> cbPreguntaSeguridad;
     private javax.swing.JComboBox<String> cbSexo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -955,6 +1035,7 @@ public class frmTrabajador extends javax.swing.JFrame {
     private javax.swing.JTextField txtCorreoTrabajador;
     private javax.swing.JTextField txtDireccionTrabajador;
     private javax.swing.JTextField txtNombreTrabajador;
+    private javax.swing.JTextField txtRespuesta;
     private javax.swing.JTextField txtTelefonoTrabajador;
     // End of variables declaration//GEN-END:variables
 }
