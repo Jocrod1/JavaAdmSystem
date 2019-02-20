@@ -30,9 +30,9 @@ public class ftrabajador {
     {
         DefaultTableModel modelo;
         
-        String [] titulos = {"Cedula", "Nombre", "Direccion", "Sexo", "Acceso", "Contraseña", "Telefono", "Correo"};
+        String [] titulos = {"Cedula", "Nombre", "Direccion", "Sexo", "Acceso", "Contraseña", "Telefono", "Correo","Pregunta","Respuesta"};
         
-        String [] registro = new String [8];
+        String [] registro = new String [10];
         
         totalregistros=0;
         
@@ -55,6 +55,8 @@ public class ftrabajador {
                 registro [5]= rs.getString("contraseña");
                 registro [6]= rs.getString("telefono");
                 registro [7]= rs.getString("correo");
+                registro [8]= rs.getString("pregunta");
+                registro [9]= rs.getString("respuesta");
                 
                 totalregistros= totalregistros+1;
                 modelo.addRow(registro);
@@ -85,6 +87,8 @@ public class ftrabajador {
                 pst.setString(6, dts.getContraseña());
                 pst.setString(7, dts.getTelefono());
                 pst.setString(8, dts.getCorreo());
+                pst.setString(9, dts.getPregunta());
+                pst.setString(10, dts.getRespuesta());
                 
                 int n=pst.executeUpdate();
                 
@@ -118,6 +122,8 @@ public class ftrabajador {
                 pst.setString(6, dts.getTelefono());
                 pst.setString(7, dts.getCorreo());
                 pst.setString(8, dts.getId_trabajador());
+                pst.setString(9, dts.getPregunta());
+                pst.setString(10, dts.getRespuesta());
                 
                 int n=pst.executeUpdate();
                 

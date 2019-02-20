@@ -19,8 +19,10 @@ public class vtrabajador {
     private String contraseña;
     private String telefono;
     private String correo;
+    private String pregunta;
+    private String respuesta;
 
-    public vtrabajador(String id_trabajador, String nombre, String direccion, String sexo, String acceso, String contraseña, String telefono, String correo) {
+    public vtrabajador(String id_trabajador, String nombre, String direccion, String sexo, String acceso, String contraseña, String telefono, String correo, String pregunta, String respuesta) {
         this.id_trabajador = id_trabajador;
         this.nombre = nombre;
         this.direccion = direccion;
@@ -29,6 +31,24 @@ public class vtrabajador {
         this.contraseña = contraseña;
         this.telefono = telefono;
         this.correo = correo;
+        this.pregunta=pregunta;
+        this.respuesta=respuesta;
+    }
+
+    public String getPregunta() {
+        return pregunta;
+    }
+
+    public void setPregunta(String pregunta) {
+        this.pregunta = pregunta;
+    }
+
+    public String getRespuesta() {
+        return respuesta;
+    }
+
+    public void setRespuesta(String respuesta) {
+        this.respuesta = respuesta;
     }
 
     public vtrabajador() {
