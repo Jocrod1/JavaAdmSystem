@@ -7,6 +7,8 @@ package Presentacion;
 
 import Datos.vtrabajador;
 import Logica.ftrabajador;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -418,7 +420,7 @@ public class frmTrabajador extends javax.swing.JFrame {
 
         jLabel10.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(204, 255, 204));
-        jLabel10.setText("Buscar:");
+        jLabel10.setText("Buscar por CI :");
 
         btnBuscar.setBackground(new java.awt.Color(255, 255, 255));
         btnBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Files/buscar.png"))); // NOI18N
@@ -467,21 +469,22 @@ public class frmTrabajador extends javax.swing.JFrame {
                 .addGap(23, 23, 23)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 702, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addComponent(jLabel9)
-                            .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addComponent(jLabel10)
-                            .addGap(18, 18, 18)
-                            .addComponent(txtBuscarTrabajador, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(btnBuscar)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(btnEliminar)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(144, 144, 144)))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel9)
+                                .addGap(0, 524, Short.MAX_VALUE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel10)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(txtBuscarTrabajador, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnBuscar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btnEliminar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap())))
         );
 
         jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnBuscar, btnEliminar, btnSalir});
@@ -515,7 +518,7 @@ public class frmTrabajador extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 746, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -545,6 +548,21 @@ public class frmTrabajador extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btnNuevoActionPerformed
 
+    
+    public static boolean valEmail(String input){
+        String emailRegex = "^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$";
+        Pattern emailPat = Pattern.compile(emailRegex,Pattern.CASE_INSENSITIVE);
+        Matcher matcher = emailPat.matcher(input);
+        return matcher.find();
+    }
+    
+    
+    
+    
+    
+    
+    
+    
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
 
         //valida si los campos estan vacios
@@ -578,8 +596,42 @@ public class frmTrabajador extends javax.swing.JFrame {
             return;
         }
         
-        if(btnGuardar.getText().equals("Guardar")){  //esto valida si el boton es de guardar o editar
+        
+        //valida si la ci tiene letras
+        if ( !(txtCedulaTrabajador.getText().matches("[0-9]+")) ){
+        JOptionPane.showMessageDialog(rootPane, "La cedula solo puede contener numeros");
+        txtCedulaTrabajador.requestFocus();
+        return;
+        }
+        
+        //valida si el tlfno tiene letras
+        if ( !(txtTelefonoTrabajador.getText().matches("[0-9]+")) ){
+        JOptionPane.showMessageDialog(rootPane, "El numero de telefono solo puede contener numeros");
+        txtTelefonoTrabajador.requestFocus();
+        return;
+        }
+        
+        
+        //valida si el nombre tiene numeros
+        if ( !(Pattern.matches("[a-zA-Z]+", txtNombreTrabajador.getText()) ) ){
+        JOptionPane.showMessageDialog(rootPane, "El nombre solo puede contener letras");
+        txtNombreTrabajador.requestFocus();
+        return;
+        }        
+        
+        
+        //valida el formato del correo    
             
+        String email = txtCorreoTrabajador.getText();
+        
+        if (!valEmail(email)){  
+          JOptionPane.showMessageDialog(rootPane, "El correo no es valido, vuelva a escribirlo");
+          txtCorreoTrabajador.requestFocus();
+          return;
+        }
+        
+        
+        if(btnGuardar.getText().equals("Guardar")){  //esto valida si el boton es de guardar o editar
             
         
         if(txtConfirmacionTrabajador.getText().length() == 0){
@@ -627,7 +679,7 @@ public class frmTrabajador extends javax.swing.JFrame {
             
         
             if (func.editar(dts)) {
-                JOptionPane.showMessageDialog(rootPane, "El trabajador fue registrado exitosamente");
+                JOptionPane.showMessageDialog(rootPane, "El trabajador fue editado exitosamente");
                 mostrar("");
                 limpiar();
                 inhabilitar();
@@ -651,7 +703,9 @@ public class frmTrabajador extends javax.swing.JFrame {
                 dts.setId_trabajador(txtCedulaTrabajador.getText());
                 func.eliminar(dts); //se envian los datos para la elimacion, osea solo la id
                 mostrar(""); //se envia una cadena en blanco para que se muestren todos
+                limpiar();
                 inhabilitar();
+                
                 
                 
                 
