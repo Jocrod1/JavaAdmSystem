@@ -36,13 +36,14 @@ insert into venta (id_cliente,id_trabajador, fecha, subtotal, impuesto, total)
 values (@idcliente,@idtrabajador,@fecha,@subtotal,@impuesto,@total)
 go
 
---Eliminar Venta
+--Anular Venta
 Create proc SpEliminar_venta
 @idventa int
 as 
-delete from venta
-where id_venta = @idventa
+update venta set estado = 'ANULADO'
+ where id_venta = @idventa
 go
+
 
 --insertar detalle venta
 create proc SpInsertarDetalleVenta
