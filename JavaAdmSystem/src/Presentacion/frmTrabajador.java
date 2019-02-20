@@ -786,7 +786,8 @@ public class frmTrabajador extends javax.swing.JFrame {
         dts.setDireccion(txtDireccionTrabajador.getText());
         dts.setTelefono(txtTelefonoTrabajador.getText());
         dts.setCorreo(txtCorreoTrabajador.getText());
-        dts.setContraseña(pwdContraseñaTrabajador.getPassword().toString());
+        String a = new String(pwdContraseñaTrabajador.getPassword());
+        dts.setContraseña(a);
         dts.setRespuesta(txtRespuesta.getText());
         int seleccionado_sexo = cbSexo.getSelectedIndex();
         dts.setSexo((String) cbSexo.getItemAt(seleccionado_sexo) );
