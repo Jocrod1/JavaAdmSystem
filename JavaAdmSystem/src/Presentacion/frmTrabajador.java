@@ -37,13 +37,13 @@ public class frmTrabajador extends javax.swing.JFrame {
     
     private String accion="Guardar";
     
-    void ocultar_columnas(){
+  /*  void ocultar_columnas(){
         //esto OCULTA LA CONTRASEÑA DE LA TABLA
         tablalistado.getColumnModel().getColumn(5).setMaxWidth(0);
         tablalistado.getColumnModel().getColumn(5).setMinWidth(0);
         tablalistado.getColumnModel().getColumn(5).setPreferredWidth(0);
         
-    }   
+   }    */
     
     void inhabilitar (){
         txtCedulaTrabajador.setEnabled(false);
@@ -108,7 +108,7 @@ public class frmTrabajador extends javax.swing.JFrame {
             modelo = func.mostrar(buscar);
             
             tablalistado.setModel(modelo);
-            ocultar_columnas();
+            //ocultar_columnas();
             lblTotal.setText(Integer.toString(func.totalregistros));
             
             

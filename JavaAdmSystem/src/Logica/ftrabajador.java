@@ -121,9 +121,9 @@ public class ftrabajador {
                 pst.setString(5, dts.getContraseña());
                 pst.setString(6, dts.getTelefono());
                 pst.setString(7, dts.getCorreo());
-                pst.setString(8, dts.getId_trabajador());
-                pst.setString(9, dts.getPregunta());
-                pst.setString(10, dts.getRespuesta());
+                pst.setString(8, dts.getPregunta());
+                pst.setString(9, dts.getRespuesta());
+                pst.setString(10, dts.getId_trabajador());
                 
                 int n=pst.executeUpdate();
                 
@@ -248,6 +248,60 @@ public class ftrabajador {
             return null;
         }  
     }
+        
+        
+        
+        public DefaultTableModel contraseñaolvidada(String id_trabajador)
+    {
+        DefaultTableModel modelo;
+        
+        String [] titulos = {"Cedula","Contraseña","Pregunta","Respuesta"};
+        
+        String [] registro = new String [4];
+        
+        totalregistros=0;
+        
+        modelo= new DefaultTableModel(null, titulos);
+        
+        sSQL="select id_trabajador, contraseña, pregunta, respuesta from trabajador where id_trabajador='" + id_trabajador+"'";
+        
+        try {
+            Statement st= cn.createStatement();
+            ResultSet rs=st.executeQuery(sSQL);
+            
+                 
+            while(rs.next())
+            {
+                registro [0]= rs.getString("id_trabajador");
+                registro [1]= rs.getString("contraseña");
+                registro [2]= rs.getString("pregunta");
+                registro [3]= rs.getString("respuesta");
+                
+                totalregistros= totalregistros+1;
+                modelo.addRow(registro);
+            }
+                 
+                 
+            
+            return modelo;
+            
+        } catch (Exception e) {
+            JOptionPane.showConfirmDialog(null, e);
+            return null;
+        }  
+    }
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
     }
         
         

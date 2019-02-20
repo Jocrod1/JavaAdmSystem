@@ -62,13 +62,12 @@ public class farticulo {
     
     public boolean insertar (varticulo dts)
         {
-            sSQL="Insert into articulo (id_articulo, nombre, descripcion)" + "values (?,?,?)";
+            sSQL="Insert into articulo (nombre, descripcion)" + "values (?,?)";
             try {
                 
                 PreparedStatement pst=cn.prepareStatement(sSQL);
-                pst.setInt(1, dts.getId_articulo());
-                pst.setString(2, dts.getNombre());
-                pst.setString(3, dts.getDescripcion());
+                pst.setString(1, dts.getNombre());
+                pst.setString(2, dts.getDescripcion());
 
                 
                 int n=pst.executeUpdate();
