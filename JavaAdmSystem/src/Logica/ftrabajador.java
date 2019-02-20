@@ -75,7 +75,7 @@ public class ftrabajador {
             
         public boolean insertar (vtrabajador dts)
         {
-            sSQL="Insert into trabajador (id_trabajador, nombre, direccion, sexo, acceso, contraseña, telefono, correo)" + "values (?,?,?,?,?,?,?,?)";
+            sSQL="Insert into trabajador (id_trabajador, nombre, direccion, sexo, acceso, contraseña, telefono, correo, pregunta, respuesta)" + "values (?,?,?,?,?,?,?,?,?,?)";
             try {
                 
                 PreparedStatement pst=cn.prepareStatement(sSQL);
@@ -109,7 +109,7 @@ public class ftrabajador {
     
         public boolean editar (vtrabajador dts)
         {
-            sSQL= "Update trabajador set nombre=?, direccion=?, sexo=?,acceso=?, contraseña=?, telefono=?, correo=?" + "where id_trabajador=?";
+            sSQL= "Update trabajador set nombre=?, direccion=?, sexo=?,acceso=?, contraseña=?, telefono=?, correo=?, pregunta=?, respuesta=?" + "where id_trabajador=?";
             
             try {
                 

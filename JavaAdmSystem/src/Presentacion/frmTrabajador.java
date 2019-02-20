@@ -929,8 +929,8 @@ public class frmTrabajador extends javax.swing.JFrame {
         pwdContraseñaTrabajador.setText(tablalistado.getValueAt(fila,5).toString()); 
         txtTelefonoTrabajador.setText(tablalistado.getValueAt(fila,6).toString()); 
         txtCorreoTrabajador.setText(tablalistado.getValueAt(fila,7).toString()); 
-        
-        
+        cbPreguntaSeguridad.setSelectedItem(tablalistado.getValueAt(fila,8).toString());
+        txtRespuesta.setText(tablalistado.getValueAt(fila,9).toString()); 
 
         
              
