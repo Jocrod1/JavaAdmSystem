@@ -176,7 +176,7 @@ public class ftrabajador {
         
         modelo= new DefaultTableModel(null, titulos);
         
-        sSQL="select id_trabajador,contraseña from trabajador where id_trabajador='" + id_trabajador + "' and contraseña='" + contraseña;
+        sSQL="select id_trabajador,nombre,acceso,contraseña from trabajador where id_trabajador='" + id_trabajador+ "' and contraseña='" + contraseña;
         
         try {
             Statement st= cn.createStatement();
@@ -185,8 +185,10 @@ public class ftrabajador {
                  
             while(rs.next())
             {
-                registro [0]= rs.getString("id_trabajador");
-                registro [1]= rs.getString("contraseña");
+                registro [0]= rs.getString("id_trabajador");;
+                registro [1] =rs.getString("nombre");
+                registro [2] =rs.getString("acceso");
+                registro [3]= rs.getString("contraseña");
                 
                 totalregistros= totalregistros+1;
                 modelo.addRow(registro);
