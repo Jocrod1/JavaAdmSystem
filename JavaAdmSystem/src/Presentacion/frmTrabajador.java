@@ -7,6 +7,7 @@ package Presentacion;
 
 import Datos.vtrabajador;
 import Logica.ftrabajador;
+import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
@@ -50,8 +51,8 @@ public class frmTrabajador extends javax.swing.JFrame {
         txtTelefonoTrabajador.setEnabled(false);
         txtCorreoTrabajador.setEnabled(false);
         cbAcceso.setEnabled(false);
-        txtContraseñaTrabajador.setEnabled(false);
-        txtConfirmacionTrabajador.setEnabled(false);
+        pwdContraseñaTrabajador.setEnabled(false);
+        pwdConfirmacionTrabajador.setEnabled(false);
         
         btnGuardar.setEnabled(false);
         btnCancelar.setEnabled(false);
@@ -68,8 +69,8 @@ public class frmTrabajador extends javax.swing.JFrame {
         txtTelefonoTrabajador.setEnabled(true);
         txtCorreoTrabajador.setEnabled(true);
         cbAcceso.setEnabled(true);
-        txtContraseñaTrabajador.setEnabled(true);
-        txtConfirmacionTrabajador.setEnabled(true);
+        pwdContraseñaTrabajador.setEnabled(true);
+        pwdConfirmacionTrabajador.setEnabled(true);
         
         btnGuardar.setEnabled(true);
         btnCancelar.setEnabled(true);
@@ -86,8 +87,8 @@ public class frmTrabajador extends javax.swing.JFrame {
         txtTelefonoTrabajador.setText("");
         txtCorreoTrabajador.setText("");
         cbAcceso.setSelectedIndex(0);
-        txtContraseñaTrabajador.setText("");
-        txtConfirmacionTrabajador.setText("");
+        pwdContraseñaTrabajador.setText("");
+        pwdConfirmacionTrabajador.setText("");
     }
     
 
@@ -101,6 +102,7 @@ public class frmTrabajador extends javax.swing.JFrame {
             tablalistado.setModel(modelo);
             ocultar_columnas();
             lblTotal.setText(Integer.toString(func.totalregistros));
+            
             
         } catch (Exception e) {
             JOptionPane.showConfirmDialog(rootPane, e);
@@ -123,11 +125,9 @@ public class frmTrabajador extends javax.swing.JFrame {
 
         jPanel2 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
-        txtContraseñaTrabajador = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         cbAcceso = new javax.swing.JComboBox<>();
-        txtConfirmacionTrabajador = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         txtCedulaTrabajador = new javax.swing.JTextField();
         txtDireccionTrabajador = new javax.swing.JTextField();
@@ -144,6 +144,8 @@ public class frmTrabajador extends javax.swing.JFrame {
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         cbSexo = new javax.swing.JComboBox<>();
+        pwdContraseñaTrabajador = new javax.swing.JPasswordField();
+        pwdConfirmacionTrabajador = new javax.swing.JPasswordField();
         jPanel1 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -164,12 +166,6 @@ public class frmTrabajador extends javax.swing.JFrame {
         jLabel5.setForeground(new java.awt.Color(0, 51, 0));
         jLabel5.setText("Registro de Trabajador");
 
-        txtContraseñaTrabajador.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtContraseñaTrabajadorActionPerformed(evt);
-            }
-        });
-
         jLabel7.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(0, 51, 0));
         jLabel7.setText("Contraseña");
@@ -182,12 +178,6 @@ public class frmTrabajador extends javax.swing.JFrame {
         cbAcceso.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbAccesoActionPerformed(evt);
-            }
-        });
-
-        txtConfirmacionTrabajador.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtConfirmacionTrabajadorActionPerformed(evt);
             }
         });
 
@@ -283,6 +273,12 @@ public class frmTrabajador extends javax.swing.JFrame {
             }
         });
 
+        pwdContraseñaTrabajador.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pwdContraseñaTrabajadorActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -295,31 +291,11 @@ public class frmTrabajador extends javax.swing.JFrame {
                             .addComponent(jLabel3)
                             .addComponent(jLabel2)
                             .addComponent(jLabel4))
-                        .addGap(18, 18, 18)
+                        .addGap(18, 18, Short.MAX_VALUE)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(txtDireccionTrabajador, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 315, Short.MAX_VALUE)
-                            .addComponent(txtNombreTrabajador, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtCedulaTrabajador, javax.swing.GroupLayout.Alignment.LEADING)))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(177, 177, 177)
-                        .addComponent(jLabel5))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(11, 11, 11)
-                                .addComponent(jLabel8)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(txtContraseñaTrabajador, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(cbAcceso, javax.swing.GroupLayout.Alignment.LEADING, 0, 315, Short.MAX_VALUE)
-                                    .addComponent(txtConfirmacionTrabajador)))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(btnNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(txtNombreTrabajador, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 280, Short.MAX_VALUE)
+                            .addComponent(txtDireccionTrabajador)
+                            .addComponent(txtCedulaTrabajador)))
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(jPanel2Layout.createSequentialGroup()
                             .addGap(107, 107, 107)
@@ -330,14 +306,34 @@ public class frmTrabajador extends javax.swing.JFrame {
                                 .addComponent(jLabel7))
                             .addGap(18, 18, 18)
                             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(txtCorreoTrabajador, javax.swing.GroupLayout.DEFAULT_SIZE, 315, Short.MAX_VALUE)
+                                .addComponent(pwdContraseñaTrabajador, javax.swing.GroupLayout.DEFAULT_SIZE, 282, Short.MAX_VALUE)
+                                .addComponent(txtCorreoTrabajador)
                                 .addComponent(txtTelefonoTrabajador)))
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                             .addGap(64, 64, 64)
                             .addComponent(jLabel11)
                             .addGap(18, 18, 18)
-                            .addComponent(cbSexo, javax.swing.GroupLayout.PREFERRED_SIZE, 313, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(22, Short.MAX_VALUE))
+                            .addComponent(cbSexo, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(177, 177, 177)
+                        .addComponent(jLabel5))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(11, 11, 11)
+                                .addComponent(jLabel8)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(cbAcceso, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(pwdConfirmacionTrabajador, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(btnNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addGap(35, 35, 35))
         );
 
         jPanel2Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnCancelar, btnGuardar, btnNuevo});
@@ -378,11 +374,11 @@ public class frmTrabajador extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
-                    .addComponent(txtContraseñaTrabajador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(pwdContraseñaTrabajador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtConfirmacionTrabajador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(pwdConfirmacionTrabajador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -519,7 +515,7 @@ public class frmTrabajador extends javax.swing.JFrame {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(32, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -538,7 +534,7 @@ public class frmTrabajador extends javax.swing.JFrame {
         // TODO add your handling code here:
         
         //vuelve la confirmacion verdadera
-        txtConfirmacionTrabajador.setEnabled(true);
+        pwdConfirmacionTrabajador.setEnabled(true);
         jLabel8.setEnabled(true);
         limpiar();
         habilitar();
@@ -589,10 +585,10 @@ public class frmTrabajador extends javax.swing.JFrame {
             return;
         }
         
-        if(txtContraseñaTrabajador.getText().length() == 0){
+        if(pwdContraseñaTrabajador.getPassword().length == 0){
         
             JOptionPane.showMessageDialog(rootPane, "Debes ingresar la contraseña del trabajador");
-            txtContraseñaTrabajador.requestFocus();
+            pwdContraseñaTrabajador.requestFocus();
             return;
         }
         
@@ -613,7 +609,7 @@ public class frmTrabajador extends javax.swing.JFrame {
         
         
         //valida si el nombre tiene numeros
-        if ( !(Pattern.matches("[a-zA-Z]+", txtNombreTrabajador.getText()) ) ){
+        if ( !(Pattern.matches("[a-zA-Z\\s ]+", txtNombreTrabajador.getText()) ) ){
         JOptionPane.showMessageDialog(rootPane, "El nombre solo puede contener letras");
         txtNombreTrabajador.requestFocus();
         return;
@@ -631,22 +627,32 @@ public class frmTrabajador extends javax.swing.JFrame {
         }
         
         
+        
+        
+        
+        
+        
+        
         if(btnGuardar.getText().equals("Guardar")){  //esto valida si el boton es de guardar o editar
             
         
-        if(txtConfirmacionTrabajador.getText().length() == 0){
+        if(pwdConfirmacionTrabajador.getPassword().length == 0){
         
             JOptionPane.showMessageDialog(rootPane, "Debes ingresar la contraseña de nuevo");
             txtDireccionTrabajador.requestFocus();
             return;
         }
         
-        if(  !(txtContraseñaTrabajador.getText().equals(txtConfirmacionTrabajador.getText()))  ){
         
+        //confirma que las contraseñas sean iguales
+        
+        if ( !(Arrays.equals(pwdContraseñaTrabajador.getPassword(), pwdConfirmacionTrabajador.getPassword())) ) {
             JOptionPane.showMessageDialog(rootPane, "La confirmacion de la contraseña no coincide. Porfavor vuelva a escribirla");
-            txtConfirmacionTrabajador.requestFocus();
+            pwdConfirmacionTrabajador.requestFocus();
             return;
-        }
+        } 
+        
+        
         
         }
         
@@ -658,7 +664,7 @@ public class frmTrabajador extends javax.swing.JFrame {
         dts.setDireccion(txtDireccionTrabajador.getText());
         dts.setTelefono(txtTelefonoTrabajador.getText());
         dts.setCorreo(txtCorreoTrabajador.getText());
-        dts.setContraseña(txtContraseñaTrabajador.getText());
+        dts.setContraseña(pwdContraseñaTrabajador.getPassword().toString());
       
         int seleccionado_sexo = cbSexo.getSelectedIndex();
         dts.setSexo((String) cbSexo.getItemAt(seleccionado_sexo) );
@@ -719,6 +725,13 @@ public class frmTrabajador extends javax.swing.JFrame {
 
         mostrar(txtBuscarTrabajador.getText());
         
+        if (lblTotal.getText().equals("0")){
+            
+            JOptionPane.showMessageDialog(rootPane, "No hay registros que coincidan con ese número de cedula");
+        }
+        
+        
+        
         
     }//GEN-LAST:event_btnBuscarActionPerformed
 
@@ -756,21 +769,11 @@ public class frmTrabajador extends javax.swing.JFrame {
         cbAcceso.transferFocus();
     }//GEN-LAST:event_cbAccesoActionPerformed
 
-    private void txtContraseñaTrabajadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtContraseñaTrabajadorActionPerformed
-        // TODO add your handling code here:
-        txtContraseñaTrabajador.transferFocus();
-    }//GEN-LAST:event_txtContraseñaTrabajadorActionPerformed
-
-    private void txtConfirmacionTrabajadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtConfirmacionTrabajadorActionPerformed
-        // TODO add your handling code here:
-        txtConfirmacionTrabajador.transferFocus();
-    }//GEN-LAST:event_txtConfirmacionTrabajadorActionPerformed
-
     private void tablalistadoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablalistadoMouseClicked
 
         btnGuardar.setText("Editar");
         habilitar();
-        txtConfirmacionTrabajador.setEnabled(false);
+        pwdConfirmacionTrabajador.setEnabled(false);
         
         
         
@@ -787,7 +790,7 @@ public class frmTrabajador extends javax.swing.JFrame {
         txtCedulaTrabajador.setEnabled(false);
         
         //vuelve la confirmacion falsa
-        txtConfirmacionTrabajador.setEnabled(false);
+        pwdConfirmacionTrabajador.setEnabled(false);
         jLabel8.setEnabled(false);
 
         
@@ -795,7 +798,7 @@ public class frmTrabajador extends javax.swing.JFrame {
         txtDireccionTrabajador.setText(tablalistado.getValueAt(fila,2).toString());        
         cbSexo.setSelectedItem(tablalistado.getValueAt(fila,3).toString());
         cbAcceso.setSelectedItem(tablalistado.getValueAt(fila,4).toString());
-        txtContraseñaTrabajador.setText(tablalistado.getValueAt(fila,5).toString()); 
+        pwdContraseñaTrabajador.setText(tablalistado.getValueAt(fila,5).toString()); 
         txtTelefonoTrabajador.setText(tablalistado.getValueAt(fila,6).toString()); 
         txtCorreoTrabajador.setText(tablalistado.getValueAt(fila,7).toString()); 
         
@@ -814,6 +817,13 @@ public class frmTrabajador extends javax.swing.JFrame {
         limpiar();
         inhabilitar();
     }//GEN-LAST:event_btnCancelarActionPerformed
+
+    private void pwdContraseñaTrabajadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pwdContraseñaTrabajadorActionPerformed
+        
+    pwdContraseñaTrabajador.setEchoChar('*');
+    pwdConfirmacionTrabajador.setEchoChar('*');
+    
+    }//GEN-LAST:event_pwdContraseñaTrabajadorActionPerformed
 
     /**
      * @param args the command line arguments
@@ -876,11 +886,11 @@ public class frmTrabajador extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblTotal;
+    private javax.swing.JPasswordField pwdConfirmacionTrabajador;
+    private javax.swing.JPasswordField pwdContraseñaTrabajador;
     private javax.swing.JTable tablalistado;
     private javax.swing.JTextField txtBuscarTrabajador;
     private javax.swing.JTextField txtCedulaTrabajador;
-    private javax.swing.JTextField txtConfirmacionTrabajador;
-    private javax.swing.JTextField txtContraseñaTrabajador;
     private javax.swing.JTextField txtCorreoTrabajador;
     private javax.swing.JTextField txtDireccionTrabajador;
     private javax.swing.JTextField txtNombreTrabajador;
