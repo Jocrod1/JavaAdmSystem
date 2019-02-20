@@ -164,6 +164,7 @@ public class ftrabajador {
         
         
         
+
         public DefaultTableModel usuario(String id_trabajador, String contraseña)
     {
         DefaultTableModel modelo;
@@ -176,7 +177,7 @@ public class ftrabajador {
         
         modelo= new DefaultTableModel(null, titulos);
         
-        sSQL="select id_trabajador,nombre,acceso,contraseña from trabajador where id_trabajador='" + id_trabajador+ "' and contraseña='" + contraseña;
+        sSQL="select id_trabajador,contraseña,nombre,acceso from trabajador where id_trabajador='" + id_trabajador+ "' and contraseña='" + contraseña+"'";
         
         try {
             Statement st= cn.createStatement();
@@ -185,10 +186,10 @@ public class ftrabajador {
                  
             while(rs.next())
             {
-                registro [0]= rs.getString("id_trabajador");;
-                registro [1] =rs.getString("nombre");
-                registro [2] =rs.getString("acceso");
-                registro [3]= rs.getString("contraseña");
+                registro [0]= rs.getString("id_trabajador");
+                registro [1]= rs.getString("contraseña");
+                registro [2] =rs.getString("nombre");
+                registro [3] =rs.getString("acceso");
                 
                 totalregistros= totalregistros+1;
                 modelo.addRow(registro);
@@ -202,6 +203,45 @@ public class ftrabajador {
             JOptionPane.showConfirmDialog(null, e);
             return null;
         }  
+        
+        }
+        
+        public DefaultTableModel usuariorepetido(String id_trabajador)
+    {
+        DefaultTableModel modelo;
+        
+        String [] titulos = {"Cedula"};
+        
+        String [] registro = new String [1];
+        
+        totalregistros=0;
+        
+        modelo= new DefaultTableModel(null, titulos);
+        
+        sSQL="select id_trabajador from trabajador where id_trabajador='" + id_trabajador+"'";
+        
+        try {
+            Statement st= cn.createStatement();
+            ResultSet rs=st.executeQuery(sSQL);
+            
+                 
+            while(rs.next())
+            {
+                registro [0]= rs.getString("id_trabajador");
+                
+                totalregistros= totalregistros+1;
+                modelo.addRow(registro);
+            }
+                 
+                 
+            
+            return modelo;
+            
+        } catch (Exception e) {
+            JOptionPane.showConfirmDialog(null, e);
+            return null;
+        }  
+    }
     }
         
         
@@ -219,4 +259,4 @@ public class ftrabajador {
         
         
         
-}
+

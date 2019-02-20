@@ -29,6 +29,8 @@ public class frmTrabajador extends javax.swing.JFrame {
         
         inhabilitar();
         
+        txtCedulaTrabajador.requestFocus();
+        
     }
 
     
@@ -157,6 +159,8 @@ public class frmTrabajador extends javax.swing.JFrame {
         btnSalir = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         lblTotal = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tablarepetida = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -367,7 +371,7 @@ public class frmTrabajador extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtCorreoTrabajador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cbAcceso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -451,6 +455,19 @@ public class frmTrabajador extends javax.swing.JFrame {
         lblTotal.setForeground(new java.awt.Color(204, 255, 204));
         lblTotal.setText("jLabel11");
 
+        tablarepetida.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane2.setViewportView(tablarepetida);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -464,7 +481,6 @@ public class frmTrabajador extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(23, 23, 23)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 702, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -480,7 +496,12 @@ public class frmTrabajador extends javax.swing.JFrame {
                                 .addComponent(btnEliminar)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap())))
+                        .addContainerGap())
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 702, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
 
         jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnBuscar, btnEliminar, btnSalir});
@@ -488,7 +509,9 @@ public class frmTrabajador extends javax.swing.JFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(52, Short.MAX_VALUE)
+                .addContainerGap()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel9)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -652,6 +675,40 @@ public class frmTrabajador extends javax.swing.JFrame {
             return;
         } 
         
+        //cedula unica
+        try {
+            DefaultTableModel modelo;
+            ftrabajador func= new ftrabajador();
+            vtrabajador dts= new vtrabajador();
+            
+            
+            
+            
+            dts.setId_trabajador(txtCedulaTrabajador.getText());
+            
+            modelo=func.usuariorepetido(dts.getId_trabajador());
+            
+
+            
+            tablarepetida.setModel(modelo);
+            
+            if(func.totalregistros>0)
+            {
+                JOptionPane.showMessageDialog(rootPane,"Cedula ya Registrada!","Error", JOptionPane.ERROR_MESSAGE);
+                
+                txtCedulaTrabajador.requestFocus();
+                
+                return;
+                
+            }
+            
+            
+        } catch (Exception e) {
+        }
+        
+        
+        
+        
         
         
         }
@@ -673,6 +730,8 @@ public class frmTrabajador extends javax.swing.JFrame {
         dts.setAcceso((String) cbAcceso.getItemAt(seleccionado_acceso) );
         
         if(accion.equals("Guardar")){
+                      
+            
             if (func.insertar(dts)) {
                 JOptionPane.showMessageDialog(rootPane, "Se guardo correctamente");
                 mostrar("");
@@ -885,10 +944,12 @@ public class frmTrabajador extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lblTotal;
     private javax.swing.JPasswordField pwdConfirmacionTrabajador;
     private javax.swing.JPasswordField pwdContraseñaTrabajador;
     private javax.swing.JTable tablalistado;
+    private javax.swing.JTable tablarepetida;
     private javax.swing.JTextField txtBuscarTrabajador;
     private javax.swing.JTextField txtCedulaTrabajador;
     private javax.swing.JTextField txtCorreoTrabajador;
