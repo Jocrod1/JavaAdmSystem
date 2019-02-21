@@ -619,6 +619,7 @@ public class frmTrabajador extends javax.swing.JFrame {
         jLabel8.setEnabled(true);
         limpiar();
         habilitar();
+        btnEliminar.setEnabled(false);
         btnGuardar.setText("Guardar");
         accion="Guardar";
         
