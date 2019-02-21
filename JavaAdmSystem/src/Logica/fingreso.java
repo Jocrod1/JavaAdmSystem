@@ -40,7 +40,7 @@ public class fingreso {
         
         modelo= new DefaultTableModel(null, titulos);
         
-        sSQL="select top 100 i.id_ingreso, t.nombre as trabajador, p.empresa as Proveedor,\n" +
+        sSQL="select i.id_ingreso, t.nombre as trabajador, p.empresa as Proveedor,\n" +
 " p.nombre as RepresentanteLegal, i.fecha, i.estado, i.precio_total\n" +
 " from detalle_ingreso d inner join ingreso i on d.id_ingreso = i.id_ingreso\n" +
 " inner join proveedor p on i.id_proveedor = p.id_proveedor\n" +
