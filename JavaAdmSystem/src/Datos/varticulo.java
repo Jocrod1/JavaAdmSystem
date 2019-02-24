@@ -11,11 +11,11 @@ package Datos;
  */
 public class varticulo {
     
-    private int id_articulo;
+    private String id_articulo;
     private String nombre;
     private String descripcion;
 
-    public varticulo(int id_articulo, String nombre, String descripcion) {
+    public varticulo(String id_articulo, String nombre, String descripcion) {
         this.id_articulo = id_articulo;
         this.nombre = nombre;
         this.descripcion = descripcion;
@@ -24,11 +24,11 @@ public class varticulo {
     public varticulo() {
     }
 
-    public int getId_articulo() {
+    public String getId_articulo() {
         return id_articulo;
     }
 
-    public void setId_articulo(int id_articulo) {
+    public void setId_articulo(String id_articulo) {
         this.id_articulo = id_articulo;
     }
 
