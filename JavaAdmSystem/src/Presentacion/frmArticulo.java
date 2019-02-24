@@ -418,7 +418,10 @@ public class frmArticulo extends javax.swing.JFrame {
         
         
         
-    if(btnGuardar.getText().equals("Guardar")){  //esto valida si el boton es de guardar o editar
+    if(btnGuardar.getText().equals("Guardar")){
+        //esto valida si el boton es de guardar o editar
+    
+        }
     
         varticulo dts = new varticulo();
         farticulo func = new farticulo();
@@ -438,9 +441,10 @@ public class frmArticulo extends javax.swing.JFrame {
                 inhabilitar();
             }
         }else if(accion.equals("Editar")){
+
             dts.setId_articulo(Integer.parseInt(txtIdArticulo.getText()));
             
-            JOptionPane.showMessageDialog(rootPane,txtIdArticulo.getText());
+
         
             if (func.editar(dts)) {
                 JOptionPane.showMessageDialog(rootPane, "El articulo fue editado exitosamente");
@@ -452,8 +456,7 @@ public class frmArticulo extends javax.swing.JFrame {
         
         }
         
-        
-    } //final del if         
+               
         
         
         
