@@ -89,13 +89,14 @@ public class farticulo {
     
     public boolean editar (varticulo dts)
         {
-            sSQL= "Update articulo set nombre=?, descripcion=?" + "where id_articulo=?";
+            sSQL= "Update articulo set nombre=?, descripcion=?"+" where id_articulo=?";
             
             try {
                 
                 PreparedStatement pst=cn.prepareStatement(sSQL);
                 pst.setString(1, dts.getNombre());
                 pst.setString(2, dts.getDescripcion());
+                pst.setInt(3, dts.getId_articulo());
 
                 
                 int n=pst.executeUpdate();
@@ -119,7 +120,7 @@ public class farticulo {
     
             public boolean eliminar (varticulo dts)
         {
-            sSQL="delete from trabajador where id_articulo=?";
+            sSQL="delete from articulo where id_articulo=?";
             try {
                 
                 PreparedStatement pst=cn.prepareStatement(sSQL);
