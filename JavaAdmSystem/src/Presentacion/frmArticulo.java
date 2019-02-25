@@ -26,7 +26,7 @@ public class frmArticulo extends javax.swing.JFrame {
         
         inhabilitar();
         
-        txtNombreArticulo.requestFocus();
+        txtIdArticulo.requestFocus();
     }
 
     
@@ -47,6 +47,7 @@ public class frmArticulo extends javax.swing.JFrame {
     
     
         void habilitar (){
+        txtIdArticulo.setEnabled(true);
         txtNombreArticulo.setEnabled(true);
         txtDescripcionArticulo.setEnabled(true);
         
@@ -297,7 +298,7 @@ public class frmArticulo extends javax.swing.JFrame {
 
         jLabel4.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(0, 51, 0));
-        jLabel4.setText("Id");
+        jLabel4.setText("Codigo");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -311,8 +312,9 @@ public class frmArticulo extends javax.swing.JFrame {
                 .addGap(54, 54, 54)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel3)
-                    .addComponent(jLabel2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                    .addComponent(jLabel2)
+                    .addComponent(btnNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtIdArticulo, javax.swing.GroupLayout.PREFERRED_SIZE, 315, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -329,9 +331,17 @@ public class frmArticulo extends javax.swing.JFrame {
                         .addComponent(btnNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(0, 0, Short.MAX_VALUE))
+                        .addGap(71, 71, 71)
+                        .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 8, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtIdArticulo, javax.swing.GroupLayout.PREFERRED_SIZE, 315, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(txtDescripcionArticulo, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(txtNombreArticulo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 315, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(58, 58, 58))))
         );
 
         jPanel2Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnCancelar, btnGuardar, btnNuevo});
@@ -424,6 +434,7 @@ public class frmArticulo extends javax.swing.JFrame {
         varticulo dts = new varticulo();
         farticulo func = new farticulo();
         
+        dts.setId_articulo(txtIdArticulo.getText());
         dts.setNombre(txtNombreArticulo.getText());
         dts.setDescripcion(txtDescripcionArticulo.getText());
         dts.setId_articulo(Integer.parseInt(txtIdArticulo.getText()));
@@ -441,7 +452,7 @@ public class frmArticulo extends javax.swing.JFrame {
             }
         }else if(accion.equals("Editar")){
 
-            dts.setId_articulo(Integer.parseInt(txtIdArticulo.getText()));
+            dts.setId_articulo(txtIdArticulo.getText());
             
 
         
@@ -473,7 +484,7 @@ public class frmArticulo extends javax.swing.JFrame {
                 varticulo dts = new varticulo();
                 
                 
-                dts.setId_articulo(Integer.parseInt(txtIdArticulo.getText()) );
+                dts.setId_articulo(txtIdArticulo.getText());
                 func.eliminar(dts); //se envian los datos para la elimacion, osea solo la id
                 mostrar(""); //se envia una cadena en blanco para que se muestren todos
                 limpiar();
@@ -515,7 +526,7 @@ public class frmArticulo extends javax.swing.JFrame {
         // TODO add your handling code here:
         btnGuardar.setText("Editar");
         habilitar();
-        txtNombreArticulo.setEnabled(false);
+        //txtNombreArticulo.setEnabled(false);
         
         
         
