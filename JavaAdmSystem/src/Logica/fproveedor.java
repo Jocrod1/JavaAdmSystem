@@ -38,7 +38,7 @@ public class fproveedor {
         
         modelo= new DefaultTableModel(null, titulos);
         
-        sSQL="select * from proveedor where id_trabajador like '%" + buscar + "%' order  by id_proveedor";
+        sSQL="select * from proveedor where cedula like '%" + buscar + "%' order  by cedula";
         
         try {
             Statement st= cn.createStatement();
@@ -114,6 +114,7 @@ public class fproveedor {
                 pst.setString(5, dts.getEmpresa());
                 pst.setString(6, dts.getTelefono());
                 pst.setString(7, dts.getCorreo());
+                pst.setInt(8, dts.getId_proveedor());
                 
                 int n=pst.executeUpdate();
                 
