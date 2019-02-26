@@ -5,7 +5,7 @@
  */
 package Presentacion;
 
-import Logica.fproveedor;
+import Logica.fcliente;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -13,12 +13,12 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Raimon
  */
-public class fmvistaproveedor extends javax.swing.JFrame {
+public class frmvistacliente extends javax.swing.JFrame {
 
     /**
-     * Creates new form rfmvistaproveedor
+     * Creates new form frmvistacliente
      */
-    public fmvistaproveedor() {
+    public frmvistacliente() {
         initComponents();
         mostrar("");
         this.setLocationRelativeTo(null);
@@ -50,7 +50,7 @@ public class fmvistaproveedor extends javax.swing.JFrame {
 
         jLabel9.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(204, 255, 204));
-        jLabel9.setText("Listado de Proveedores");
+        jLabel9.setText("Listado de Artículo");
 
         tablalistado.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -118,9 +118,9 @@ public class fmvistaproveedor extends javax.swing.JFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(46, Short.MAX_VALUE)
+                .addGap(58, 58, 58)
                 .addComponent(jLabel9)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtBuscarTrabajador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -163,24 +163,23 @@ public class fmvistaproveedor extends javax.swing.JFrame {
         if(evt.getClickCount() == 2){
             int fila = tablalistado.getSelectedRow();
 
-            String ID, Nombre;
+            String Cedula, Nombre;
 
-            ID = tablalistado.getValueAt(fila, 0).toString();
+            Cedula = tablalistado.getValueAt(fila, 0).toString();
             Nombre = tablalistado.getValueAt(fila, 1).toString();
 
-            frmIngreso.CodArticulo = ID;
-            frmIngreso.txtArticulo.setText(Nombre);
+            frmVenta.TxtClienteCedula.setText(Cedula);
+            frmVenta.TxtClienteNombre.setText(Nombre);
 
             this.setVisible(false);
         }
     }//GEN-LAST:event_tablalistadoMousePressed
 
-    
         void mostrar (String buscar){
         
         try {
             DefaultTableModel modelo;
-            fproveedor func= new fproveedor();
+            fcliente func= new fcliente();
             modelo = func.mostrar(buscar);
             
             tablalistado.setModel(modelo);
@@ -197,19 +196,6 @@ public class fmvistaproveedor extends javax.swing.JFrame {
     
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         // TODO add your handling code here:
 
@@ -217,7 +203,7 @@ public class fmvistaproveedor extends javax.swing.JFrame {
 
         if (lblTotal.getText().equals("0")){
 
-            JOptionPane.showMessageDialog(rootPane, "No hay registros que coincidan con ese nombre");
+            JOptionPane.showMessageDialog(rootPane, "No hay registros que coincidan con ese cliente");
         }
     }//GEN-LAST:event_btnBuscarActionPerformed
 
@@ -238,21 +224,20 @@ public class fmvistaproveedor extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(fmvistaproveedor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmvistacliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(fmvistaproveedor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmvistacliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(fmvistaproveedor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmvistacliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(fmvistaproveedor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmvistacliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new fmvistaproveedor().setVisible(true);
+                new frmvistacliente().setVisible(true);
             }
         });
     }
