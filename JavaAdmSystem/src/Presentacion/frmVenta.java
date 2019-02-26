@@ -399,6 +399,11 @@ public class frmVenta extends javax.swing.JFrame {
         jLabel6.setText("Cliente:");
 
         BtnBuscarProveedor.setText("Buscar");
+        BtnBuscarProveedor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnBuscarProveedorActionPerformed(evt);
+            }
+        });
 
         jLabel11.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(0, 51, 0));
@@ -771,6 +776,15 @@ public class frmVenta extends javax.swing.JFrame {
     private void txtcantidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtcantidadActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtcantidadActionPerformed
+
+    private void BtnBuscarProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBuscarProveedorActionPerformed
+        // TODO add your handling code here:
+        
+        frmvistacliente frm = new frmvistacliente();
+        frm.toFront();
+        frm.setVisible(true);
+        
+    }//GEN-LAST:event_BtnBuscarProveedorActionPerformed
 
     /**
      * @param args the command line arguments
