@@ -109,6 +109,7 @@ public class fcliente {
                 pst.setString(3, dts.getTelefono());
                 pst.setString(4, dts.getCorreo());
                 pst.setString(5, dts.getSexo());
+                pst.setString(6, dts.getId_cliente());
                 
                 int n=pst.executeUpdate();
                 
@@ -153,5 +154,48 @@ public class fcliente {
             }
         }
         
+         
+         
+         
+         public DefaultTableModel usuariorepetido(String id_cliente)
+    {
+        DefaultTableModel modelo;
+        
+        String [] titulos = {"Cedula"};
+        
+        String [] registro = new String [1];
+        
+        totalregistros=0;
+        
+        modelo= new DefaultTableModel(null, titulos);
+        
+        sSQL="select id_trabajador from trabajador where id_trabajador='" + id_cliente+"'";
+        
+        try {
+            Statement st= cn.createStatement();
+            ResultSet rs=st.executeQuery(sSQL);
+            
+                 
+            while(rs.next())
+            {
+                registro [0]= rs.getString("id_trabajador");
+                
+                totalregistros= totalregistros+1;
+                modelo.addRow(registro);
+            }
+                 
+                 
+            
+            return modelo;
+            
+        } catch (Exception e) {
+            JOptionPane.showConfirmDialog(null, e);
+            return null;
+        }  
+    }
+         
+         
+         
+         
         
 }
