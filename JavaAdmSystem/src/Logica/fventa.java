@@ -132,15 +132,15 @@ public class fventa {
     {
         DefaultTableModel modelo;
         
-        String [] titulos = {"ID", "Articulo", "Cantidad", "Precio", "Subtotal"};
+        String [] titulos = {"Articulo", "Cantidad", "Precio", "Subtotal"};
         
-        String [] registro = new String [5];
+        String [] registro = new String [4];
         
         totalregistros=0;
         
         modelo= new DefaultTableModel(null, titulos);
         
-        sSQL="select d.id_detalle_ingreso, a.nombre as Articulo, d.cantidad ,d.precio,\n" +
+        sSQL="select a.nombre as Articulo, d.cantidad ,d.precio,\n" +
 " (d.precio * d.cantidad) as Subtotal\n" +
 " from detalle_venta d inner join detalle_ingreso di on d.id_detalle_ingreso = di.id_detalle_ingreso\n" +
 " inner join articulo a on di.id_articulo = a.id_articulo\n" +
@@ -153,11 +153,10 @@ public class fventa {
                  
             while(rs.next())
             {
-                registro [0]= rs.getString("id_detalle_ingreso");
-                registro [1]= rs.getString("Articulo");
-                registro [2]= rs.getString("cantidad");
-                registro [3]= rs.getString("precio");
-                registro [4]= rs.getString("Subtotal");
+                registro [0]= rs.getString("Articulo");
+                registro [1]= rs.getString("cantidad");
+                registro [2]= rs.getString("precio");
+                registro [3]= rs.getString("Subtotal");
                 
                 totalregistros= totalregistros+1;
                 modelo.addRow(registro);
