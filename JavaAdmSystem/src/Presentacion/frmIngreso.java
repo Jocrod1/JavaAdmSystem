@@ -261,6 +261,11 @@ public class frmIngreso extends javax.swing.JFrame {
 
         btnAgregar.setText("Agregar");
         btnAgregar.setToolTipText("");
+        btnAgregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregarActionPerformed(evt);
+            }
+        });
 
         btnQuitar.setText("Quitar");
         btnQuitar.setToolTipText("");
