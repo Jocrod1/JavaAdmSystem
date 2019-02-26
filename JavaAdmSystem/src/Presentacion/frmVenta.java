@@ -8,6 +8,9 @@ package Presentacion;
 import Datos.vdetalle_ingreso;
 import Datos.vdetalle_venta;
 import Logica.fingreso;
+import Logica.fventa;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -143,6 +146,24 @@ public class frmVenta extends javax.swing.JFrame {
             DefaultTableModel modelo;
             fingreso func= new fingreso();
             modelo = func.mostrar();
+            
+            tablalistado.setModel(modelo);
+            //ocultar_columnas();
+            lblTotal.setText(Integer.toString(func.totalregistros));
+            
+            
+        } catch (Exception e) {
+            JOptionPane.showConfirmDialog(rootPane, e);
+        }
+        
+    }
+    
+            void mostrarentrefecha (String buscar1, String buscar2){
+        
+        try {
+            DefaultTableModel modelo;
+            fventa func= new fventa();
+            modelo = func.buscarentrefechas(buscar1, buscar2);
             
             tablalistado.setModel(modelo);
             //ocultar_columnas();
@@ -513,14 +534,14 @@ public class frmVenta extends javax.swing.JFrame {
 
         jPanel2Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnCancelar, btnGuardar, btnNuevo});
 
-        jTabbedPane1.addTab("Ingresos Almacén", jPanel2);
+        jTabbedPane1.addTab("Ventas", jPanel2);
 
         jPanel4.setBackground(new java.awt.Color(0, 102, 0));
         jPanel4.setForeground(new java.awt.Color(204, 255, 204));
 
         jLabel9.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(204, 255, 204));
-        jLabel9.setText("Listado de Ingresos");
+        jLabel9.setText("Listado de Ventas");
 
         tablalistado.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -542,6 +563,11 @@ public class frmVenta extends javax.swing.JFrame {
         btnBuscar.setBackground(new java.awt.Color(255, 255, 255));
         btnBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Files/buscar.png"))); // NOI18N
         btnBuscar.setText("Buscar");
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarActionPerformed(evt);
+            }
+        });
 
         btnAnular.setBackground(new java.awt.Color(255, 255, 255));
         btnAnular.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Files/eliminar.png"))); // NOI18N
@@ -638,7 +664,7 @@ public class frmVenta extends javax.swing.JFrame {
                 .addContainerGap(12, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Listado de Ingresos", jPanel1);
+        jTabbedPane1.addTab("Listado de Ventas", jPanel1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -785,6 +811,34 @@ public class frmVenta extends javax.swing.JFrame {
         frm.setVisible(true);
         
     }//GEN-LAST:event_BtnBuscarProveedorActionPerformed
+
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        // TODO add your handling code here:
+        
+        fventa func= new fventa();
+        
+        
+        Date fecha1 = new Date();
+        
+        fecha1= dateChooserCombo2.getCurrent().getTime();
+        
+        DateFormat dateformat = new SimpleDateFormat("yyyy-MM-dd");
+        
+        String fecha1completa =dateformat.format(fecha1);
+
+        
+
+        Date fecha2 = new Date();
+        
+        fecha2= dateChooserCombo3.getCurrent().getTime();
+        
+        String fecha2completa =dateformat.format(fecha2);
+
+        mostrarentrefecha(fecha1completa, fecha2completa);
+        
+        
+        
+    }//GEN-LAST:event_btnBuscarActionPerformed
 
     /**
      * @param args the command line arguments
