@@ -17,14 +17,14 @@ public class vingreso {
     private int id_articulo;
     private int id_trabajador;
     private int id_proveedor;
-    private Date fecha;
+    private String fecha;
     private String estado;
     private Double precio_total;
 
     public vingreso() {
     }
 
-    public vingreso(int id_ingreso, int id_articulo, int id_trabajador, int id_proveedor, Date fecha, String estado, Double precio_total) {
+    public vingreso(int id_ingreso, int id_articulo, int id_trabajador, int id_proveedor, String fecha, String estado, Double precio_total) {
         this.id_ingreso = id_ingreso;
         this.id_articulo = id_articulo;
         this.id_trabajador = id_trabajador;
@@ -33,15 +33,13 @@ public class vingreso {
         this.estado = estado;
         this.precio_total = precio_total;
     }
-    
-    
 
-    public Double getPrecio_total() {
-        return precio_total;
+    public int getId_ingreso() {
+        return id_ingreso;
     }
 
-    public void setPrecio_total(Double precio_total) {
-        this.precio_total = precio_total;
+    public void setId_ingreso(int id_ingreso) {
+        this.id_ingreso = id_ingreso;
     }
 
     public int getId_articulo() {
@@ -68,11 +66,11 @@ public class vingreso {
         this.id_proveedor = id_proveedor;
     }
 
-    public Date getFecha() {
+    public String getFecha() {
         return fecha;
     }
 
-    public void setFecha(Date fecha) {
+    public void setFecha(String fecha) {
         this.fecha = fecha;
     }
 
@@ -84,13 +82,14 @@ public class vingreso {
         this.estado = estado;
     }
 
-    public int getId_ingreso() {
-        return id_ingreso;
+    public Double getPrecio_total() {
+        return precio_total;
     }
 
-    public void setId_ingreso(int id_ingreso) {
-        this.id_ingreso = id_ingreso;
+    public void setPrecio_total(Double precio_total) {
+        this.precio_total = precio_total;
     }
+
     
     
     

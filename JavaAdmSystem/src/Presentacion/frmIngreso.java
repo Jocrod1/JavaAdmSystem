@@ -6,6 +6,7 @@
 package Presentacion;
 
 import Datos.vdetalle_ingreso;
+import Datos.vingreso;
 import Logica.fingreso;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -22,7 +23,7 @@ import java.text.SimpleDateFormat;
  * @author Mirlu
  */
 public class frmIngreso extends javax.swing.JFrame {
-    public static String idtrabajador;
+    public static String idtrabajador = "26866008";
     public static String CodArticulo;
     public static String idProveedor;
     /**
@@ -241,6 +242,11 @@ public class frmIngreso extends javax.swing.JFrame {
         btnGuardar.setBackground(new java.awt.Color(255, 255, 255));
         btnGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Files/guardar.png"))); // NOI18N
         btnGuardar.setText("Guardar");
+        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarActionPerformed(evt);
+            }
+        });
 
         btnCancelar.setBackground(new java.awt.Color(255, 255, 255));
         btnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Files/cancelar.png"))); // NOI18N
@@ -497,6 +503,7 @@ public class frmIngreso extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tablalistado.setEnabled(false);
         jScrollPane1.setViewportView(tablalistado);
 
         jLabel10.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
@@ -790,6 +797,40 @@ public class frmIngreso extends javax.swing.JFrame {
   
         
     }//GEN-LAST:event_btnBuscarActionPerformed
+
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+        // TODO add your handling code here:
+        if(Detalles.getRowCount()<= 0){
+            JOptionPane.showConfirmDialog(rootPane, "Debes agregar ingresos");
+            BtnBuscarArticulo.requestFocus();
+            return;
+        }
+        if(txtProveedor.getText().length() == 0){
+            JOptionPane.showConfirmDialog(rootPane, "Debes ingresar un Proveedor");
+            BtnBuscarProveedor.requestFocus();
+            return;
+        }
+        
+        fingreso FI = new fingreso();
+        
+        vingreso VI = new vingreso();
+        
+        VI.setId_trabajador(Integer.parseInt(idtrabajador));
+        VI.setId_proveedor(Integer.parseInt(idProveedor));
+        Date fecha = new Date();
+        fecha= dateChooserCombo1.getCurrent().getTime();
+        DateFormat dateformat = new SimpleDateFormat("yyyy-MM-dd");
+        String fechacompleta =dateformat.format(fecha);
+        VI.setFecha(fechacompleta);
+        VI.setPrecio_total(TotalPagado);
+        
+        if(FI.insertar(VI)){
+            JOptionPane.showConfirmDialog(rootPane, "Se guardo correctamente");
+        }
+        
+        int identity = FI.Obteneridentity();
+        
+    }//GEN-LAST:event_btnGuardarActionPerformed
 
     /**
      * @param args the command line arguments

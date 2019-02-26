@@ -210,9 +210,8 @@ public class fingreso {
                 PreparedStatement pst=cn.prepareStatement(sSQL);
                 pst.setInt(1, dts.getId_trabajador());
                 pst.setInt(2, dts.getId_proveedor());
-                pst.setDate(3, dts.getFecha());
-                pst.setString(4, dts.getEstado());
-                pst.setDouble(5, dts.getPrecio_total());
+                pst.setString(3, dts.getFecha());
+                pst.setDouble(4, dts.getPrecio_total());
                 
                 int n=pst.executeUpdate();
                 
