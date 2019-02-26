@@ -771,7 +771,7 @@ public class frmIngreso extends javax.swing.JFrame {
         
         fecha1= dateChooserCombo2.getCurrent().getTime();
         
-        DateFormat dateformat = new SimpleDateFormat("dd-MM-yyyy");
+        DateFormat dateformat = new SimpleDateFormat("yyyy-MM-dd");
         
         String fecha1completa =dateformat.format(fecha1);
 
