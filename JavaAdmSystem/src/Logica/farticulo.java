@@ -28,7 +28,7 @@ public class farticulo {
     {
         DefaultTableModel modelo;
         
-        String [] titulos = {"ID", "Nombre", "Descripcion"};
+        String [] titulos = {"Codigo del Articulo", "Nombre del Articulo", "Descripcion del Articulo"};
         
         String [] registro = new String [3];
         
