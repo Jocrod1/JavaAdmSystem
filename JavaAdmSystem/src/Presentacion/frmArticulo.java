@@ -27,6 +27,7 @@ public class frmArticulo extends javax.swing.JFrame {
         inhabilitar();
         
         txtIdArticulo.requestFocus();
+        tablalistado.setEnabled(false);
     }
 
     

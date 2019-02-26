@@ -5,7 +5,12 @@
  */
 package Presentacion;
 
+import Datos.vdetalle_ingreso;
 import Logica.fingreso;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -14,16 +19,25 @@ import javax.swing.table.DefaultTableModel;
  * @author Mirlu
  */
 public class frmIngreso extends javax.swing.JFrame {
-
+    public static String idtrabajador;
+    public static String CodArticulo;
+    public static String idProveedor;
     /**
      * Creates new form frmIngreso
      */
     
-    String [] titulos = {"ID", "Articulo", "Precio de Compra", "Precio de Venta", "Stock Inicial", "Stock Actual", "Subtotal"};
+    String [] titulos = {"Articulo", "Precio de Compra", "Precio de Venta", "Stock Inicial", "Stock Actual", "Subtotal"};
     
     DefaultTableModel Detalles = new DefaultTableModel(null,titulos);
+    String [] Registrar = new String[6];
+    int Row;
     
     String accion = "Guardar";
+    
+    List<vdetalle_ingreso> ListDetalles = new ArrayList<>();
+    
+    double TotalPagado;
+    
     
     
     
@@ -33,22 +47,21 @@ public class frmIngreso extends javax.swing.JFrame {
         mostrar();
         
         inhabilitar();
+        inhabilitardetalle();
         
         jTable1.setModel(Detalles);
+        jTable1.setEnabled(false);
     }
     
     
     void inhabilitar (){
         txtProveedor.setEnabled(false);
         dateChooserCombo1.setEnabled(false);
-        txtArticulo.setEnabled(false);
-        txtPrecioCompra.setEnabled(false);
-        txtPrecioVenta.setEnabled(false);
-        txtStockInicial.setEnabled(false);
         
         btnGuardar.setEnabled(false);
         btnCancelar.setEnabled(false);
         btnAnular.setEnabled(false);
+        BtnBuscarProveedor.setEnabled(false);
     }
     
     
@@ -56,24 +69,64 @@ public class frmIngreso extends javax.swing.JFrame {
     void habilitar (){
         txtProveedor.setEnabled(true);
         dateChooserCombo1.setEnabled(true);
-        txtArticulo.setEnabled(true);
-        txtPrecioCompra.setEnabled(true);
-        txtPrecioVenta.setEnabled(true);
-        txtStockInicial.setEnabled(true);
         
         btnGuardar.setEnabled(true);
         btnCancelar.setEnabled(true);
         btnAnular.setEnabled(true);
+        BtnBuscarProveedor.setEnabled(true);
     }    
 
     
     void limpiar(){
     
         txtProveedor.setText("");
+        Calendar today = Calendar.getInstance();
+        today.setTime(new Date());
+        dateChooserCombo1.setSelectedDate(today);
+    }
+    
+    void habilitardetalle(){
+        txtArticulo.setEnabled(true);
+        txtPrecioCompra.setEnabled(true);
+        txtPrecioVenta.setEnabled(true);
+        txtStockInicial.setEnabled(true);
+        
+        btnQuitar.setEnabled(true);
+        btnAgregar.setEnabled(true);
+        BtnBuscarArticulo.setEnabled(true);
+    }
+    void inhabilitardetalle(){
+        txtArticulo.setEnabled(false);
+        txtPrecioCompra.setEnabled(false);
+        txtPrecioVenta.setEnabled(false);
+        txtStockInicial.setEnabled(false);
+        
+        btnQuitar.setEnabled(false);
+        btnAgregar.setEnabled(false);
+        BtnBuscarArticulo.setEnabled(false);
+    }
+    void limpiardetalle(){
         txtArticulo.setText("");
         txtPrecioCompra.setText("");
         txtPrecioVenta.setText("");
-        txtStockInicial.setText("");       
+        txtStockInicial.setText("");
+        CodArticulo = "";
+    }
+    void ActualizarTotalPagado(){
+        TotalPagado = 0;
+        if(Detalles.getRowCount()> 0){
+            for(int i = Detalles.getRowCount() - 1; i>-1; i--){
+                    TotalPagado += Double.parseDouble(jTable1.getValueAt(Row,5).toString());
+            }
+        }
+        lblTotalPagado.setText(Double.toString(TotalPagado));
+    }
+    void limpiartabladetalles(){
+        if(Detalles.getRowCount()> 0){
+            for(int i = Detalles.getRowCount() - 1; i>-1; i--){
+                Detalles.removeRow(i);
+            }
+        }
     }
     
 
@@ -115,7 +168,7 @@ public class frmIngreso extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         txtArticulo = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
+        BtnBuscarArticulo = new javax.swing.JButton();
         txtPrecioVenta = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
         txtPrecioCompra = new javax.swing.JTextField();
@@ -126,7 +179,7 @@ public class frmIngreso extends javax.swing.JFrame {
         jTable1 = new javax.swing.JTable();
         txtProveedor = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        BtnBuscarProveedor = new javax.swing.JButton();
         jLabel11 = new javax.swing.JLabel();
         dateChooserCombo1 = new datechooser.beans.DateChooserCombo();
         jLabel15 = new javax.swing.JLabel();
@@ -187,11 +240,18 @@ public class frmIngreso extends javax.swing.JFrame {
         jLabel8.setForeground(new java.awt.Color(0, 51, 0));
         jLabel8.setText("Stock Inicial");
 
+        txtArticulo.setEditable(false);
+
         jLabel4.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(0, 51, 0));
         jLabel4.setText("Artículo");
 
-        jButton2.setText("Buscar");
+        BtnBuscarArticulo.setText("Buscar");
+        BtnBuscarArticulo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnBuscarArticuloActionPerformed(evt);
+            }
+        });
 
         jLabel13.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(0, 51, 0));
@@ -203,9 +263,19 @@ public class frmIngreso extends javax.swing.JFrame {
 
         btnAgregar.setText("Agregar");
         btnAgregar.setToolTipText("");
+        btnAgregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregarActionPerformed(evt);
+            }
+        });
 
         btnQuitar.setText("Quitar");
         btnQuitar.setToolTipText("");
+        btnQuitar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnQuitarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -221,7 +291,7 @@ public class frmIngreso extends javax.swing.JFrame {
                     .addComponent(txtArticulo)
                     .addComponent(txtStockInicial, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jButton2)
+                .addComponent(BtnBuscarArticulo)
                 .addGap(36, 36, 36)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel14)
@@ -230,7 +300,7 @@ public class frmIngreso extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(txtPrecioCompra)
                     .addComponent(txtPrecioVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 310, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnAgregar, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(btnQuitar, javax.swing.GroupLayout.Alignment.TRAILING))
@@ -259,7 +329,7 @@ public class frmIngreso extends javax.swing.JFrame {
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtArticulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton2))
+                            .addComponent(BtnBuscarArticulo))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -278,13 +348,18 @@ public class frmIngreso extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(jTable1);
 
         jLabel6.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(0, 51, 0));
         jLabel6.setText("Proveedor");
 
-        jButton1.setText("Buscar");
+        BtnBuscarProveedor.setText("Buscar");
 
         jLabel11.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(0, 51, 0));
@@ -310,7 +385,7 @@ public class frmIngreso extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(txtProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1)
+                        .addComponent(BtnBuscarProveedor)
                         .addGap(35, 35, 35)
                         .addComponent(jLabel11)
                         .addGap(18, 18, 18)
@@ -350,13 +425,14 @@ public class frmIngreso extends javax.swing.JFrame {
                 .addGap(30, 30, 30)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton1)))
-                    .addComponent(dateChooserCombo1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(37, 37, 37)
+                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(BtnBuscarProveedor))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(dateChooserCombo1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(38, 38, 38)))
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -512,8 +588,8 @@ public class frmIngreso extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 530, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 530, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
@@ -523,21 +599,116 @@ public class frmIngreso extends javax.swing.JFrame {
         // TODO add your handling code here:
         limpiar();
         habilitar();
+        limpiardetalle();
+        habilitardetalle();
         btnAnular.setEnabled(false);
         btnGuardar.setText("Guardar");
         accion="Guardar";
+        ListDetalles.clear();
+        limpiartabladetalles();
+        ActualizarTotalPagado();
+        btnQuitar.setEnabled(false);
     }//GEN-LAST:event_btnNuevoActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         // TODO add your handling code here:
         limpiar();
         inhabilitar();
+        limpiartabladetalles();
+        ActualizarTotalPagado();
+        ListDetalles.clear();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void txtStockInicialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtStockInicialActionPerformed
         // TODO add your handling code here:
         txtStockInicial.transferFocus();
     }//GEN-LAST:event_txtStockInicialActionPerformed
+
+    private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
+        // TODO add your handling code here:
+        if(txtArticulo.getText().length() == 0){
+            JOptionPane.showConfirmDialog(rootPane, "Debes Seleccionar un Articulo");
+            BtnBuscarArticulo.requestFocus();
+            return;
+        }
+        if(txtPrecioCompra.getText().length() == 0){
+            JOptionPane.showConfirmDialog(rootPane, "Debes Especificar un Precio de Compra");
+            txtPrecioCompra.requestFocus();
+            return;
+        }
+        if(txtPrecioVenta.getText().length() == 0){
+            JOptionPane.showConfirmDialog(rootPane, "Debes Especificar un Precio de Venta");
+            txtPrecioVenta.requestFocus();
+            return;
+        }
+        if(txtStockInicial.getText().length() == 0){
+            JOptionPane.showConfirmDialog(rootPane, "Debes Especificar un Stock Inicial");
+            txtStockInicial.requestFocus();
+            return;
+        }
+        vdetalle_ingreso DI = new vdetalle_ingreso();
+        
+        Registrar[0] = txtArticulo.getText();
+        DI.setId_articulo(Integer.parseInt(CodArticulo));
+        Registrar[1] = txtPrecioCompra.getText();
+        DI.setPrecio_compra(Double.parseDouble(Registrar[1]));
+        Registrar[2] = txtPrecioVenta.getText();
+        DI.setPrecio_venta(Double.parseDouble(Registrar[2]));
+        Registrar[3] = txtStockInicial.getText();
+        DI.setStock_inicial(Integer.parseInt(Registrar[3]));
+        DI.setStock_actual(Integer.parseInt(Registrar[3]));
+        Registrar[4] = Registrar[3];
+        double a = Integer.parseInt(Registrar[3]) * Double.parseDouble(Registrar[1]);
+        Registrar[5] = Double.toString(a);
+        
+        if(accion.equals("Guardar")){
+        Detalles.addRow(Registrar);
+        ListDetalles.add(DI);
+        }
+        else if (accion.equals("Editar")){
+            jTable1.setValueAt(Registrar[0], Row, 0);
+            jTable1.setValueAt(Registrar[1], Row, 1);
+            jTable1.setValueAt(Registrar[2], Row, 2);
+            jTable1.setValueAt(Registrar[3], Row, 3);
+            jTable1.setValueAt(Registrar[4], Row, 4);
+            jTable1.setValueAt(Registrar[5], Row, 5);
+            ListDetalles.set(Row, DI);
+        }
+        limpiardetalle();
+        ActualizarTotalPagado();
+        accion = "Guardar";
+    }//GEN-LAST:event_btnAgregarActionPerformed
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        // TODO add your handling code here:
+        Row = jTable1.rowAtPoint(evt.getPoint());
+        
+        txtArticulo.setText(jTable1.getValueAt(Row,0).toString());
+        txtPrecioCompra.setText(jTable1.getValueAt(Row,1).toString());
+        txtPrecioVenta.setText(jTable1.getValueAt(Row,2).toString());
+        txtStockInicial.setText(jTable1.getValueAt(Row,3).toString());
+        
+        accion = "Editar";
+        btnQuitar.setEnabled(true);
+    }//GEN-LAST:event_jTable1MouseClicked
+
+    private void btnQuitarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuitarActionPerformed
+        // TODO add your handling code here:
+        if(accion.equals("Editar")){
+            Detalles.removeRow(Row);
+            limpiardetalle();
+            accion = "Guardar";
+            btnQuitar.setEnabled(false);
+            ListDetalles.remove(Row);
+        }
+    }//GEN-LAST:event_btnQuitarActionPerformed
+
+    private void BtnBuscarArticuloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBuscarArticuloActionPerformed
+        // TODO add your handling code here:
+        frmvistaarticulo frm = new frmvistaarticulo();
+        frm.toFront();
+        frm.setVisible(true);
+    }//GEN-LAST:event_BtnBuscarArticuloActionPerformed
 
     /**
      * @param args the command line arguments
@@ -575,6 +746,8 @@ public class frmIngreso extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BtnBuscarArticulo;
+    private javax.swing.JButton BtnBuscarProveedor;
     private javax.swing.JButton btnAgregar;
     private javax.swing.JButton btnAnular;
     private javax.swing.JButton btnBuscar;
@@ -583,11 +756,9 @@ public class frmIngreso extends javax.swing.JFrame {
     private javax.swing.JButton btnImprimir;
     private javax.swing.JButton btnNuevo;
     private javax.swing.JButton btnQuitar;
-    private datechooser.beans.DateChooserCombo dateChooserCombo1;
+    public datechooser.beans.DateChooserCombo dateChooserCombo1;
     private datechooser.beans.DateChooserCombo dateChooserCombo2;
     private datechooser.beans.DateChooserCombo dateChooserCombo3;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -611,10 +782,10 @@ public class frmIngreso extends javax.swing.JFrame {
     private javax.swing.JLabel lblTotal;
     private javax.swing.JLabel lblTotalPagado;
     private javax.swing.JTable tablalistado;
-    private javax.swing.JTextField txtArticulo;
-    private javax.swing.JTextField txtPrecioCompra;
-    private javax.swing.JTextField txtPrecioVenta;
-    private javax.swing.JTextField txtProveedor;
-    private javax.swing.JTextField txtStockInicial;
+    public static javax.swing.JTextField txtArticulo;
+    public javax.swing.JTextField txtPrecioCompra;
+    public javax.swing.JTextField txtPrecioVenta;
+    public javax.swing.JTextField txtProveedor;
+    public javax.swing.JTextField txtStockInicial;
     // End of variables declaration//GEN-END:variables
 }

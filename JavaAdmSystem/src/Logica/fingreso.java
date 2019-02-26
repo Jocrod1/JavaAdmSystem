@@ -169,7 +169,41 @@ public class fingreso {
             return null;
         }  
     }
+    
+    
+    public int Obteneridentity()
+    {
+        DefaultTableModel modelo;
+        
+        String [] titulos = {"ID"};
+        
+        int registro = 0;
+        
+        totalregistros=0;
+        
+        modelo= new DefaultTableModel(null, titulos);
+        
+        sSQL="SELECT id_ingreso FROM ingreso WHERE id_ingreso =(SELECT MAX(id_ingreso)FROM ingreso)";
+        
+        try {
+            Statement st= cn.createStatement();
+            ResultSet rs=st.executeQuery(sSQL);
             
+                 
+            while(rs.next())
+            {
+                registro = rs.getInt("id_ingreso");
+            }
+                 
+                 
+            
+            return registro;
+            
+        } catch (Exception e) {
+            JOptionPane.showConfirmDialog(null, e);
+            return 0;
+        }  
+    }
         public boolean insertar (vingreso dts)
         {
             sSQL="insert into ingreso (id_trabajador, id_proveedor, fecha, estado, precio_total)" + "values (?,?,?,'APROBADO',?)";
@@ -223,40 +257,6 @@ public class fingreso {
                 {
                     return false;
                 }
-                
-            } catch (Exception e) {
-                JOptionPane.showConfirmDialog(null, e);
-                return false;
-            }
-        }
-        
-        public boolean editar (vtrabajador dts)
-        {
-            sSQL= "Update trabajador set nombre=?, direccion=?, sexo=?,acceso=?, contraseña=?, telefono=?, correo=?" + "where id_trabajador=?";
-            
-            try {
-                
-                PreparedStatement pst=cn.prepareStatement(sSQL);
-                pst.setString(1, dts.getNombre());
-                pst.setString(2, dts.getDireccion());
-                pst.setString(3, dts.getSexo());
-                pst.setString(4, dts.getAcceso());
-                pst.setString(5, dts.getContraseña());
-                pst.setString(6, dts.getTelefono());
-                pst.setString(7, dts.getCorreo());
-                pst.setString(8, dts.getId_trabajador());
-                
-                int n=pst.executeUpdate();
-                
-                if(n!=0)
-                {
-                   return true; 
-                }
-                else
-                {
-                    return false;
-                }
-                
                 
             } catch (Exception e) {
                 JOptionPane.showConfirmDialog(null, e);

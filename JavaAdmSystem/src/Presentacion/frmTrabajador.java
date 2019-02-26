@@ -31,6 +31,7 @@ public class frmTrabajador extends javax.swing.JFrame {
         
         txtCedulaTrabajador.requestFocus();
         
+        tablalistado.setEnabled(false);
     }
 
     
