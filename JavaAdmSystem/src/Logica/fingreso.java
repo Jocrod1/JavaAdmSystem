@@ -93,7 +93,7 @@ public class fingreso {
 " from detalle_ingreso d inner join ingreso i on d.id_ingreso = i.id_ingreso\n" +
 " inner join proveedor p on i.id_proveedor = p.id_proveedor\n" +
 " inner join  trabajador t on i.id_trabajador = t.id_trabajador\n" +
-" where i.fecha>= '"+ Buscar +"' and i.fecha <= '"+ Buscar2 +"'";
+" where i.fecha BETWEEN '"+ Buscar +"' and '"+ Buscar2 +"'";
         
         try {
             Statement st= cn.createStatement();

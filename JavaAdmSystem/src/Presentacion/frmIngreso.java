@@ -7,12 +7,15 @@ package Presentacion;
 
 import Datos.vdetalle_ingreso;
 import Logica.fingreso;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 
 /**
  *
@@ -147,6 +150,26 @@ public class frmIngreso extends javax.swing.JFrame {
         }
         
     }
+    
+        void mostrarentrefecha (String buscar1, String buscar2){
+        
+        try {
+            DefaultTableModel modelo;
+            fingreso func= new fingreso();
+            modelo = func.buscarentrefechas(buscar1, buscar2);
+            
+            tablalistado.setModel(modelo);
+            //ocultar_columnas();
+            lblTotal.setText(Integer.toString(func.totalregistros));
+            
+            
+        } catch (Exception e) {
+            JOptionPane.showConfirmDialog(rootPane, e);
+        }
+        
+    }
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -239,6 +262,8 @@ public class frmIngreso extends javax.swing.JFrame {
         jLabel8.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(0, 51, 0));
         jLabel8.setText("Stock Inicial");
+
+        txtArticulo.setEditable(false);
 
         jLabel4.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(0, 51, 0));
@@ -354,11 +379,18 @@ public class frmIngreso extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(jTable1);
 
+        txtProveedor.setEditable(false);
+
         jLabel6.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(0, 51, 0));
         jLabel6.setText("Proveedor");
 
         BtnBuscarProveedor.setText("Buscar");
+        BtnBuscarProveedor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnBuscarProveedorActionPerformed(evt);
+            }
+        });
 
         jLabel11.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(0, 51, 0));
@@ -474,6 +506,11 @@ public class frmIngreso extends javax.swing.JFrame {
         btnBuscar.setBackground(new java.awt.Color(255, 255, 255));
         btnBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Files/buscar.png"))); // NOI18N
         btnBuscar.setText("Buscar");
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarActionPerformed(evt);
+            }
+        });
 
         btnAnular.setBackground(new java.awt.Color(255, 255, 255));
         btnAnular.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Files/eliminar.png"))); // NOI18N
@@ -658,6 +695,11 @@ public class frmIngreso extends javax.swing.JFrame {
         double a = DI.getPrecio_compra() * DI.getStock_inicial();
         Registrar[5] = Double.toString(a);
         
+        
+        
+        
+        
+        
         if(accion.equals("Guardar")){
         Detalles.addRow(Registrar);
         ListDetalles.add(DI);
@@ -708,6 +750,46 @@ public class frmIngreso extends javax.swing.JFrame {
         frm.setVisible(true);
     }//GEN-LAST:event_BtnBuscarArticuloActionPerformed
 
+    private void BtnBuscarProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBuscarProveedorActionPerformed
+        // TODO add your handling code here:
+        
+        frmvistaproveedor frm = new frmvistaproveedor();
+        frm.toFront();
+        frm.setVisible(true);
+        
+        
+        
+    }//GEN-LAST:event_BtnBuscarProveedorActionPerformed
+
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        // TODO add your handling code here:
+        fingreso func= new fingreso();
+        
+        
+        Date fecha1 = new Date();
+        
+        fecha1= dateChooserCombo2.getCurrent().getTime();
+        
+        DateFormat dateformat = new SimpleDateFormat("dd-MM-yyyy");
+        
+        String fecha1completa =dateformat.format(fecha1);
+
+        
+
+        Date fecha2 = new Date();
+        
+        fecha2= dateChooserCombo3.getCurrent().getTime();
+        
+        String fecha2completa =dateformat.format(fecha2);
+
+        mostrarentrefecha(fecha1completa, fecha2completa);
+        
+                
+        //JOptionPane.showConfirmDialog(rootPane, "la fecha "+fecha1completa + "y la fecha" +fecha2completa);
+  
+        
+    }//GEN-LAST:event_btnBuscarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -754,9 +836,9 @@ public class frmIngreso extends javax.swing.JFrame {
     private javax.swing.JButton btnImprimir;
     private javax.swing.JButton btnNuevo;
     private javax.swing.JButton btnQuitar;
-    private datechooser.beans.DateChooserCombo dateChooserCombo1;
-    private datechooser.beans.DateChooserCombo dateChooserCombo2;
-    private datechooser.beans.DateChooserCombo dateChooserCombo3;
+    public static datechooser.beans.DateChooserCombo dateChooserCombo1;
+    public static datechooser.beans.DateChooserCombo dateChooserCombo2;
+    public static datechooser.beans.DateChooserCombo dateChooserCombo3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -779,11 +861,11 @@ public class frmIngreso extends javax.swing.JFrame {
     private javax.swing.JTable jTable1;
     private javax.swing.JLabel lblTotal;
     private javax.swing.JLabel lblTotalPagado;
-    private javax.swing.JTable tablalistado;
+    public static javax.swing.JTable tablalistado;
     public static javax.swing.JTextField txtArticulo;
     private javax.swing.JTextField txtPrecioCompra;
     private javax.swing.JTextField txtPrecioVenta;
-    private javax.swing.JTextField txtProveedor;
+    public static javax.swing.JTextField txtProveedor;
     private javax.swing.JTextField txtStockInicial;
     // End of variables declaration//GEN-END:variables
 }

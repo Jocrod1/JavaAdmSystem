@@ -13,12 +13,12 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Raimon
  */
-public class fmvistaproveedor extends javax.swing.JFrame {
+public class frmvistaproveedor extends javax.swing.JFrame {
 
     /**
      * Creates new form rfmvistaproveedor
      */
-    public fmvistaproveedor() {
+    public frmvistaproveedor() {
         initComponents();
         mostrar("");
         this.setLocationRelativeTo(null);
@@ -166,10 +166,10 @@ public class fmvistaproveedor extends javax.swing.JFrame {
             String ID, Nombre;
 
             ID = tablalistado.getValueAt(fila, 0).toString();
-            Nombre = tablalistado.getValueAt(fila, 1).toString();
+            Nombre = tablalistado.getValueAt(fila, 2).toString();
 
-            frmIngreso.CodArticulo = ID;
-            frmIngreso.txtArticulo.setText(Nombre);
+            frmIngreso.idProveedor = ID;
+            frmIngreso.txtProveedor.setText(Nombre);
 
             this.setVisible(false);
         }
@@ -238,21 +238,23 @@ public class fmvistaproveedor extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(fmvistaproveedor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmvistaproveedor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(fmvistaproveedor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmvistaproveedor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(fmvistaproveedor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmvistaproveedor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(fmvistaproveedor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmvistaproveedor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new fmvistaproveedor().setVisible(true);
+                new frmvistaproveedor().setVisible(true);
             }
         });
     }
