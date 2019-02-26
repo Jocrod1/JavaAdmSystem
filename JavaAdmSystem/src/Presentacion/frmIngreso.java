@@ -654,7 +654,7 @@ public class frmIngreso extends javax.swing.JFrame {
         DI.setStock_inicial(Integer.parseInt(Registrar[3]));
         DI.setStock_actual(Integer.parseInt(Registrar[3]));
         Registrar[4] = Registrar[3];
-        double a = Integer.parseInt(Registrar[3]) * Double.parseDouble(Registrar[1]);
+        double a = DI.getPrecio_compra() * DI.getStock_inicial();
         Registrar[5] = Double.toString(a);
         
         if(accion.equals("Guardar")){
@@ -683,6 +683,7 @@ public class frmIngreso extends javax.swing.JFrame {
         txtPrecioCompra.setText(jTable1.getValueAt(Row,1).toString());
         txtPrecioVenta.setText(jTable1.getValueAt(Row,2).toString());
         txtStockInicial.setText(jTable1.getValueAt(Row,3).toString());
+        CodArticulo = Integer.toString(ListDetalles.get(Row).getId_articulo());
         
         accion = "Editar";
         btnQuitar.setEnabled(true);
