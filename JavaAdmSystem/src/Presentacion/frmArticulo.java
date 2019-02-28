@@ -6,9 +6,19 @@
 package Presentacion;
 
 import Datos.varticulo;
+import Logica.conexion;
 import Logica.farticulo;
+import java.io.File;
+import java.sql.Connection;
+import java.util.HashMap;
+import java.util.Map;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
@@ -539,8 +549,13 @@ public class frmArticulo extends javax.swing.JFrame {
         
     }//GEN-LAST:event_tablalistadoMouseClicked
 
+    
+    
+    
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
         // TODO add your handling code here:
+       
+        
         this.dispose();
     }//GEN-LAST:event_btnSalirActionPerformed
 
