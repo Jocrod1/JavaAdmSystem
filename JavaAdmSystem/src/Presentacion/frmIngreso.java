@@ -643,7 +643,6 @@ public class frmIngreso extends javax.swing.JFrame {
         limpiardetalle();
         habilitardetalle();
         btnAnular.setEnabled(false);
-        btnGuardar.setText("Guardar");
         accion="Guardar";
         ListDetalles.clear();
         limpiartabladetalles();
@@ -656,6 +655,7 @@ public class frmIngreso extends javax.swing.JFrame {
         limpiar();
         limpiardetalle();
         inhabilitar();
+        inhabilitardetalle();
         limpiartabladetalles();
         ActualizarTotalPagado();
         ListDetalles.clear();
@@ -823,15 +823,33 @@ public class frmIngreso extends javax.swing.JFrame {
         String fechacompleta =dateformat.format(fecha);
         VI.setFecha(fechacompleta);
         VI.setPrecio_total(TotalPagado);
-        
         if(FI.insertar(VI)){
             JOptionPane.showConfirmDialog(rootPane, "Se guardo correctamente");
         }
         
         int identity = FI.Obteneridentity();
+            
+        InsertarDetalle(identity, FI);
+        
+        limpiar();
+        limpiardetalle();
+        limpiartabladetalles();
+        accion="Guardar";
+        ListDetalles.clear();
+        inhabilitar();
+        inhabilitardetalle();
+        ActualizarTotalPagado();
         
     }//GEN-LAST:event_btnGuardarActionPerformed
-
+    void InsertarDetalle(int identity, fingreso FI){
+        for(int i = 0; i < ListDetalles.size(); i++){
+            vdetalle_ingreso a = ListDetalles.get(i);
+            a.setId_ingreso(identity);
+            if(!FI.insertarDetalle(a)){
+                return;
+            }
+        }
+    }
     /**
      * @param args the command line arguments
      */
