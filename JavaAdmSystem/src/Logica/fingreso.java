@@ -91,7 +91,7 @@ public class fingreso {
 " p.nombre as RepresentanteLegal, i.fecha, i.estado, i.precio_total\n" +
 " from ingreso i inner join proveedor p on i.id_proveedor = p.id_proveedor\n" +
 " inner join  trabajador t on i.id_trabajador = t.id_trabajador\n" +
-" where i.fecha BETWEEN '"+ Buscar +"' and '"+ Buscar2 +"'";
+" where i.fecha BETWEEN '"+ Buscar +"' and '"+ Buscar2 +"' order by i.id_ingreso desc";
         
         try {
             Statement st= cn.createStatement();
@@ -122,13 +122,13 @@ public class fingreso {
         }  
     }
     
-    public DefaultTableModel MostrarDetalle(String Buscar)
+    public DefaultTableModel MostrarDetalle(int Buscar)
     {
         DefaultTableModel modelo;
         
-        String [] titulos = {"ID", "Articulo", "Precio de Compra", "Precio de Venta", "Stock Inicial", "Stock Actual", "Subtotal"};
+        String [] titulos = {"Articulo", "Precio de Compra", "Precio de Venta", "Stock Inicial", "Stock Actual", "Subtotal"};
         
-        String [] registro = new String [7];
+        String [] registro = new String [6];
         
         totalregistros=0;
         
@@ -137,7 +137,7 @@ public class fingreso {
         sSQL="select d.id_articulo, a.nombre as Articulo, d.precio_compra, d.precio_venta, d.stock_inicial,\n" +
 "d.stock_actual, (d.stock_inicial * d.precio_compra) as Subtotal\n" +
 "from detalle_ingreso d inner join articulo a on d.id_articulo = a.id_articulo\n" +
-"where d.id_ingreso = '"+ Buscar +"'";
+"where d.id_ingreso = "+ Buscar +"";
         
         try {
             Statement st= cn.createStatement();
@@ -146,13 +146,12 @@ public class fingreso {
                  
             while(rs.next())
             {
-                registro [0]= rs.getString("id_articulo");
-                registro [1]= rs.getString("Articulo");
-                registro [2]= rs.getString("precio_compra");
-                registro [3]= rs.getString("precio_venta");
-                registro [4]= rs.getString("stock_inicial");
-                registro [5]= rs.getString("stock_actual");
-                registro [6]= rs.getString("Subtotal");
+                registro [0]= rs.getString("Articulo");
+                registro [1]= rs.getString("precio_compra");
+                registro [2]= rs.getString("precio_venta");
+                registro [3]= rs.getString("stock_inicial");
+                registro [4]= rs.getString("stock_actual");
+                registro [5]= rs.getString("Subtotal");
                 
                 totalregistros= totalregistros+1;
                 modelo.addRow(registro);

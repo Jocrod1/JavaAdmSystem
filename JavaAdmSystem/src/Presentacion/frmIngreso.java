@@ -17,7 +17,6 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-
 /**
  *
  * @author Mirlu
@@ -26,6 +25,7 @@ public class frmIngreso extends javax.swing.JFrame {
     public static String idtrabajador = "26866008";
     public static String CodArticulo;
     public static String idProveedor;
+    
     /**
      * Creates new form frmIngreso
      */
@@ -41,6 +41,7 @@ public class frmIngreso extends javax.swing.JFrame {
     List<vdetalle_ingreso> ListDetalles = new ArrayList<>();
     
     double TotalPagado;
+    int idingreso;
     
     
     
@@ -132,6 +133,11 @@ public class frmIngreso extends javax.swing.JFrame {
             }
         }
     }
+    void OcultarColumnas(){
+        tablalistado.getColumnModel().getColumn(0).setMaxWidth(0);
+        tablalistado.getColumnModel().getColumn(0).setMinWidth(0);
+        tablalistado.getColumnModel().getColumn(0).setPreferredWidth(0);
+    }
     
 
     void mostrar (){
@@ -142,7 +148,7 @@ public class frmIngreso extends javax.swing.JFrame {
             modelo = func.mostrar();
             
             tablalistado.setModel(modelo);
-            //ocultar_columnas();
+            OcultarColumnas();
             lblTotal.setText(Integer.toString(func.totalregistros));
             
             
@@ -160,7 +166,7 @@ public class frmIngreso extends javax.swing.JFrame {
             modelo = func.buscarentrefechas(buscar1, buscar2);
             
             tablalistado.setModel(modelo);
-            //ocultar_columnas();
+            OcultarColumnas();
             lblTotal.setText(Integer.toString(func.totalregistros));
             
             
@@ -169,7 +175,41 @@ public class frmIngreso extends javax.swing.JFrame {
         }
         
     }
-    
+    void mostrardetalle (int identity){
+        
+        try {
+            DefaultTableModel modelo;
+            fingreso func= new fingreso();
+            Detalles = func.MostrarDetalle(identity);
+            
+            jTable1.setModel(Detalles);
+            //ocultar_columnas();
+            ActualizarTotalPagado();
+            
+            
+        } catch (Exception e) {
+            JOptionPane.showConfirmDialog(rootPane, e);
+        }
+    }
+    void InsertarDetalle(int identity, fingreso FI){
+        for(int i = 0; i < ListDetalles.size(); i++){
+            vdetalle_ingreso a = ListDetalles.get(i);
+            a.setId_ingreso(identity);
+            if(!FI.insertarDetalle(a)){
+                return;
+            }
+        }
+    }
+    boolean PuedeAgregar(int idarticulo){
+        if(Detalles.getRowCount()<= 0)
+            return true;
+        for(int i = 0; i < ListDetalles.size(); i++){
+            int a = ListDetalles.get(i).getId_articulo();
+            if(a == idarticulo)
+                return false;
+        }
+        return true;
+    }
     
 
     /**
@@ -504,6 +544,11 @@ public class frmIngreso extends javax.swing.JFrame {
             }
         ));
         tablalistado.setEnabled(false);
+        tablalistado.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tablalistadoMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tablalistado);
 
         jLabel10.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
@@ -522,6 +567,11 @@ public class frmIngreso extends javax.swing.JFrame {
         btnAnular.setBackground(new java.awt.Color(255, 255, 255));
         btnAnular.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Files/eliminar.png"))); // NOI18N
         btnAnular.setText("Anular");
+        btnAnular.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAnularActionPerformed(evt);
+            }
+        });
 
         btnImprimir.setBackground(new java.awt.Color(255, 255, 255));
         btnImprimir.setText("Imprimir");
@@ -648,6 +698,7 @@ public class frmIngreso extends javax.swing.JFrame {
         limpiartabladetalles();
         ActualizarTotalPagado();
         btnQuitar.setEnabled(false);
+        btnNuevo.setEnabled(false);
     }//GEN-LAST:event_btnNuevoActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
@@ -659,6 +710,9 @@ public class frmIngreso extends javax.swing.JFrame {
         limpiartabladetalles();
         ActualizarTotalPagado();
         ListDetalles.clear();
+        limpiartabladetalles();
+        accion="";
+        btnNuevo.setEnabled(true);
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void txtStockInicialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtStockInicialActionPerformed
@@ -670,6 +724,11 @@ public class frmIngreso extends javax.swing.JFrame {
         // TODO add your handling code here:
         if(txtArticulo.getText().length() == 0){
             JOptionPane.showConfirmDialog(rootPane, "Debes Seleccionar un Articulo");
+            BtnBuscarArticulo.requestFocus();
+            return;
+        }
+        if(!PuedeAgregar(Integer.parseInt(CodArticulo))){
+            JOptionPane.showConfirmDialog(rootPane, "Debes Selecciar un articulo no este ya agregado");
             BtnBuscarArticulo.requestFocus();
             return;
         }
@@ -728,6 +787,8 @@ public class frmIngreso extends javax.swing.JFrame {
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         // TODO add your handling code here:
+        if(accion.equals("Anular"))
+                return;
         Row = jTable1.rowAtPoint(evt.getPoint());
         
         txtArticulo.setText(jTable1.getValueAt(Row,0).toString());
@@ -839,17 +900,62 @@ public class frmIngreso extends javax.swing.JFrame {
         inhabilitar();
         inhabilitardetalle();
         ActualizarTotalPagado();
-        
+        mostrar();
     }//GEN-LAST:event_btnGuardarActionPerformed
-    void InsertarDetalle(int identity, fingreso FI){
-        for(int i = 0; i < ListDetalles.size(); i++){
-            vdetalle_ingreso a = ListDetalles.get(i);
-            a.setId_ingreso(identity);
-            if(!FI.insertarDetalle(a)){
-                return;
-            }
+
+    private void btnAnularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnularActionPerformed
+        // TODO add your handling code here:
+        if(accion.equals("Anular")){
+            fingreso FI =  new fingreso();
+            vingreso VI = new vingreso();
+            
+            VI.setId_ingreso(idingreso);
+            
+            FI.Anular(VI);
+            
+            limpiar();
+            limpiardetalle();
+            inhabilitar();
+            inhabilitardetalle();
+            limpiartabladetalles();
+            ActualizarTotalPagado();
+            ListDetalles.clear();
+            limpiartabladetalles();
+            jTable1.setModel(Detalles);
+            accion="";
+            btnNuevo.setEnabled(true);
+            
+            mostrar();
         }
-    }
+        
+    }//GEN-LAST:event_btnAnularActionPerformed
+
+    private void tablalistadoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablalistadoMouseClicked
+        // TODO add your handling code here:
+        accion="Anular";
+        limpiar();
+        limpiardetalle();
+        limpiartabladetalles();
+        ListDetalles.clear();
+        inhabilitar();
+        inhabilitardetalle();
+        Row = tablalistado.rowAtPoint(evt.getPoint());
+        
+        int identity = Integer.parseInt(tablalistado.getValueAt(Row,0).toString());
+        
+        mostrardetalle(identity);
+        
+        ActualizarTotalPagado();
+        
+        idingreso = identity;
+        
+        jTable1.requestFocus();
+        jTabbedPane1.setSelectedIndex(0);
+        btnNuevo.setEnabled(false);
+        btnCancelar.setEnabled(true);
+        btnAnular.setEnabled(true);
+    }//GEN-LAST:event_tablalistadoMouseClicked
+    
     /**
      * @param args the command line arguments
      */
@@ -883,6 +989,7 @@ public class frmIngreso extends javax.swing.JFrame {
                 new frmIngreso().setVisible(true);
             }
         });
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
