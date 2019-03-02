@@ -8,18 +8,21 @@ package Presentacion;
 import Datos.vcliente;
 import Logica.conexion;
 import Logica.fcliente;
-import java.io.File;
+import java.net.URL;
+
 import java.sql.Connection;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.util.JRLoader;
 import net.sf.jasperreports.view.JasperViewer;
 
 /**
@@ -761,28 +764,39 @@ public class frmCliente extends javax.swing.JInternalFrame {
     
     
     private void btnBuscar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscar1ActionPerformed
-      /* 
-        //librerias
-        Map p= new HashMap();
-        JasperReport report;
-        JasperPrint print;
+
+        
+        
+        conexion cn =new conexion();
         
         
         try {
-            report=JasperCompileManager.compileReport(new File("").getAbsolutePath()+ "/src/Reportes/rptcliente.jrxml");
-            
-            print= JasperFillManager.fillReport(report, p,connection);
-            
-            JasperViewer view=new JasperViewer(print, false);
-            
-            view.setTitle("Reporte de Clientes");
-            
-            view.setVisible(true);
-            
+        cn.conectar();    
         } catch (Exception e) {
-            e.printStackTrace();
+          JOptionPane.showMessageDialog(rootPane, "ERROR");
+
         }
-        */
+
+        //String archivo=this.getClass().getClassLoader().getResource("JavaAdmSystem") + "/Reportes/reportecliente.jasper";
+        
+        URL archivo=this.getClass().getResource("/Reportes/reportecliente.jasper");
+        
+        JasperReport jr = null;
+        
+        try {
+            jr=(JasperReport) JRLoader.loadObject(archivo);        
+                 
+            
+            JasperPrint jp=JasperFillManager.fillReport(jr, null,cn.getConn());
+            
+            JasperViewer jv=new JasperViewer(jp);
+            
+            jv.setVisible(true);
+            jv.setTitle("Reporte Clientes");
+            
+        } catch (JRException ex) {
+            Logger.getLogger(frmCliente.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnBuscar1ActionPerformed
 
     /**
