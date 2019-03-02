@@ -756,12 +756,12 @@ public class frmCliente extends javax.swing.JInternalFrame {
 
     
     //conexion del reporte
-    //private Connection connection=new conexion().conectar();
+    private Connection connection=new conexion().conectar();
     
     
     
     private void btnBuscar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscar1ActionPerformed
-      /* 
+      
         //librerias
         Map p= new HashMap();
         JasperReport report;
@@ -782,7 +782,7 @@ public class frmCliente extends javax.swing.JInternalFrame {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        */
+        
     }//GEN-LAST:event_btnBuscar1ActionPerformed
 
     /**
