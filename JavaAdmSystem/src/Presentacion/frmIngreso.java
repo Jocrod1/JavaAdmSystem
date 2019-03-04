@@ -7,7 +7,10 @@ package Presentacion;
 
 import Datos.vdetalle_ingreso;
 import Datos.vingreso;
+import Logica.conexion;
 import Logica.fingreso;
+import java.io.File;
+import java.sql.Connection;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -17,12 +20,23 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.HashMap;
+import java.util.Map;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.view.JasperViewer;
 /**
  *
  * @author Mirlu
  */
 public class frmIngreso extends javax.swing.JFrame {
-    public static String idtrabajador = "26866008";
+    
+
+    
+    
+    public static String idtrabajador;
     public static String CodArticulo;
     public static String idProveedor;
     
@@ -859,6 +873,8 @@ public class frmIngreso extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btnBuscarActionPerformed
 
+            private Connection connection=new conexion().conectar();
+    
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         // TODO add your handling code here:
         if(Detalles.getRowCount()<= 0){
@@ -885,7 +901,33 @@ public class frmIngreso extends javax.swing.JFrame {
         VI.setFecha(fechacompleta);
         VI.setPrecio_total(TotalPagado);
         if(FI.insertar(VI)){
-            JOptionPane.showConfirmDialog(rootPane, "Se guardo correctamente");
+            JOptionPane.showMessageDialog(rootPane, "Se guardo correctamente, se mostrará el comprobante");
+
+            //if (idingreso == 0) {
+            //    JOptionPane.showMessageDialog(rootPane, "ERROR");
+            //} else {
+                //librerias de reportes
+                Map p = new HashMap();
+                p.put("idingreso", idingreso);
+                JasperReport report;
+                JasperPrint print;
+
+                try {
+                    report = JasperCompileManager.compileReport(new File("").getAbsolutePath() + "/src/Reportes/rptingreso.jrxml");
+
+                    print = JasperFillManager.fillReport(report, p, connection);
+
+                    JasperViewer view = new JasperViewer(print, false);
+
+                    view.setTitle("Comprobante de Ingreso");
+
+                    view.setVisible(true);
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+            //}
         }
         
         int identity = FI.Obteneridentity();

@@ -5,6 +5,17 @@
  */
 package Presentacion;
 
+import Logica.conexion;
+import java.io.File;
+import java.sql.Connection;
+import java.util.HashMap;
+import java.util.Map;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.view.JasperViewer;
+
 /**
  *
  * @author Mirlu
@@ -48,6 +59,8 @@ public class frmInicio extends javax.swing.JFrame {
         mnuVentasporfecha = new javax.swing.JMenuItem();
         mnuIngresosporfecha = new javax.swing.JMenuItem();
         mnuInventario = new javax.swing.JMenuItem();
+        jMenu1 = new javax.swing.JMenu();
+        jMenuReporteCliente = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
         mnuAcercade = new javax.swing.JMenuItem();
 
@@ -58,12 +71,12 @@ public class frmInicio extends javax.swing.JFrame {
         lblNombre.setForeground(new java.awt.Color(204, 255, 204));
         lblNombre.setText("Nombre");
         escritorio.add(lblNombre);
-        lblNombre.setBounds(10, 260, 60, 16);
+        lblNombre.setBounds(10, 260, 260, 14);
 
         lblAcceso.setForeground(new java.awt.Color(204, 255, 204));
         lblAcceso.setText("Acceso");
         escritorio.add(lblAcceso);
-        lblAcceso.setBounds(10, 280, 70, 16);
+        lblAcceso.setBounds(10, 280, 230, 14);
 
         mnuSistema.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Files/Inicio.png"))); // NOI18N
         mnuSistema.setText("Sistema");
@@ -100,7 +113,6 @@ public class frmInicio extends javax.swing.JFrame {
 
         menuBar.add(mnuRegistros);
 
-        jMenu3.setIcon(new javax.swing.ImageIcon("C:\\Users\\Mirlu\\Documents\\Complementos\\Imágenes Menú\\Configuraciones.png")); // NOI18N
         jMenu3.setText("Procesos");
 
         mnuIngreso.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Files/Add_to_Cart-512.png"))); // NOI18N
@@ -140,6 +152,18 @@ public class frmInicio extends javax.swing.JFrame {
 
         menuBar.add(jMenu2);
 
+        jMenu1.setText("Reportes");
+
+        jMenuReporteCliente.setText("Cliente");
+        jMenuReporteCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuReporteClienteActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuReporteCliente);
+
+        menuBar.add(jMenu1);
+
         jMenu5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Files/Ayuda.png"))); // NOI18N
         jMenu5.setText("Ayuda");
 
@@ -170,6 +194,12 @@ public class frmInicio extends javax.swing.JFrame {
 
     private void mnuIngresoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuIngresoActionPerformed
         // TODO add your handling code here:
+        
+        frmIngreso form =new frmIngreso();
+        form.toFront();
+        form.setVisible(true);
+        
+        
     }//GEN-LAST:event_mnuIngresoActionPerformed
 
     private void mnuInventarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuInventarioActionPerformed
@@ -183,6 +213,45 @@ public class frmInicio extends javax.swing.JFrame {
         form.toFront();
         form.setVisible(true);
     }//GEN-LAST:event_mnuClientesActionPerformed
+
+        private Connection connection=new conexion().conectar();
+    
+    
+    private void jMenuReporteClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuReporteClienteActionPerformed
+        // TODO add your handling code here:
+        
+        
+                //librerias
+        Map p= new HashMap();
+        JasperReport report;
+        JasperPrint print;
+        
+        
+        try {
+            report=JasperCompileManager.compileReport(new File("").getAbsolutePath()+ "/src/Reportes/rptcliente.jrxml");
+            
+            print= JasperFillManager.fillReport(report, p,connection);
+            
+            JasperViewer view=new JasperViewer(print, false);
+            
+            view.setTitle("Reporte de Clientes");
+            
+            view.setVisible(true);
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    }//GEN-LAST:event_jMenuReporteClienteActionPerformed
 
     /**
      * @param args the command line arguments
@@ -221,11 +290,13 @@ public class frmInicio extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane escritorio;
+    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu5;
-    private javax.swing.JLabel lblAcceso;
-    private javax.swing.JLabel lblNombre;
+    private javax.swing.JMenuItem jMenuReporteCliente;
+    public static javax.swing.JLabel lblAcceso;
+    public static javax.swing.JLabel lblNombre;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JMenuItem mnuAcercade;
     private javax.swing.JMenuItem mnuArticulos;

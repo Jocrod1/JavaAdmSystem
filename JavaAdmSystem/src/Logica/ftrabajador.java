@@ -175,7 +175,7 @@ public class ftrabajador {
     {
         DefaultTableModel modelo;
         
-        String [] titulos = {"Cedula", "Nombre", "Acceso", "Contraseña"};
+        String [] titulos = {"Cedula", "Contraseña", "Nombre", "Acceso"};
         
         String [] registro = new String [4];
         

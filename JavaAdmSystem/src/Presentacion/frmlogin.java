@@ -198,9 +198,14 @@ public class frmlogin extends javax.swing.JFrame {
                 
                 //se cierra el form aca
                 this.dispose();
-                //frmmenu form=new frmmenu();
-                //form.toFront();
-                //form.setVisible(true);
+                frmInicio form=new frmInicio();
+                form.toFront();
+                form.setVisible(true);
+                
+                frmInicio.lblNombre.setText(tablalistado.getValueAt(0, 2).toString());
+                frmInicio.lblAcceso.setText(tablalistado.getValueAt(0, 3).toString());
+                
+                frmIngreso.idtrabajador= (tablalistado.getValueAt(0, 0).toString());
                 
             }
             else
@@ -309,7 +314,7 @@ public class frmlogin extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
+    public static javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lblpregunta;
     private javax.swing.JTable tablacontraseña;
