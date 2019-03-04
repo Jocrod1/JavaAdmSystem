@@ -904,28 +904,10 @@ public class frmIngreso extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(rootPane, "Se guardo correctamente, se mostrará el comprobante");
 
             //if (idingreso == 0) {
-            //    JOptionPane.showMessageDialog(rootPane, "ERROR");
+            //    JOptionPane.showMessageDialog(rootPane, "No hay ningun comprobante a ver");
             //} else {
                 //librerias de reportes
-                Map p = new HashMap();
-                p.put("idingreso", idingreso);
-                JasperReport report;
-                JasperPrint print;
 
-                try {
-                    report = JasperCompileManager.compileReport(new File("").getAbsolutePath() + "/src/Reportes/rptingreso.jrxml");
-
-                    print = JasperFillManager.fillReport(report, p, connection);
-
-                    JasperViewer view = new JasperViewer(print, false);
-
-                    view.setTitle("Comprobante de Ingreso");
-
-                    view.setVisible(true);
-
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
 
             //}
         }
@@ -943,6 +925,30 @@ public class frmIngreso extends javax.swing.JFrame {
         inhabilitardetalle();
         ActualizarTotalPagado();
         mostrar();
+        
+        //reporte
+                Map p = new HashMap();
+                p.put("idingreso", FI.Obteneridentity());
+                JasperReport report;
+                JasperPrint print;
+
+                try {
+                    report = JasperCompileManager.compileReport(new File("").getAbsolutePath() + "/src/Reportes/rptingreso.jrxml");
+
+                    print = JasperFillManager.fillReport(report, p, connection);
+
+                    JasperViewer view = new JasperViewer(print, false);
+
+                    view.setTitle("Comprobante de Ingreso");
+
+                    view.setVisible(true);
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+        
+        
+        
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void btnAnularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnularActionPerformed
