@@ -36,13 +36,13 @@ public class fventa {
         
         String [] titulos = {"ID", "Trabajador", "Cliente", "Fecha", "Estado", "Subtotal", "Impuesto", "Total"};
         
-        String [] registro = new String [7];
+        String [] registro = new String [8];
         
         totalregistros=0;
         
         modelo= new DefaultTableModel(null, titulos);
         
-        sSQL="select top 100 v.id_venta, t.nombre as trabajador, c.nombre as Cliente, v.fecha, v.estado,\n" +
+        sSQL="select v.id_venta, t.nombre as trabajador, c.nombre as Cliente, v.fecha, v.estado,\n" +
 "v.subtotal, v.impuesto, v.total \n" +
 "from venta v inner join cliente c on v.id_cliente = c.id_cliente\n" +
 "inner join trabajador t on v.id_trabajador = t.id_trabajador\n" +
@@ -59,10 +59,10 @@ public class fventa {
                 registro [1]= rs.getString("trabajador");
                 registro [2]= rs.getString("Cliente");
                 registro [3]= rs.getString("fecha");
-                registro [5]= rs.getString("estado");
-                registro [6]= rs.getString("subtotal");
-                registro [7]= rs.getString("impuesto");
-                registro [8]= rs.getString("total");
+                registro [4]= rs.getString("estado");
+                registro [5]= rs.getString("subtotal");
+                registro [6]= rs.getString("impuesto");
+                registro [7]= rs.getString("total");
                 
                 totalregistros= totalregistros+1;
                 modelo.addRow(registro);

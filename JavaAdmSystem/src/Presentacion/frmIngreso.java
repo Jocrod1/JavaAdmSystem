@@ -70,6 +70,7 @@ public class frmIngreso extends javax.swing.JFrame {
         
         jTable1.setModel(Detalles);
         jTable1.setEnabled(false);
+
     }
     
     
@@ -81,6 +82,9 @@ public class frmIngreso extends javax.swing.JFrame {
         btnCancelar.setEnabled(false);
         btnAnular.setEnabled(false);
         BtnBuscarProveedor.setEnabled(false);
+        
+        btnAnular.setEnabled(false);
+        btnImprimir.setEnabled(false);
     }
     
     
@@ -240,6 +244,7 @@ public class frmIngreso extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         btnNuevo = new javax.swing.JButton();
         btnGuardar = new javax.swing.JButton();
+        btnImprimir = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         txtStockInicial = new javax.swing.JTextField();
@@ -261,6 +266,7 @@ public class frmIngreso extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         dateChooserCombo1 = new datechooser.beans.DateChooserCombo();
         jLabel15 = new javax.swing.JLabel();
+        btnAnular = new javax.swing.JButton();
         lblTotalPagado = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
@@ -269,8 +275,6 @@ public class frmIngreso extends javax.swing.JFrame {
         tablalistado = new javax.swing.JTable();
         jLabel10 = new javax.swing.JLabel();
         btnBuscar = new javax.swing.JButton();
-        btnAnular = new javax.swing.JButton();
-        btnImprimir = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         lblTotal = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
@@ -299,6 +303,14 @@ public class frmIngreso extends javax.swing.JFrame {
         btnGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnGuardarActionPerformed(evt);
+            }
+        });
+
+        btnImprimir.setBackground(new java.awt.Color(255, 255, 255));
+        btnImprimir.setText("Imprimir");
+        btnImprimir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnImprimirActionPerformed(evt);
             }
         });
 
@@ -383,7 +395,7 @@ public class frmIngreso extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(txtPrecioCompra)
                     .addComponent(txtPrecioVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 320, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnAgregar, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(btnQuitar, javax.swing.GroupLayout.Alignment.TRAILING))
@@ -460,6 +472,15 @@ public class frmIngreso extends javax.swing.JFrame {
         jLabel15.setForeground(new java.awt.Color(0, 51, 0));
         jLabel15.setText("Total pagado:");
 
+        btnAnular.setBackground(new java.awt.Color(255, 255, 255));
+        btnAnular.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Files/eliminar.png"))); // NOI18N
+        btnAnular.setText("Anular");
+        btnAnular.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAnularActionPerformed(evt);
+            }
+        });
+
         lblTotalPagado.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         lblTotalPagado.setForeground(new java.awt.Color(0, 51, 0));
         lblTotalPagado.setText("total");
@@ -494,16 +515,17 @@ public class frmIngreso extends javax.swing.JFrame {
                         .addComponent(btnGuardar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(191, 191, 191)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnAnular, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnImprimir, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel15)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblTotalPagado)
-                        .addGap(0, 385, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jScrollPane2))
-                        .addGap(105, 105, 105))))
+                        .addComponent(lblTotalPagado, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addGap(105, 105, 105))
         );
 
         jPanel2Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnCancelar, btnGuardar, btnNuevo});
@@ -526,13 +548,16 @@ public class frmIngreso extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnGuardar)
-                    .addComponent(btnCancelar)
-                    .addComponent(btnNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblTotalPagado, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnImprimir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnAnular, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnGuardar)
+                        .addComponent(btnCancelar)
+                        .addComponent(btnNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblTotalPagado, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
 
         jPanel2Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnCancelar, btnGuardar, btnNuevo});
@@ -578,18 +603,6 @@ public class frmIngreso extends javax.swing.JFrame {
             }
         });
 
-        btnAnular.setBackground(new java.awt.Color(255, 255, 255));
-        btnAnular.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Files/eliminar.png"))); // NOI18N
-        btnAnular.setText("Anular");
-        btnAnular.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAnularActionPerformed(evt);
-            }
-        });
-
-        btnImprimir.setBackground(new java.awt.Color(255, 255, 255));
-        btnImprimir.setText("Imprimir");
-
         jLabel1.setForeground(new java.awt.Color(204, 255, 204));
         jLabel1.setText("Cantidad de Registros: ");
 
@@ -618,11 +631,7 @@ public class frmIngreso extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(dateChooserCombo3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnBuscar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnAnular)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnImprimir, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnBuscar)))
                 .addContainerGap(30, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -648,10 +657,7 @@ public class frmIngreso extends javax.swing.JFrame {
                                 .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                             .addContainerGap()
-                            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(btnBuscar)
-                                .addComponent(btnAnular)
-                                .addComponent(btnImprimir)))))
+                            .addComponent(btnBuscar))))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 325, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -973,6 +979,8 @@ public class frmIngreso extends javax.swing.JFrame {
             btnNuevo.setEnabled(true);
             
             mostrar();
+            btnAnular.setEnabled(false);
+
         }
         
     }//GEN-LAST:event_btnAnularActionPerformed
@@ -1001,7 +1009,51 @@ public class frmIngreso extends javax.swing.JFrame {
         btnNuevo.setEnabled(false);
         btnCancelar.setEnabled(true);
         btnAnular.setEnabled(true);
+        btnImprimir.setEnabled(true);
     }//GEN-LAST:event_tablalistadoMouseClicked
+
+    private void btnImprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImprimirActionPerformed
+        // TODO add your handling code here:
+        
+         fingreso func=new fingreso();
+
+            
+        try { 
+
+            func.ObtenerComprobante(idingreso);
+            
+        } catch (Exception e) {
+              JOptionPane.showMessageDialog(rootPane, "Error en la conexion");
+              return;
+        }
+        
+
+                   //reporte
+                Map p = new HashMap();
+                p.put("idingreso", idingreso);
+                JasperReport report;
+                JasperPrint print;
+
+                try {
+                    report = JasperCompileManager.compileReport(new File("").getAbsolutePath() + "/src/Reportes/rptingreso.jrxml");
+
+                    print = JasperFillManager.fillReport(report, p, connection);
+
+                    JasperViewer view = new JasperViewer(print, false);
+
+                    view.setTitle("Comprobante de Ingreso");
+
+                    view.setVisible(true);
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                } 
+        
+        btnImprimir.setEnabled(false);
+        
+        
+        
+    }//GEN-LAST:event_btnImprimirActionPerformed
     
     /**
      * @param args the command line arguments
