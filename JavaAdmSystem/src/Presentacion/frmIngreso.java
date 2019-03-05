@@ -903,13 +903,6 @@ public class frmIngreso extends javax.swing.JFrame {
         if(FI.insertar(VI)){
             JOptionPane.showMessageDialog(rootPane, "Se guardo correctamente, se mostrará el comprobante");
 
-            //if (idingreso == 0) {
-            //    JOptionPane.showMessageDialog(rootPane, "No hay ningun comprobante a ver");
-            //} else {
-                //librerias de reportes
-
-
-            //}
         }
         
         int identity = FI.Obteneridentity();
@@ -927,6 +920,12 @@ public class frmIngreso extends javax.swing.JFrame {
         mostrar();
         
         //reporte
+        if(FI.Obteneridentity()==0)
+        {
+            JOptionPane.showMessageDialog(rootPane, "No existe ningún comprobante");
+        }
+        else{
+
                 Map p = new HashMap();
                 p.put("idingreso", FI.Obteneridentity());
                 JasperReport report;
@@ -946,7 +945,7 @@ public class frmIngreso extends javax.swing.JFrame {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-        
+        }
         
         
     }//GEN-LAST:event_btnGuardarActionPerformed

@@ -61,6 +61,8 @@ public class frmInicio extends javax.swing.JFrame {
         mnuInventario = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
         jMenuReporteCliente = new javax.swing.JMenuItem();
+        jMenu4 = new javax.swing.JMenu();
+        jMenuComprobanteIngreso = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
         mnuAcercade = new javax.swing.JMenuItem();
 
@@ -164,6 +166,18 @@ public class frmInicio extends javax.swing.JFrame {
 
         menuBar.add(jMenu1);
 
+        jMenu4.setText("Comprobantes");
+
+        jMenuComprobanteIngreso.setText("jMenuItem1");
+        jMenuComprobanteIngreso.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuComprobanteIngresoActionPerformed(evt);
+            }
+        });
+        jMenu4.add(jMenuComprobanteIngreso);
+
+        menuBar.add(jMenu4);
+
         jMenu5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Files/Ayuda.png"))); // NOI18N
         jMenu5.setText("Ayuda");
 
@@ -253,6 +267,19 @@ public class frmInicio extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jMenuReporteClienteActionPerformed
 
+    private void jMenuComprobanteIngresoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuComprobanteIngresoActionPerformed
+        // TODO add your handling code here:
+        
+        frmComprobanteIngreso form =new frmComprobanteIngreso();
+        form.toFront();
+        form.setVisible(true);
+        
+        
+        
+        
+        
+    }//GEN-LAST:event_jMenuComprobanteIngresoActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -293,7 +320,9 @@ public class frmInicio extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
+    private javax.swing.JMenuItem jMenuComprobanteIngreso;
     private javax.swing.JMenuItem jMenuReporteCliente;
     public static javax.swing.JLabel lblAcceso;
     public static javax.swing.JLabel lblNombre;

@@ -287,6 +287,50 @@ public class fingreso {
         }
         
         
+
+    public int ObtenerComprobante(int Buscar)
+    {
+        DefaultTableModel modelo;
+        
+        String [] titulos = {"ID"};
+        
+        int registro = 0;
+        
+        totalregistros=0;
+        
+        modelo= new DefaultTableModel(null, titulos);
+        
+        sSQL="SELECT id_ingreso FROM ingreso WHERE id_ingreso ='"+Buscar+"'";
+        
+        try {
+            Statement st= cn.createStatement();
+            ResultSet rs=st.executeQuery(sSQL);
+            
+                 
+            while(rs.next())
+            {
+                registro = rs.getInt("id_ingreso");
+            }
+                 
+                 
+            
+            return registro;
+            
+        } catch (Exception e) {
+            JOptionPane.showConfirmDialog(null, e);
+            return 0;
+        }  
+    }
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
     }
         
         
