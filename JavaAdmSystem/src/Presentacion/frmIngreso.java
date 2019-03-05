@@ -135,7 +135,7 @@ public class frmIngreso extends javax.swing.JFrame {
         TotalPagado = 0;
         if(Detalles.getRowCount()> 0){
             for(int i = Detalles.getRowCount() - 1; i>-1; i--){
-                    TotalPagado += Double.parseDouble(jTable1.getValueAt(Row,5).toString());
+                    TotalPagado += Double.parseDouble(jTable1.getValueAt(i,5).toString());
             }
         }
         lblTotalPagado.setText(Double.toString(TotalPagado));

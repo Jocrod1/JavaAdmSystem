@@ -42,6 +42,8 @@ public class frmVenta extends javax.swing.JFrame {
     List<vdetalle_ingreso> ListDetallesingreso = new ArrayList<>();
     double TotalPagado;
     
+    int idventa;
+    
     
     
     
@@ -144,7 +146,7 @@ public class frmVenta extends javax.swing.JFrame {
         
         try {
             DefaultTableModel modelo;
-            fingreso func= new fingreso();
+            fventa func= new fventa();
             modelo = func.mostrar();
             
             tablalistado.setModel(modelo);
@@ -158,7 +160,7 @@ public class frmVenta extends javax.swing.JFrame {
         
     }
     
-            void mostrarentrefecha (String buscar1, String buscar2){
+    void mostrarentrefecha (String buscar1, String buscar2){
         
         try {
             DefaultTableModel modelo;
@@ -174,6 +176,41 @@ public class frmVenta extends javax.swing.JFrame {
             JOptionPane.showConfirmDialog(rootPane, e);
         }
         
+    }
+    void mostrardetalle (int identity){
+        
+        try {
+            DefaultTableModel modelo;
+            fingreso func= new fingreso();
+            Detalles = func.MostrarDetalle(identity);
+            
+            jTable1.setModel(Detalles);
+            //ocultar_columnas();
+            ActualizarTotalPagado();
+            
+            
+        } catch (Exception e) {
+            JOptionPane.showConfirmDialog(rootPane, e);
+        }
+    }
+    void InsertarDetalle(int identity, fventa FV){
+        for(int i = 0; i < ListDetalles.size(); i++){
+            vdetalle_venta a = ListDetalles.get(i);
+            a.setId_venta(identity);
+            if(!FV.insertarDetalle(a)){
+                return;
+            }
+        }
+    }
+    boolean PuedeAgregar(int idarticulo){
+        if(Detalles.getRowCount()<= 0)
+            return true;
+        for(int i = 0; i < ListDetalles.size(); i++){
+            int a = ListDetalles.get(i).getId_detalle_ingreso();
+            if(a == idarticulo)
+                return false;
+        }
+        return true;
     }
 
     /**
@@ -554,6 +591,11 @@ public class frmVenta extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tablalistado.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tablalistadoMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tablalistado);
 
         jLabel10.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
@@ -661,7 +703,7 @@ public class frmVenta extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(12, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Listado de Ventas", jPanel1);
@@ -839,6 +881,32 @@ public class frmVenta extends javax.swing.JFrame {
         
         
     }//GEN-LAST:event_btnBuscarActionPerformed
+
+    private void tablalistadoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablalistadoMouseClicked
+        // TODO add your handling code here:
+        accion="Anular";
+        limpiar();
+        limpiardetalle();
+        limpiartabladetalles();
+        ListDetalles.clear();
+        inhabilitar();
+        inhabilitardetalle();
+        Row = tablalistado.rowAtPoint(evt.getPoint());
+        
+        int identity = Integer.parseInt(tablalistado.getValueAt(Row,0).toString());
+        
+        mostrardetalle(identity);
+        
+        ActualizarTotalPagado();
+        
+        idventa = identity;
+        
+        jTable1.requestFocus();
+        jTabbedPane1.setSelectedIndex(0);
+        btnNuevo.setEnabled(false);
+        btnCancelar.setEnabled(true);
+        btnAnular.setEnabled(true);
+    }//GEN-LAST:event_tablalistadoMouseClicked
 
     /**
      * @param args the command line arguments
