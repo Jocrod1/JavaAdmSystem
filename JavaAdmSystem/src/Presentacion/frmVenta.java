@@ -99,7 +99,7 @@ public class frmVenta extends javax.swing.JFrame {
         txtPrecioCompra.setEnabled(true);
         txtPrecioVenta.setEnabled(true);
         txtStockInicial.setEnabled(true);
-        txtcantidad.setEnabled(false);
+        txtcantidad.setEnabled(true);
         
         btnQuitar.setEnabled(true);
         btnAgregar.setEnabled(true);
@@ -128,7 +128,7 @@ public class frmVenta extends javax.swing.JFrame {
         TotalPagado = 0;
         if(Detalles.getRowCount()> 0){
             for(int i = Detalles.getRowCount() - 1; i>-1; i--){
-                    TotalPagado += Double.parseDouble(jTable1.getValueAt(Row,3).toString());
+                    TotalPagado += Double.parseDouble(jTable1.getValueAt(i,3).toString());
             }
         }
         lblTotalPagado.setText(Double.toString(TotalPagado));
@@ -140,6 +140,11 @@ public class frmVenta extends javax.swing.JFrame {
             }
         }
     }
+    void OcultarColumnas(){
+        tablalistado.getColumnModel().getColumn(0).setMaxWidth(0);
+        tablalistado.getColumnModel().getColumn(0).setMinWidth(0);
+        tablalistado.getColumnModel().getColumn(0).setPreferredWidth(0);
+    }
     
 
     void mostrar (){
@@ -150,7 +155,7 @@ public class frmVenta extends javax.swing.JFrame {
             modelo = func.mostrar();
             
             tablalistado.setModel(modelo);
-            //ocultar_columnas();
+            OcultarColumnas();
             lblTotal.setText(Integer.toString(func.totalregistros));
             
             
@@ -168,7 +173,7 @@ public class frmVenta extends javax.swing.JFrame {
             modelo = func.buscarentrefechas(buscar1, buscar2);
             
             tablalistado.setModel(modelo);
-            //ocultar_columnas();
+            OcultarColumnas();
             lblTotal.setText(Integer.toString(func.totalregistros));
             
             
@@ -759,6 +764,11 @@ public class frmVenta extends javax.swing.JFrame {
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         // TODO add your handling code here:
+        if(!PuedeAgregar(Integer.parseInt(CodDetalleIngreso))){
+            JOptionPane.showConfirmDialog(rootPane, "Debes Selecciar un articulo que no este ya agregado");
+            BtnBuscarArticulo.requestFocus();
+            return;
+        }
         if(txtArticulo.getText().length() == 0){
             JOptionPane.showConfirmDialog(rootPane, "Debes Seleccionar un Articulo");
             BtnBuscarArticulo.requestFocus();
@@ -990,6 +1000,6 @@ public class frmVenta extends javax.swing.JFrame {
     public static javax.swing.JTextField txtPrecioCompra;
     public static javax.swing.JTextField txtPrecioVenta;
     public static javax.swing.JTextField txtStockInicial;
-    private javax.swing.JTextField txtcantidad;
+    public static javax.swing.JTextField txtcantidad;
     // End of variables declaration//GEN-END:variables
 }
