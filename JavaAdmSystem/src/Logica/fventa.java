@@ -42,7 +42,7 @@ public class fventa {
         
         modelo= new DefaultTableModel(null, titulos);
         
-        sSQL="select top 100 v.id_venta, t.nombre as trabajador, c.nombre as Cliente, v.fecha, v.estado,\n" +
+        sSQL="select v.id_venta, t.nombre as trabajador, c.nombre as Cliente, v.fecha, v.estado,\n" +
 "v.subtotal, v.impuesto, v.total \n" +
 "from venta v inner join cliente c on v.id_cliente = c.id_cliente\n" +
 "inner join trabajador t on v.id_trabajador = t.id_trabajador\n" +
