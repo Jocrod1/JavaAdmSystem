@@ -61,8 +61,7 @@ public class frmInicio extends javax.swing.JFrame {
         mnuInventario = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
         jMenuReporteCliente = new javax.swing.JMenuItem();
-        jMenu4 = new javax.swing.JMenu();
-        jMenuComprobanteIngreso = new javax.swing.JMenuItem();
+        jMenuReporteTrabajador = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
         mnuAcercade = new javax.swing.JMenuItem();
 
@@ -164,19 +163,15 @@ public class frmInicio extends javax.swing.JFrame {
         });
         jMenu1.add(jMenuReporteCliente);
 
-        menuBar.add(jMenu1);
-
-        jMenu4.setText("Comprobantes");
-
-        jMenuComprobanteIngreso.setText("jMenuItem1");
-        jMenuComprobanteIngreso.addActionListener(new java.awt.event.ActionListener() {
+        jMenuReporteTrabajador.setText("Trabajadores");
+        jMenuReporteTrabajador.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuComprobanteIngresoActionPerformed(evt);
+                jMenuReporteTrabajadorActionPerformed(evt);
             }
         });
-        jMenu4.add(jMenuComprobanteIngreso);
+        jMenu1.add(jMenuReporteTrabajador);
 
-        menuBar.add(jMenu4);
+        menuBar.add(jMenu1);
 
         jMenu5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Files/Ayuda.png"))); // NOI18N
         jMenu5.setText("Ayuda");
@@ -267,18 +262,35 @@ public class frmInicio extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jMenuReporteClienteActionPerformed
 
-    private void jMenuComprobanteIngresoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuComprobanteIngresoActionPerformed
+    private void jMenuReporteTrabajadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuReporteTrabajadorActionPerformed
         // TODO add your handling code here:
         
-        frmComprobanteIngreso form =new frmComprobanteIngreso();
-        form.toFront();
-        form.setVisible(true);
+                        //librerias
+        Map p= new HashMap();
+        JasperReport report;
+        JasperPrint print;
+        
+        
+        try {
+            report=JasperCompileManager.compileReport(new File("").getAbsolutePath()+ "/src/Reportes/rpttrabajador.jrxml");
+            
+            print= JasperFillManager.fillReport(report, p,connection);
+            
+            JasperViewer view=new JasperViewer(print, false);
+            
+            view.setTitle("Reporte de Clientes");
+            
+            view.setVisible(true);
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         
         
         
         
         
-    }//GEN-LAST:event_jMenuComprobanteIngresoActionPerformed
+    }//GEN-LAST:event_jMenuReporteTrabajadorActionPerformed
 
     /**
      * @param args the command line arguments
@@ -320,10 +332,9 @@ public class frmInicio extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
-    private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
-    private javax.swing.JMenuItem jMenuComprobanteIngreso;
     private javax.swing.JMenuItem jMenuReporteCliente;
+    private javax.swing.JMenuItem jMenuReporteTrabajador;
     public static javax.swing.JLabel lblAcceso;
     public static javax.swing.JLabel lblNombre;
     private javax.swing.JMenuBar menuBar;

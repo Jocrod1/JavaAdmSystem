@@ -169,7 +169,7 @@ public class fcliente {
         
         modelo= new DefaultTableModel(null, titulos);
         
-        sSQL="select id_trabajador from trabajador where id_trabajador='" + id_cliente+"'";
+        sSQL="select id_cliente from cliente where id_cliente='" + id_cliente+"'";
         
         try {
             Statement st= cn.createStatement();
@@ -178,7 +178,7 @@ public class fcliente {
                  
             while(rs.next())
             {
-                registro [0]= rs.getString("id_trabajador");
+                registro [0]= rs.getString("id_cliente");
                 
                 totalregistros= totalregistros+1;
                 modelo.addRow(registro);
