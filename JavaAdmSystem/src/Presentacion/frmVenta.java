@@ -10,6 +10,7 @@ import Datos.vdetalle_venta;
 import Datos.vventa;
 import Logica.fingreso;
 import Logica.fventa;
+import java.awt.event.KeyEvent;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -491,7 +492,11 @@ public class frmVenta extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(jTable1);
 
-        TxtClienteCedula.setEditable(false);
+        TxtClienteCedula.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                TxtClienteCedulaKeyPressed(evt);
+            }
+        });
 
         jLabel6.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(0, 51, 0));
@@ -626,15 +631,16 @@ public class frmVenta extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnGuardar)
-                    .addComponent(btnCancelar)
-                    .addComponent(btnNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblSubtotal, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(lblTotalP, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(lblTotalP, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnGuardar)
+                        .addComponent(btnCancelar)
+                        .addComponent(btnNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblSubtotal, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -936,9 +942,32 @@ public class frmVenta extends javax.swing.JFrame {
     private void BtnBuscarProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBuscarProveedorActionPerformed
         // TODO add your handling code here:
         
-        frmvistacliente frm = new frmvistacliente();
-        frm.toFront();
-        frm.setVisible(true);
+        try {
+            
+            DefaultTableModel modelo;
+            fventa func= new fventa();
+            
+            
+            modelo=func.BuscarCliente(TxtClienteCedula.getText());
+            
+            if(func.totalregistros>0)
+            {
+                TxtClienteNombre.setText(modelo.getValueAt(0, 1).toString());
+                
+            }
+            else
+            {
+                JOptionPane.showMessageDialog(rootPane,"Acceso Denegado","Acceso al Sistema", JOptionPane.ERROR_MESSAGE);
+                frmvistacliente frm = new frmvistacliente();
+                frm.txtCedulaCliente.setText(TxtClienteCedula.getText());
+                frm.toFront();
+                frm.setVisible(true);
+            }
+            
+            
+        } catch (Exception e) {
+        }
+        
         
     }//GEN-LAST:event_BtnBuscarProveedorActionPerformed
 
@@ -1006,7 +1035,7 @@ public class frmVenta extends javax.swing.JFrame {
             BtnBuscarArticulo.requestFocus();
             return;
         }
-        if(TxtClienteCedula.getText().length() == 0){
+        if(TxtClienteNombre.getText().length() == 0){
             JOptionPane.showConfirmDialog(rootPane, "Debes ingresar un Cliente");
             BtnBuscarProveedor.requestFocus();
             return;
@@ -1087,6 +1116,15 @@ public class frmVenta extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_btnAnularActionPerformed
+
+    private void TxtClienteCedulaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxtClienteCedulaKeyPressed
+        // TODO add your handling code here:
+        TxtClienteNombre.setText("");
+        if(evt.getKeyCode()== KeyEvent.VK_ENTER){
+        
+            this.BtnBuscarProveedor.doClick();
+        }
+    }//GEN-LAST:event_TxtClienteCedulaKeyPressed
 
     /**
      * @param args the command line arguments

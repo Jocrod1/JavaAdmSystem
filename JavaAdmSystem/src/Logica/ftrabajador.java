@@ -171,8 +171,7 @@ public class ftrabajador {
         
         
 
-        public DefaultTableModel usuario(String id_trabajador, String contraseña)
-    {
+    public DefaultTableModel usuario(String id_trabajador, String contraseña){
         DefaultTableModel modelo;
         
         String [] titulos = {"Cedula", "Contraseña", "Nombre", "Acceso"};

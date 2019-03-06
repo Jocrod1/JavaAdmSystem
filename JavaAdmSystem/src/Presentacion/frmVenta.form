@@ -164,15 +164,17 @@
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="jScrollPane2" min="-2" pref="164" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="btnGuardar" linkSize="2" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="btnCancelar" linkSize="2" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="btnNuevo" linkSize="2" alignment="3" min="-2" pref="47" max="-2" attributes="0"/>
-                          <Component id="jLabel15" alignment="3" min="-2" pref="16" max="-2" attributes="0"/>
-                          <Component id="lblSubtotal" alignment="3" min="-2" pref="16" max="-2" attributes="0"/>
-                          <Group type="103" alignment="3" groupAlignment="3" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="103" alignment="0" groupAlignment="3" attributes="0">
                               <Component id="jLabel19" alignment="3" min="-2" pref="16" max="-2" attributes="0"/>
                               <Component id="lblTotalP" alignment="3" min="-2" pref="16" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="btnGuardar" linkSize="2" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="btnCancelar" linkSize="2" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="btnNuevo" linkSize="2" alignment="3" min="-2" pref="47" max="-2" attributes="0"/>
+                              <Component id="jLabel15" alignment="3" min="-2" pref="16" max="-2" attributes="0"/>
+                              <Component id="lblSubtotal" alignment="3" min="-2" pref="16" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
@@ -481,9 +483,9 @@
               </SubComponents>
             </Container>
             <Component class="javax.swing.JTextField" name="TxtClienteCedula">
-              <Properties>
-                <Property name="editable" type="boolean" value="false"/>
-              </Properties>
+              <Events>
+                <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="TxtClienteCedulaKeyPressed"/>
+              </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
               </AuxValues>

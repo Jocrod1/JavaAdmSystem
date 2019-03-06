@@ -222,6 +222,44 @@ public class fventa {
         }  
     }
     
+    public DefaultTableModel BuscarCliente(String IdCliente){
+        DefaultTableModel modelo;
+        
+        String [] titulos = {"ID", "Nombre"};
+        
+        String [] registro = new String [2];
+        
+        totalregistros=0;
+        
+        modelo= new DefaultTableModel(null, titulos);
+        
+        sSQL="select id_cliente, nombre from cliente where id_cliente ='" + IdCliente+ "'";
+        
+        try {
+            Statement st= cn.createStatement();
+            ResultSet rs=st.executeQuery(sSQL);
+            
+                 
+            while(rs.next())
+            {
+                registro [0]= rs.getString("id_cliente");
+                registro [1]= rs.getString("nombre");
+                
+                totalregistros= totalregistros+1;
+                modelo.addRow(registro);
+            }
+                 
+                 
+            
+            return modelo;
+            
+        } catch (Exception e) {
+            JOptionPane.showConfirmDialog(null, e);
+            return null;
+        }  
+        
+        }
+    
     public int Obteneridentity()
     {
         DefaultTableModel modelo;
