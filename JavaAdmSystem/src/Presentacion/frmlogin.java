@@ -7,6 +7,7 @@ package Presentacion;
 
 import Datos.vtrabajador;
 import Logica.ftrabajador;
+import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -65,6 +66,18 @@ public class frmlogin extends javax.swing.JFrame {
         jLabel1.setText("Cedula");
 
         jLabel2.setText("Contraseña");
+
+        txtusuario.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtusuarioKeyPressed(evt);
+            }
+        });
+
+        txtcontraseña.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtcontraseñaKeyPressed(evt);
+            }
+        });
 
         btningresar.setText("Ingresar");
         btningresar.addActionListener(new java.awt.event.ActionListener() {
@@ -219,7 +232,7 @@ public class frmlogin extends javax.swing.JFrame {
             
             if(func.totalregistros>0)
             {
-                JOptionPane.showMessageDialog(rootPane,"Bienvenido al Sitema","Acceso al Sistema", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(rootPane,"Bienvenido al Sistema","Acceso al Sistema", JOptionPane.INFORMATION_MESSAGE);
 
                 
                 //se cierra el form aca
@@ -298,6 +311,23 @@ public class frmlogin extends javax.swing.JFrame {
         
        
     }//GEN-LAST:event_lblpreguntaMouseClicked
+
+    private void txtcontraseñaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtcontraseñaKeyPressed
+        // TODO add your handling code here:
+        if(evt.getKeyCode()== KeyEvent.VK_ENTER){
+        
+            this.btningresar.doClick();
+        }
+        
+    }//GEN-LAST:event_txtcontraseñaKeyPressed
+
+    private void txtusuarioKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtusuarioKeyPressed
+        // TODO add your handling code here:
+        if(evt.getKeyCode()== KeyEvent.VK_ENTER){
+        
+            this.btningresar.doClick();
+        }
+    }//GEN-LAST:event_txtusuarioKeyPressed
 
     /**
      * @param args the command line arguments
