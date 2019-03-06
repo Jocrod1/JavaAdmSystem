@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="rptproveedor" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="4afd0c3e-3a6a-4711-b88a-a5103f979716">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[SELECT
+     proveedor.`cedula` AS proveedor_cedula,
+     proveedor.`nombre` AS proveedor_nombre,
+     proveedor.`direccion` AS proveedor_direccion,
+     proveedor.`rif` AS proveedor_rif,
+     proveedor.`empresa` AS proveedor_empresa,
+     proveedor.`telefono` AS proveedor_telefono,
+     proveedor.`correo` AS proveedor_correo
+FROM
+     `proveedor` proveedor]]>
+	</queryString>
+	<field name="proveedor_cedula" class="java.lang.String"/>
+	<field name="proveedor_nombre" class="java.lang.String"/>
+	<field name="proveedor_direccion" class="java.lang.String"/>
+	<field name="proveedor_rif" class="java.lang.String"/>
+	<field name="proveedor_empresa" class="java.lang.String"/>
+	<field name="proveedor_telefono" class="java.lang.String"/>
+	<field name="proveedor_correo" class="java.lang.String"/>
+	<background>
+		<band/>
+	</background>
+	<title>
+		<band height="72">
+			<frame>
+				<reportElement mode="Opaque" x="-20" y="-20" width="843" height="92" backcolor="#009933" uuid="b7e5feac-3de4-406b-b413-e76ab8867394"/>
+				<staticText>
+					<reportElement x="600" y="42" width="224" height="27" forecolor="#FFFFFF" uuid="e3b3c117-3c72-4f49-b8f1-725319d11c49"/>
+					<textElement textAlignment="Right">
+						<font size="18" isBold="false"/>
+					</textElement>
+					<text><![CDATA[Proveedores de la Empresa]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="20" y="0" width="556" height="92" forecolor="#FFFFFF" uuid="cdd6ef5e-2119-4f94-9d26-bf8e066b3175"/>
+					<textElement>
+						<font size="72" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Green Leaf]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="600" y="17" width="224" height="25" forecolor="#FFFFFF" uuid="6cd16edb-5b5f-4205-ba52-3c09429e29c2"/>
+					<textElement textAlignment="Right">
+						<font size="18" isBold="false"/>
+					</textElement>
+					<text><![CDATA[Reporte]]></text>
+				</staticText>
+			</frame>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="34">
+			<staticText>
+				<reportElement x="0" y="11" width="132" height="20" uuid="30080cf3-594e-435f-be86-eaa16bcc7279"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial Narrow" size="12"/>
+				</textElement>
+				<text><![CDATA[Empresa]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="132" y="11" width="100" height="20" uuid="89bca5a5-5076-4f56-9642-a18a4438252d"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial Narrow" size="12"/>
+				</textElement>
+				<text><![CDATA[RIF]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="232" y="11" width="113" height="20" uuid="8a213692-d768-4386-b040-b1cfbe93ca9c"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial Narrow" size="12"/>
+				</textElement>
+				<text><![CDATA[Cedula del Proveedor]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="345" y="11" width="111" height="20" uuid="2e08ea97-05f2-40f9-a57d-d8912f0d8ba2"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial Narrow" size="12"/>
+				</textElement>
+				<text><![CDATA[Nombre del Proveedor]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="456" y="11" width="124" height="20" uuid="8f59f40b-1f87-48fe-a735-1541bfbe67dd"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial Narrow" size="12"/>
+				</textElement>
+				<text><![CDATA[Direccion]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="580" y="11" width="91" height="20" uuid="3b8557a2-8ea4-4f7d-9dae-2b3d58144a36"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial Narrow" size="12"/>
+				</textElement>
+				<text><![CDATA[Telefono]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="671" y="11" width="133" height="20" uuid="63b717bf-eefc-47f7-9614-a4f1c555acb9"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial Narrow" size="12"/>
+				</textElement>
+				<text><![CDATA[Correo]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="6"/>
+	</columnHeader>
+	<detail>
+		<band height="40">
+			<textField>
+				<reportElement x="0" y="0" width="132" height="20" uuid="80c86933-8255-4f6f-bead-f99e0bdd47b5"/>
+				<textFieldExpression><![CDATA[$F{proveedor_empresa}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="132" y="0" width="100" height="20" uuid="75e8d893-99db-44cd-a783-31768653e03a"/>
+				<textFieldExpression><![CDATA[$F{proveedor_rif}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="232" y="0" width="113" height="20" uuid="87309a06-8316-4c14-b248-82b8f58f4304"/>
+				<textFieldExpression><![CDATA[$F{proveedor_cedula}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="345" y="0" width="111" height="20" uuid="b897b0d5-841c-4d39-b990-918861bfd7e9"/>
+				<textFieldExpression><![CDATA[$F{proveedor_nombre}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="456" y="0" width="124" height="39" uuid="9b50a45b-c55b-4936-9062-800026b6bf92"/>
+				<textFieldExpression><![CDATA[$F{proveedor_direccion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="580" y="0" width="91" height="20" uuid="8e25ab70-a9e6-496b-b2ff-73f32f2dd9b3"/>
+				<textFieldExpression><![CDATA[$F{proveedor_telefono}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="671" y="0" width="130" height="20" uuid="d79e7ac9-0bb3-4ba8-9126-b4271d94806d"/>
+				<textFieldExpression><![CDATA[$F{proveedor_correo}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="-9" width="801" height="1" uuid="533fc5ff-6791-4a7b-94c8-f28b683c3177"/>
+			</line>
+		</band>
+	</detail>
+	<columnFooter>
+		<band/>
+	</columnFooter>
+	<pageFooter>
+		<band height="17">
+			<textField>
+				<reportElement mode="Opaque" x="246" y="4" width="515" height="13" backcolor="#E6E6E6" uuid="a269a83f-fc1a-4045-a3ef-36401cb12a20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Pagina "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement mode="Opaque" x="761" y="4" width="40" height="13" backcolor="#E6E6E6" uuid="f80a6eda-8860-4fd6-97b5-b205164a1596"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="0" y="4" width="100" height="13" uuid="241b46bb-4858-4d3f-a41a-332f86df738b"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band/>
+	</summary>
+</jasperReport>

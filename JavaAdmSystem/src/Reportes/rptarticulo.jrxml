@@ -3,6 +3,17 @@
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[SELECT
+     articulo.`id_articulo` AS articulo_id_articulo,
+     articulo.`nombre` AS articulo_nombre,
+     articulo.`descripcion` AS articulo_descripcion
+FROM
+     `articulo` articulo]]>
+	</queryString>
+	<field name="articulo_id_articulo" class="java.lang.String"/>
+	<field name="articulo_nombre" class="java.lang.String"/>
+	<field name="articulo_descripcion" class="java.lang.String"/>
 	<background>
 		<band/>
 	</background>
@@ -11,30 +22,99 @@
 			<frame>
 				<reportElement mode="Opaque" x="-20" y="-20" width="842" height="92" backcolor="#009933" uuid="6873ab70-4db3-4329-8e30-8b32eb9744b5"/>
 				<staticText>
-					<reportElement x="20" y="20" width="234" height="43" forecolor="#FFFFFF" uuid="2fb57b2c-1d68-4cbb-9c39-1be5db4d1849"/>
-					<textElement>
-						<font size="34" isBold="true"/>
+					<reportElement x="633" y="42" width="191" height="25" forecolor="#FFFFFF" uuid="014c9850-4a9e-4675-ac5a-e5dd88b45760"/>
+					<textElement textAlignment="Right">
+						<font size="18" isBold="false"/>
 					</textElement>
-					<text><![CDATA[TITLE]]></text>
+					<text><![CDATA[Articulos de la Empresa]]></text>
 				</staticText>
 				<staticText>
-					<reportElement x="395" y="43" width="180" height="20" forecolor="#FFFFFF" uuid="7bbd4f5a-86ab-4ab4-bb60-4d6c454c3e32"/>
+					<reportElement x="633" y="17" width="191" height="25" forecolor="#FFFFFF" uuid="410ee817-c1e6-4969-9d82-f32e75c9b979"/>
 					<textElement textAlignment="Right">
-						<font size="14" isBold="false"/>
+						<font size="18" isBold="false"/>
 					</textElement>
-					<text><![CDATA[Add a description here]]></text>
+					<text><![CDATA[Reporte]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="20" y="0" width="556" height="92" forecolor="#FFFFFF" uuid="586d0084-fdf3-40d2-968f-7404eb942dc0"/>
+					<textElement>
+						<font size="72" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Green Leaf]]></text>
 				</staticText>
 			</frame>
 		</band>
 	</title>
 	<pageHeader>
-		<band height="35"/>
+		<band height="28">
+			<staticText>
+				<reportElement x="0" y="7" width="153" height="20" uuid="a892835b-b7b5-44f3-a04a-d475bb99f683"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial Narrow" size="14"/>
+				</textElement>
+				<text><![CDATA[Codigo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="180" y="7" width="218" height="20" uuid="f278c34c-a0ff-4557-b6cb-86e9614a6738"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial Narrow" size="14"/>
+				</textElement>
+				<text><![CDATA[Nombre]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="423" y="7" width="379" height="20" uuid="c94b902e-64cf-4fff-8494-c3f292a4599a"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial Narrow" size="14"/>
+				</textElement>
+				<text><![CDATA[Descripcion]]></text>
+			</staticText>
+			<line>
+				<reportElement x="163" y="0" width="1" height="27" uuid="3729048c-210b-4c8e-9232-e4943c49200b"/>
+			</line>
+			<line>
+				<reportElement x="801" y="0" width="1" height="27" uuid="7141d771-c650-4053-9581-888b4b2e50a0"/>
+			</line>
+			<line>
+				<reportElement x="409" y="0" width="1" height="27" uuid="a902f854-1a03-45a5-a2a3-d721eddc52ab"/>
+			</line>
+			<line>
+				<reportElement x="-1" y="0" width="1" height="27" uuid="ee0a2869-dadf-4ea0-bcc8-68c5df20ddad"/>
+			</line>
+			<line>
+				<reportElement x="0" y="27" width="801" height="1" uuid="b4be92d0-ebc5-49bf-9445-66f4b2693834"/>
+			</line>
+		</band>
 	</pageHeader>
 	<columnHeader>
-		<band height="5"/>
+		<band/>
 	</columnHeader>
 	<detail>
-		<band height="288"/>
+		<band height="24">
+			<textField>
+				<reportElement x="12" y="0" width="141" height="20" uuid="4c0c7528-2897-4c8a-8bdf-679a6bbf7e1c"/>
+				<textElement>
+					<font fontName="Arial Narrow" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{articulo_id_articulo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="180" y="0" width="218" height="20" uuid="6177ce4f-32eb-489c-bc89-2b034ecc3c66"/>
+				<textElement>
+					<font fontName="Arial Narrow" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{articulo_nombre}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="423" y="0" width="379" height="20" uuid="562d52d0-fc28-461b-af55-98fd8598b2fe"/>
+				<textElement>
+					<font fontName="Arial Narrow" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{articulo_descripcion}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="-1" y="20" width="801" height="1" uuid="67b6d12a-6fde-495d-b005-7a11d04e5a0a"/>
+			</line>
+		</band>
 	</detail>
 	<columnFooter>
 		<band/>

@@ -62,6 +62,8 @@ public class frmInicio extends javax.swing.JFrame {
         jMenu1 = new javax.swing.JMenu();
         jMenuReporteCliente = new javax.swing.JMenuItem();
         jMenuReporteTrabajador = new javax.swing.JMenuItem();
+        jMenuReporteArticulo = new javax.swing.JMenuItem();
+        jMenuReporteProveedores = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
         mnuAcercade = new javax.swing.JMenuItem();
 
@@ -170,6 +172,22 @@ public class frmInicio extends javax.swing.JFrame {
             }
         });
         jMenu1.add(jMenuReporteTrabajador);
+
+        jMenuReporteArticulo.setText("Articulos");
+        jMenuReporteArticulo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuReporteArticuloActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuReporteArticulo);
+
+        jMenuReporteProveedores.setText("Proveedores");
+        jMenuReporteProveedores.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuReporteProveedoresActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuReporteProveedores);
 
         menuBar.add(jMenu1);
 
@@ -292,6 +310,66 @@ public class frmInicio extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jMenuReporteTrabajadorActionPerformed
 
+    private void jMenuReporteArticuloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuReporteArticuloActionPerformed
+        // TODO add your handling code here:
+        
+                                //librerias
+        Map p= new HashMap();
+        JasperReport report;
+        JasperPrint print;
+        
+        
+        try {
+            report=JasperCompileManager.compileReport(new File("").getAbsolutePath()+ "/src/Reportes/rptarticulo.jrxml");
+            
+            print= JasperFillManager.fillReport(report, p,connection);
+            
+            JasperViewer view=new JasperViewer(print, false);
+            
+            view.setTitle("Reporte de Articulos");
+            
+            view.setVisible(true);
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+        
+        
+        
+        
+    }//GEN-LAST:event_jMenuReporteArticuloActionPerformed
+
+    private void jMenuReporteProveedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuReporteProveedoresActionPerformed
+        // TODO add your handling code here:
+        
+                
+                                //librerias
+        Map p= new HashMap();
+        JasperReport report;
+        JasperPrint print;
+        
+        
+        try {
+            report=JasperCompileManager.compileReport(new File("").getAbsolutePath()+ "/src/Reportes/rptproveedor.jrxml");
+            
+            print= JasperFillManager.fillReport(report, p,connection);
+            
+            JasperViewer view=new JasperViewer(print, false);
+            
+            view.setTitle("Reporte de Proveedores");
+            
+            view.setVisible(true);
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+        
+        
+        
+    }//GEN-LAST:event_jMenuReporteProveedoresActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -333,7 +411,9 @@ public class frmInicio extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu5;
+    private javax.swing.JMenuItem jMenuReporteArticulo;
     private javax.swing.JMenuItem jMenuReporteCliente;
+    private javax.swing.JMenuItem jMenuReporteProveedores;
     private javax.swing.JMenuItem jMenuReporteTrabajador;
     public static javax.swing.JLabel lblAcceso;
     public static javax.swing.JLabel lblNombre;
