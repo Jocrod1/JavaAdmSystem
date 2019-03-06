@@ -15,6 +15,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -28,6 +30,7 @@ public class fventa {
     private Connection cn=mysql.conectar();
     private String sSQL="";
     public Integer totalregistros;
+    public List<Integer> ListIDs = new ArrayList<>();
     
     
     public DefaultTableModel mostrar()
@@ -138,7 +141,7 @@ public class fventa {
         
         modelo= new DefaultTableModel(null, titulos);
         
-        sSQL="select a.nombre as Articulo, d.cantidad ,d.precio,\n" +
+        sSQL="select di.id_detalle_ingreso as IdDetalleIngreso, a.nombre as Articulo, d.cantidad ,d.precio,\n" +
 " (d.precio * d.cantidad) as Subtotal\n" +
 " from detalle_venta d inner join detalle_ingreso di on d.id_detalle_ingreso = di.id_detalle_ingreso\n" +
 " inner join articulo a on di.id_articulo = a.id_articulo\n" +
@@ -158,6 +161,7 @@ public class fventa {
                 
                 totalregistros= totalregistros+1;
                 modelo.addRow(registro);
+                ListIDs.add(rs.getInt("IdDetalleIngreso"));
             }
                  
                  

@@ -82,8 +82,6 @@ public class frmIngreso extends javax.swing.JFrame {
         btnCancelar.setEnabled(false);
         btnAnular.setEnabled(false);
         BtnBuscarProveedor.setEnabled(false);
-        
-        btnAnular.setEnabled(false);
         btnImprimir.setEnabled(false);
     }
     
@@ -96,6 +94,7 @@ public class frmIngreso extends javax.swing.JFrame {
         btnGuardar.setEnabled(true);
         btnCancelar.setEnabled(true);
         btnAnular.setEnabled(true);
+        btnImprimir.setEnabled(true);
         BtnBuscarProveedor.setEnabled(true);
     }    
 
@@ -713,6 +712,7 @@ public class frmIngreso extends javax.swing.JFrame {
         limpiardetalle();
         habilitardetalle();
         btnAnular.setEnabled(false);
+        btnImprimir.setEnabled(false);
         accion="Guardar";
         ListDetalles.clear();
         limpiartabladetalles();
@@ -982,6 +982,7 @@ public class frmIngreso extends javax.swing.JFrame {
             
             mostrar();
             btnAnular.setEnabled(false);
+            btnImprimir.setEnabled(false);
 
         }
         

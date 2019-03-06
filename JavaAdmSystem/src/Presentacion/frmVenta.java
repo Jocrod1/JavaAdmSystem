@@ -31,7 +31,7 @@ public class frmVenta extends javax.swing.JFrame {
      * Creates new form frmIngreso
      */
     
-    String [] titulos = {"Articulo", "Precio", "Cantidad", "Subtotal"};
+    String [] titulos = {"Articulo", "Cantidad", "Precio", "Subtotal"};
     
     DefaultTableModel Detalles = new DefaultTableModel(null,titulos);
     String [] Registrar = new String[4];
@@ -46,6 +46,7 @@ public class frmVenta extends javax.swing.JFrame {
     double Total;
     
     int idventa;
+    public List<Integer> ListIDs = new ArrayList<>();
     
     
     
@@ -75,6 +76,7 @@ public class frmVenta extends javax.swing.JFrame {
         btnGuardar.setEnabled(false);
         btnCancelar.setEnabled(false);
         btnAnular.setEnabled(false);
+        btnImprimir.setEnabled(false);
         BtnBuscarProveedor.setEnabled(false);
     }
     
@@ -89,6 +91,7 @@ public class frmVenta extends javax.swing.JFrame {
         btnGuardar.setEnabled(true);
         btnCancelar.setEnabled(true);
         btnAnular.setEnabled(true);
+        btnImprimir.setEnabled(true);
         BtnBuscarProveedor.setEnabled(true);
     }    
 
@@ -210,7 +213,7 @@ public class frmVenta extends javax.swing.JFrame {
             jTable1.setModel(Detalles);
             //ocultar_columnas();
             ActualizarTotalPagado();
-            
+            ListIDs = func.ListIDs;
             
         } catch (Exception e) {
             JOptionPane.showConfirmDialog(rootPane, e);
@@ -657,6 +660,7 @@ public class frmVenta extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tablalistado.setEnabled(false);
         tablalistado.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tablalistadoMouseClicked(evt);
@@ -680,6 +684,11 @@ public class frmVenta extends javax.swing.JFrame {
         btnAnular.setBackground(new java.awt.Color(255, 255, 255));
         btnAnular.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Files/eliminar.png"))); // NOI18N
         btnAnular.setText("Anular");
+        btnAnular.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAnularActionPerformed(evt);
+            }
+        });
 
         btnImprimir.setBackground(new java.awt.Color(255, 255, 255));
         btnImprimir.setText("Imprimir");
@@ -801,6 +810,7 @@ public class frmVenta extends javax.swing.JFrame {
         limpiardetalle();
         habilitardetalle();
         btnAnular.setEnabled(false);
+        btnImprimir.setEnabled(false);
         btnGuardar.setText("Guardar");
         accion="Guardar";
         ListDetalles.clear();
@@ -852,10 +862,10 @@ public class frmVenta extends javax.swing.JFrame {
         
         Registrar[0] = txtArticulo.getText();
         DV.setId_detalle_ingreso(Integer.parseInt(CodDetalleIngreso));
-        Registrar[1] = txtPrecioVenta.getText();
-        DV.setPrecio(Double.parseDouble(Registrar[1]));
-        Registrar[2] = txtcantidad.getText();
-        DV.setCantidad(Integer.parseInt(Registrar[2]));
+        Registrar[2] = txtPrecioVenta.getText();
+        DV.setPrecio(Double.parseDouble(Registrar[2]));
+        Registrar[1] = txtcantidad.getText();
+        DV.setCantidad(Integer.parseInt(Registrar[1]));
         double a = DV.getPrecio() * DV.getCantidad();
         Registrar[3] = Double.toString(a);
         DI.setStock_actual(Integer.parseInt(txtStockInicial.getText()));
@@ -890,8 +900,8 @@ public class frmVenta extends javax.swing.JFrame {
         Row = jTable1.rowAtPoint(evt.getPoint());
         
         txtArticulo.setText(jTable1.getValueAt(Row,0).toString());
-        txtPrecioVenta.setText(jTable1.getValueAt(Row,1).toString());
-        txtcantidad.setText(jTable1.getValueAt(Row,2).toString());
+        txtPrecioVenta.setText(jTable1.getValueAt(Row,2).toString());
+        txtcantidad.setText(jTable1.getValueAt(Row,1).toString());
         txtStockInicial.setText(Integer.toString(ListDetallesingreso.get(Row).getStock_actual()));
         txtPrecioCompra.setText(Double.toString(ListDetallesingreso.get(Row).getPrecio_compra()));
         CodDetalleIngreso = Integer.toString(ListDetalles.get(Row).getId_detalle_ingreso());
@@ -985,6 +995,7 @@ public class frmVenta extends javax.swing.JFrame {
         btnNuevo.setEnabled(false);
         btnCancelar.setEnabled(true);
         btnAnular.setEnabled(true);
+        btnImprimir.setEnabled(true);
     }//GEN-LAST:event_tablalistadoMouseClicked
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
@@ -1040,6 +1051,42 @@ public class frmVenta extends javax.swing.JFrame {
         mostrar();
         
     }//GEN-LAST:event_btnGuardarActionPerformed
+
+    private void btnAnularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnularActionPerformed
+        // TODO add your handling code here:
+        if(accion.equals("Anular")){
+            fventa FV =  new fventa();
+            vventa VV = new vventa();
+            
+            VV.setId_venta(idventa);
+            
+            FV.Anular(VV);
+            
+            for(int i = 0; i < ListIDs.size(); i++){
+                vdetalle_venta VDV = new vdetalle_venta();
+                VDV.setId_detalle_ingreso(ListIDs.get(i));
+                FV.ActualizarStock(VDV,Integer.parseInt(jTable1.getValueAt(i,1).toString()));
+            }
+            
+            limpiar();
+            limpiardetalle();
+            inhabilitar();
+            inhabilitardetalle();
+            limpiartabladetalles();
+            ActualizarTotalPagado();
+            ListDetalles.clear();
+            limpiartabladetalles();
+            jTable1.setModel(Detalles);
+            accion="";
+            btnNuevo.setEnabled(true);
+            
+            mostrar();
+            btnAnular.setEnabled(false);
+            btnImprimir.setEnabled(false);
+
+        }
+        
+    }//GEN-LAST:event_btnAnularActionPerformed
 
     /**
      * @param args the command line arguments
