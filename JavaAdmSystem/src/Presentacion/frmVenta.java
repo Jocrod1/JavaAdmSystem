@@ -7,6 +7,7 @@ package Presentacion;
 
 import Datos.vdetalle_ingreso;
 import Datos.vdetalle_venta;
+import Datos.vventa;
 import Logica.fingreso;
 import Logica.fventa;
 import java.text.DateFormat;
@@ -23,14 +24,14 @@ import javax.swing.table.DefaultTableModel;
  * @author Mirlu
  */
 public class frmVenta extends javax.swing.JFrame {
-    public static String idtrabajador;
+    public static String idtrabajador = "26866008";
     public static String CodDetalleIngreso;
     public static String idProveedor;
     /**
      * Creates new form frmIngreso
      */
     
-    String [] titulos = {"Articulo", "Cantidad", "Precio", "Subtotal"};
+    String [] titulos = {"Articulo", "Precio", "Cantidad", "Subtotal"};
     
     DefaultTableModel Detalles = new DefaultTableModel(null,titulos);
     String [] Registrar = new String[4];
@@ -40,7 +41,9 @@ public class frmVenta extends javax.swing.JFrame {
     
     List<vdetalle_venta> ListDetalles = new ArrayList<>();
     List<vdetalle_ingreso> ListDetallesingreso = new ArrayList<>();
-    double TotalPagado;
+    double Subtotal;
+    double Impuesto = 12d;
+    double Total;
     
     int idventa;
     
@@ -55,6 +58,9 @@ public class frmVenta extends javax.swing.JFrame {
         inhabilitar();
         inhabilitardetalle();
         
+        lblSubtotal.setText("");
+        lblTotalP.setText("");
+        
         jTable1.setModel(Detalles);
         jTable1.setEnabled(false);
     }
@@ -64,6 +70,7 @@ public class frmVenta extends javax.swing.JFrame {
         TxtClienteCedula.setEnabled(false);
         TxtClienteNombre.setEnabled(false);
         dateChooserCombo1.setEnabled(false);
+        TxtImpuesto.setEnabled(false);
         
         btnGuardar.setEnabled(false);
         btnCancelar.setEnabled(false);
@@ -77,6 +84,7 @@ public class frmVenta extends javax.swing.JFrame {
         TxtClienteCedula.setEnabled(true);
         TxtClienteNombre.setEnabled(true);
         dateChooserCombo1.setEnabled(true);
+        TxtImpuesto.setEnabled(true);
         
         btnGuardar.setEnabled(true);
         btnCancelar.setEnabled(true);
@@ -89,6 +97,7 @@ public class frmVenta extends javax.swing.JFrame {
     
         TxtClienteCedula.setText("");
         TxtClienteNombre.setText("");
+        TxtImpuesto.setText("");
         Calendar today = Calendar.getInstance();
         today.setTime(new Date());
         dateChooserCombo1.setSelectedDate(today);
@@ -125,13 +134,22 @@ public class frmVenta extends javax.swing.JFrame {
         txtcantidad.setText("");
     }
     void ActualizarTotalPagado(){
-        TotalPagado = 0;
+        Subtotal = 0;
+        
+        if(TxtImpuesto.getText().length() == 0)
+            Impuesto = 0;
+        else
+            Impuesto = Double.parseDouble(TxtImpuesto.getText());
+        
+        double impuesto = Impuesto / 100;
         if(Detalles.getRowCount()> 0){
             for(int i = Detalles.getRowCount() - 1; i>-1; i--){
-                    TotalPagado += Double.parseDouble(jTable1.getValueAt(i,3).toString());
+                    Subtotal += Double.parseDouble(jTable1.getValueAt(i,3).toString());
             }
         }
-        lblTotalPagado.setText(Double.toString(TotalPagado));
+        lblSubtotal.setText(Double.toString(Subtotal));
+        Total = Subtotal * (impuesto + 1);
+        lblTotalP.setText(Double.toString(Total));
     }
     void limpiartabladetalles(){
         if(Detalles.getRowCount()> 0){
@@ -186,7 +204,7 @@ public class frmVenta extends javax.swing.JFrame {
         
         try {
             DefaultTableModel modelo;
-            fingreso func= new fingreso();
+            fventa func= new fventa();
             Detalles = func.MostrarDetalle(identity);
             
             jTable1.setModel(Detalles);
@@ -199,12 +217,18 @@ public class frmVenta extends javax.swing.JFrame {
         }
     }
     void InsertarDetalle(int identity, fventa FV){
+        try{
         for(int i = 0; i < ListDetalles.size(); i++){
             vdetalle_venta a = ListDetalles.get(i);
             a.setId_venta(identity);
-            if(!FV.insertarDetalle(a)){
+            if(!FV.insertarDetalle(a) || !FV.ActualizarStock(a, -a.getCantidad())){
+                JOptionPane.showConfirmDialog(rootPane, "ERROR");
                 return;
             }
+        }
+        }
+        catch (Exception e) {
+            JOptionPane.showConfirmDialog(rootPane, e);
         }
     }
     boolean PuedeAgregar(int idarticulo){
@@ -255,10 +279,14 @@ public class frmVenta extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         dateChooserCombo1 = new datechooser.beans.DateChooserCombo();
         jLabel15 = new javax.swing.JLabel();
-        lblTotalPagado = new javax.swing.JLabel();
+        lblSubtotal = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         TxtClienteNombre = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
+        TxtImpuesto = new javax.swing.JTextField();
+        jLabel18 = new javax.swing.JLabel();
+        lblTotalP = new javax.swing.JLabel();
+        jLabel19 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
@@ -293,6 +321,11 @@ public class frmVenta extends javax.swing.JFrame {
         btnGuardar.setBackground(new java.awt.Color(255, 255, 255));
         btnGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Files/guardar.png"))); // NOI18N
         btnGuardar.setText("Guardar");
+        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarActionPerformed(evt);
+            }
+        });
 
         btnCancelar.setBackground(new java.awt.Color(255, 255, 255));
         btnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Files/cancelar.png"))); // NOI18N
@@ -474,11 +507,11 @@ public class frmVenta extends javax.swing.JFrame {
 
         jLabel15.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         jLabel15.setForeground(new java.awt.Color(0, 51, 0));
-        jLabel15.setText("Total pagado:");
+        jLabel15.setText("Subtotal:");
 
-        lblTotalPagado.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
-        lblTotalPagado.setForeground(new java.awt.Color(0, 51, 0));
-        lblTotalPagado.setText("total");
+        lblSubtotal.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        lblSubtotal.setForeground(new java.awt.Color(0, 51, 0));
+        lblSubtotal.setText("total");
 
         jLabel7.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(0, 51, 0));
@@ -489,6 +522,18 @@ public class frmVenta extends javax.swing.JFrame {
         jLabel12.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(0, 51, 0));
         jLabel12.setText("Nombre");
+
+        jLabel18.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        jLabel18.setForeground(new java.awt.Color(0, 51, 0));
+        jLabel18.setText("Impuesto");
+
+        lblTotalP.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        lblTotalP.setForeground(new java.awt.Color(0, 51, 0));
+        lblTotalP.setText("total");
+
+        jLabel19.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        jLabel19.setForeground(new java.awt.Color(0, 51, 0));
+        jLabel19.setText("Total:");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -503,11 +548,15 @@ public class frmVenta extends javax.swing.JFrame {
                         .addComponent(btnGuardar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(191, 191, 191)
+                        .addGap(58, 58, 58)
                         .addComponent(jLabel15)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblTotalPagado)
-                        .addGap(0, 385, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(lblSubtotal)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel19)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(lblTotalP)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -529,15 +578,20 @@ public class frmVenta extends javax.swing.JFrame {
                                 .addGap(10, 10, 10)
                                 .addComponent(TxtClienteCedula, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(BtnBuscarProveedor)
-                        .addGap(29, 29, 29)
-                        .addComponent(jLabel11)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(BtnBuscarProveedor)
+                                .addGap(29, 29, 29)
+                                .addComponent(jLabel11))
+                            .addComponent(jLabel18))
                         .addGap(18, 18, 18)
-                        .addComponent(dateChooserCombo1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(dateChooserCombo1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(TxtImpuesto)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(320, 320, 320)
                         .addComponent(jLabel5)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(511, Short.MAX_VALUE))
         );
 
         jPanel2Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnCancelar, btnGuardar, btnNuevo});
@@ -557,9 +611,13 @@ public class frmVenta extends javax.swing.JFrame {
                     .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(dateChooserCombo1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(1, 1, 1)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(TxtClienteNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(TxtImpuesto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(TxtClienteNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -570,7 +628,10 @@ public class frmVenta extends javax.swing.JFrame {
                     .addComponent(btnCancelar)
                     .addComponent(btnNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblTotalPagado, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblSubtotal, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblTotalP, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -656,7 +717,7 @@ public class frmVenta extends javax.swing.JFrame {
                         .addComponent(btnAnular)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnImprimir, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addContainerGap(34, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1)
@@ -734,7 +795,7 @@ public class frmVenta extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
-        // TODO add your handling code here:
+        // TODO add your handling code here
         limpiar();
         habilitar();
         limpiardetalle();
@@ -746,15 +807,22 @@ public class frmVenta extends javax.swing.JFrame {
         limpiartabladetalles();
         ActualizarTotalPagado();
         btnQuitar.setEnabled(false);
+        Impuesto = 12d;
+        TxtImpuesto.setText(Double.toString(Impuesto));
     }//GEN-LAST:event_btnNuevoActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         // TODO add your handling code here:
         limpiar();
+        limpiardetalle();
         inhabilitar();
+        inhabilitardetalle();
         limpiartabladetalles();
         ActualizarTotalPagado();
         ListDetalles.clear();
+        limpiartabladetalles();
+        accion="";
+        btnNuevo.setEnabled(true);
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void txtStockInicialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtStockInicialActionPerformed
@@ -764,11 +832,6 @@ public class frmVenta extends javax.swing.JFrame {
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         // TODO add your handling code here:
-        if(!PuedeAgregar(Integer.parseInt(CodDetalleIngreso))){
-            JOptionPane.showConfirmDialog(rootPane, "Debes Selecciar un articulo que no este ya agregado");
-            BtnBuscarArticulo.requestFocus();
-            return;
-        }
         if(txtArticulo.getText().length() == 0){
             JOptionPane.showConfirmDialog(rootPane, "Debes Seleccionar un Articulo");
             BtnBuscarArticulo.requestFocus();
@@ -777,6 +840,11 @@ public class frmVenta extends javax.swing.JFrame {
         if(txtcantidad.getText().length() == 0){
             JOptionPane.showConfirmDialog(rootPane, "Debes Especificar una cantidad a vender");
             txtcantidad.requestFocus();
+            return;
+        }
+        if(!PuedeAgregar(Integer.parseInt(CodDetalleIngreso)) && accion.equals("Guardar")){
+            JOptionPane.showConfirmDialog(rootPane, "Debes Selecciar un articulo que no este ya agregado");
+            BtnBuscarArticulo.requestFocus();
             return;
         }
         vdetalle_venta DV = new vdetalle_venta();
@@ -907,7 +975,8 @@ public class frmVenta extends javax.swing.JFrame {
         
         mostrardetalle(identity);
         
-        ActualizarTotalPagado();
+        lblSubtotal.setText(tablalistado.getValueAt(Row,5).toString());
+        lblTotalP.setText(tablalistado.getValueAt(Row,7).toString());
         
         idventa = identity;
         
@@ -917,6 +986,60 @@ public class frmVenta extends javax.swing.JFrame {
         btnCancelar.setEnabled(true);
         btnAnular.setEnabled(true);
     }//GEN-LAST:event_tablalistadoMouseClicked
+
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+        // TODO add your handling code here:
+        
+        if(Detalles.getRowCount()<= 0){
+            JOptionPane.showConfirmDialog(rootPane, "Debes agregar ingresos");
+            BtnBuscarArticulo.requestFocus();
+            return;
+        }
+        if(TxtClienteCedula.getText().length() == 0){
+            JOptionPane.showConfirmDialog(rootPane, "Debes ingresar un Cliente");
+            BtnBuscarProveedor.requestFocus();
+            return;
+        }
+        if(TxtImpuesto.getText().length() == 0){
+            JOptionPane.showConfirmDialog(rootPane, "Debes ingresar el Impuesto");
+            TxtImpuesto.requestFocus();
+            return;
+        }
+        
+        fventa FV = new fventa();
+        
+        vventa VV = new vventa();
+        
+        VV.setId_trabajador(Integer.parseInt(idtrabajador));
+        VV.setId_cliente(Integer.parseInt(TxtClienteCedula.getText()));
+        Date fecha = new Date();
+        fecha= dateChooserCombo1.getCurrent().getTime();
+        DateFormat dateformat = new SimpleDateFormat("yyyy-MM-dd");
+        String fechacompleta =dateformat.format(fecha);
+        VV.setFecha(fechacompleta);
+        VV.setSubtotal(Subtotal);
+        VV.setImpuesto(Double.parseDouble(TxtImpuesto.getText()));
+        VV.setTotal(Total);
+        if(FV.insertar(VV)){
+            JOptionPane.showMessageDialog(rootPane, "Se guardo correctamente, se mostrará el comprobante");
+
+        }
+        
+        int identity = FV.Obteneridentity();
+            
+        InsertarDetalle(identity, FV);
+        
+        limpiar();
+        limpiardetalle();
+        limpiartabladetalles();
+        accion="Guardar";
+        ListDetalles.clear();
+        inhabilitar();
+        inhabilitardetalle();
+        ActualizarTotalPagado();
+        mostrar();
+        
+    }//GEN-LAST:event_btnGuardarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -959,6 +1082,7 @@ public class frmVenta extends javax.swing.JFrame {
     private javax.swing.JButton BtnBuscarProveedor;
     public static javax.swing.JTextField TxtClienteCedula;
     public static javax.swing.JTextField TxtClienteNombre;
+    public static javax.swing.JTextField TxtImpuesto;
     private javax.swing.JButton btnAgregar;
     private javax.swing.JButton btnAnular;
     private javax.swing.JButton btnBuscar;
@@ -979,6 +1103,8 @@ public class frmVenta extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -993,8 +1119,9 @@ public class frmVenta extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTable1;
+    public static javax.swing.JLabel lblSubtotal;
     private javax.swing.JLabel lblTotal;
-    private javax.swing.JLabel lblTotalPagado;
+    public static javax.swing.JLabel lblTotalP;
     private javax.swing.JTable tablalistado;
     public static javax.swing.JTextField txtArticulo;
     public static javax.swing.JTextField txtPrecioCompra;

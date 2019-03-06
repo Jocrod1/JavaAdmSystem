@@ -16,7 +16,7 @@ public class vventa {
     private int id_venta;
     private int id_cliente;
     private int id_trabajador;
-    private Date fecha;
+    private String fecha;
     private Double Subtotal;
     private Double Impuesto;
     private Double Total;
@@ -24,7 +24,7 @@ public class vventa {
     public vventa() {
     }
 
-    public vventa(int id_venta, int id_cliente, int id_trabajador, Date fecha, Double Subtotal, Double Impuesto, Double Total) {
+    public vventa(int id_venta, int id_cliente, int id_trabajador, String fecha, Double Subtotal, Double Impuesto, Double Total) {
         this.id_venta = id_venta;
         this.id_cliente = id_cliente;
         this.id_trabajador = id_trabajador;
@@ -33,6 +33,8 @@ public class vventa {
         this.Impuesto = Impuesto;
         this.Total = Total;
     }
+    
+    
 
     public Double getTotal() {
         return Total;
@@ -66,14 +68,6 @@ public class vventa {
         this.id_trabajador = id_trabajador;
     }
 
-    public Date getFecha() {
-        return fecha;
-    }
-
-    public void setFecha(Date fecha) {
-        this.fecha = fecha;
-    }
-
     public Double getSubtotal() {
         return Subtotal;
     }
@@ -88,6 +82,14 @@ public class vventa {
 
     public void setImpuesto(Double Impuesto) {
         this.Impuesto = Impuesto;
+    }
+
+    public String getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(String fecha) {
+        this.fecha = fecha;
     }
     
     

@@ -126,7 +126,7 @@ public class fventa {
         }  
     }
     
-    public DefaultTableModel MostrarDetalle(String Buscar)
+    public DefaultTableModel MostrarDetalle(int Buscar)
     {
         DefaultTableModel modelo;
         
@@ -142,7 +142,7 @@ public class fventa {
 " (d.precio * d.cantidad) as Subtotal\n" +
 " from detalle_venta d inner join detalle_ingreso di on d.id_detalle_ingreso = di.id_detalle_ingreso\n" +
 " inner join articulo a on di.id_articulo = a.id_articulo\n" +
-" where d.id_venta = '"+ Buscar +"' ";
+" where d.id_venta = "+ Buscar +" ";
         
         try {
             Statement st= cn.createStatement();
@@ -217,6 +217,40 @@ public class fventa {
             return null;
         }  
     }
+    
+    public int Obteneridentity()
+    {
+        DefaultTableModel modelo;
+        
+        String [] titulos = {"ID"};
+        
+        int registro = 0;
+        
+        totalregistros=0;
+        
+        modelo= new DefaultTableModel(null, titulos);
+        
+        sSQL="SELECT id_venta FROM venta WHERE id_venta =(SELECT MAX(id_venta)FROM venta)";
+        
+        try {
+            Statement st= cn.createStatement();
+            ResultSet rs=st.executeQuery(sSQL);
+            
+                 
+            while(rs.next())
+            {
+                registro = rs.getInt("id_venta");
+            }
+                 
+                 
+            
+            return registro;
+            
+        } catch (Exception e) {
+            JOptionPane.showConfirmDialog(null, e);
+            return 0;
+        }  
+    }
             
         public boolean insertar (vventa dts)
         {
@@ -226,7 +260,7 @@ public class fventa {
                 PreparedStatement pst=cn.prepareStatement(sSQL);
                 pst.setInt(1, dts.getId_cliente());
                 pst.setInt(2, dts.getId_trabajador());
-                pst.setDate(3, dts.getFecha());
+                pst.setString(3, dts.getFecha());
                 pst.setDouble(4, dts.getSubtotal());
                 pst.setDouble(5, dts.getImpuesto());
                 pst.setDouble(6, dts.getTotal());

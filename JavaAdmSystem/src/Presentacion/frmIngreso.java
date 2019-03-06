@@ -747,11 +747,6 @@ public class frmIngreso extends javax.swing.JFrame {
             BtnBuscarArticulo.requestFocus();
             return;
         }
-        if(!PuedeAgregar(Integer.parseInt(CodArticulo))){
-            JOptionPane.showConfirmDialog(rootPane, "Debes Selecciar un articulo no este ya agregado");
-            BtnBuscarArticulo.requestFocus();
-            return;
-        }
         if(txtPrecioCompra.getText().length() == 0){
             JOptionPane.showConfirmDialog(rootPane, "Debes Especificar un Precio de Compra");
             txtPrecioCompra.requestFocus();
@@ -767,6 +762,12 @@ public class frmIngreso extends javax.swing.JFrame {
             txtStockInicial.requestFocus();
             return;
         }
+        if(!PuedeAgregar(Integer.parseInt(CodArticulo)) && accion.equals("Guardar")){
+            JOptionPane.showConfirmDialog(rootPane, "Debes Selecciar un articulo no este ya agregado");
+            BtnBuscarArticulo.requestFocus();
+            return;
+        }
+        
         vdetalle_ingreso DI = new vdetalle_ingreso();
         
         Registrar[0] = txtArticulo.getText();
@@ -834,6 +835,7 @@ public class frmIngreso extends javax.swing.JFrame {
 
     private void BtnBuscarArticuloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBuscarArticuloActionPerformed
         // TODO add your handling code here:
+        btnQuitar.setEnabled(false);
         frmvistaarticulo frm = new frmvistaarticulo();
         frm.toFront();
         frm.setVisible(true);
