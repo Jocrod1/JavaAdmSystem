@@ -141,7 +141,7 @@ public class frmIngreso extends javax.swing.JFrame {
                     TotalPagado += Double.parseDouble(jTable1.getValueAt(i,5).toString());
             }
         }
-        lblTotalPagado.setText(Double.toString(TotalPagado));
+        lblTotalPagado.setText(Double.toString(TotalPagado) + "BsS");
     }
     void limpiartabladetalles(){
         if(Detalles.getRowCount()> 0){
@@ -279,6 +279,7 @@ public class frmIngreso extends javax.swing.JFrame {
         jLabel16 = new javax.swing.JLabel();
         dateChooserCombo2 = new datechooser.beans.DateChooserCombo();
         dateChooserCombo3 = new datechooser.beans.DateChooserCombo();
+        btnSalir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -556,7 +557,7 @@ public class frmIngreso extends javax.swing.JFrame {
                         .addComponent(btnNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(lblTotalPagado, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel2Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnCancelar, btnGuardar, btnNuevo});
@@ -612,6 +613,15 @@ public class frmIngreso extends javax.swing.JFrame {
         jLabel16.setForeground(new java.awt.Color(204, 255, 204));
         jLabel16.setText("Fecha Fin:");
 
+        btnSalir.setBackground(new java.awt.Color(255, 255, 255));
+        btnSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Files/salir.gif"))); // NOI18N
+        btnSalir.setText("Salir");
+        btnSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalirActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -630,8 +640,10 @@ public class frmIngreso extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(dateChooserCombo3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnBuscar)))
-                .addContainerGap(30, Short.MAX_VALUE))
+                        .addComponent(btnBuscar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(41, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1)
@@ -656,7 +668,9 @@ public class frmIngreso extends javax.swing.JFrame {
                                 .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                             .addContainerGap()
-                            .addComponent(btnBuscar))))
+                            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(btnBuscar)
+                                .addComponent(btnSalir)))))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 325, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -783,10 +797,11 @@ public class frmIngreso extends javax.swing.JFrame {
         double a = DI.getPrecio_compra() * DI.getStock_inicial();
         Registrar[5] = Double.toString(a);
         
-        
-        
-        
-        
+        if(DI.getPrecio_venta() < DI.getPrecio_compra()){
+            JOptionPane.showConfirmDialog(rootPane, "Debes Especificar un Precio de venta mayor al de Compra");
+            txtPrecioVenta.requestFocus();
+            return;
+        }
         
         if(accion.equals("Guardar")){
         Detalles.addRow(Registrar);
@@ -808,13 +823,15 @@ public class frmIngreso extends javax.swing.JFrame {
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         // TODO add your handling code here:
+        if(Detalles.getRowCount()<= 0)
+            return;
         if(accion.equals("Anular"))
                 return;
         Row = jTable1.rowAtPoint(evt.getPoint());
         
         txtArticulo.setText(jTable1.getValueAt(Row,0).toString());
-        txtPrecioCompra.setText(jTable1.getValueAt(Row,1).toString());
-        txtPrecioVenta.setText(jTable1.getValueAt(Row,2).toString());
+        txtPrecioCompra.setText(Double.toString(ListDetalles.get(Row).getPrecio_compra()));
+        txtPrecioVenta.setText(Double.toString(ListDetalles.get(Row).getPrecio_venta()));
         txtStockInicial.setText(jTable1.getValueAt(Row,3).toString());
         CodArticulo = Integer.toString(ListDetalles.get(Row).getId_articulo());
         
@@ -1057,6 +1074,11 @@ public class frmIngreso extends javax.swing.JFrame {
         
         
     }//GEN-LAST:event_btnImprimirActionPerformed
+
+    private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_btnSalirActionPerformed
     
     /**
      * @param args the command line arguments
@@ -1105,6 +1127,7 @@ public class frmIngreso extends javax.swing.JFrame {
     private javax.swing.JButton btnImprimir;
     private javax.swing.JButton btnNuevo;
     private javax.swing.JButton btnQuitar;
+    private javax.swing.JButton btnSalir;
     public static datechooser.beans.DateChooserCombo dateChooserCombo1;
     public static datechooser.beans.DateChooserCombo dateChooserCombo2;
     public static datechooser.beans.DateChooserCombo dateChooserCombo3;

@@ -151,9 +151,9 @@ public class frmVenta extends javax.swing.JFrame {
                     Subtotal += Double.parseDouble(jTable1.getValueAt(i,3).toString());
             }
         }
-        lblSubtotal.setText(Double.toString(Subtotal));
+        lblSubtotal.setText(Double.toString(Subtotal) + "BsS");
         Total = Subtotal * (impuesto + 1);
-        lblTotalP.setText(Double.toString(Total));
+        lblTotalP.setText(Double.toString(Total) + "BsS");
     }
     void limpiartabladetalles(){
         if(Detalles.getRowCount()> 0){
@@ -305,6 +305,7 @@ public class frmVenta extends javax.swing.JFrame {
         jLabel16 = new javax.swing.JLabel();
         dateChooserCombo2 = new datechooser.beans.DateChooserCombo();
         dateChooserCombo3 = new datechooser.beans.DateChooserCombo();
+        btnSalir2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -492,11 +493,7 @@ public class frmVenta extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(jTable1);
 
-        TxtClienteCedula.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                TxtClienteCedulaKeyPressed(evt);
-            }
-        });
+        TxtClienteCedula.setEditable(false);
 
         jLabel6.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(0, 51, 0));
@@ -709,6 +706,15 @@ public class frmVenta extends javax.swing.JFrame {
         jLabel16.setForeground(new java.awt.Color(204, 255, 204));
         jLabel16.setText("Fecha Fin:");
 
+        btnSalir2.setBackground(new java.awt.Color(255, 255, 255));
+        btnSalir2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Files/salir.gif"))); // NOI18N
+        btnSalir2.setText("Salir");
+        btnSalir2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalir2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -731,7 +737,9 @@ public class frmVenta extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnAnular)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnImprimir, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnImprimir, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnSalir2, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(34, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -760,7 +768,8 @@ public class frmVenta extends javax.swing.JFrame {
                             .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(btnBuscar)
                                 .addComponent(btnAnular)
-                                .addComponent(btnImprimir)))))
+                                .addComponent(btnImprimir)
+                                .addComponent(btnSalir2)))))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 325, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -1014,8 +1023,8 @@ public class frmVenta extends javax.swing.JFrame {
         
         mostrardetalle(identity);
         
-        lblSubtotal.setText(tablalistado.getValueAt(Row,5).toString());
-        lblTotalP.setText(tablalistado.getValueAt(Row,7).toString());
+        lblSubtotal.setText(tablalistado.getValueAt(Row,5).toString() + "BsS");
+        lblTotalP.setText(tablalistado.getValueAt(Row,7).toString() + "BsS");
         
         idventa = identity;
         
@@ -1117,14 +1126,10 @@ public class frmVenta extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btnAnularActionPerformed
 
-    private void TxtClienteCedulaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxtClienteCedulaKeyPressed
+    private void btnSalir2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalir2ActionPerformed
         // TODO add your handling code here:
-        TxtClienteNombre.setText("");
-        if(evt.getKeyCode()== KeyEvent.VK_ENTER){
-        
-            this.BtnBuscarProveedor.doClick();
-        }
-    }//GEN-LAST:event_TxtClienteCedulaKeyPressed
+        this.dispose();
+    }//GEN-LAST:event_btnSalir2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1176,6 +1181,9 @@ public class frmVenta extends javax.swing.JFrame {
     private javax.swing.JButton btnImprimir;
     private javax.swing.JButton btnNuevo;
     private javax.swing.JButton btnQuitar;
+    private javax.swing.JButton btnSalir;
+    private javax.swing.JButton btnSalir1;
+    private javax.swing.JButton btnSalir2;
     private datechooser.beans.DateChooserCombo dateChooserCombo1;
     private datechooser.beans.DateChooserCombo dateChooserCombo2;
     private datechooser.beans.DateChooserCombo dateChooserCombo3;
