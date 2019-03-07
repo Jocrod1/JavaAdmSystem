@@ -8,24 +8,34 @@ package Presentacion;
 import Datos.vdetalle_ingreso;
 import Datos.vdetalle_venta;
 import Datos.vventa;
+import Logica.conexion;
 import Logica.fingreso;
 import Logica.fventa;
 import java.awt.event.KeyEvent;
+import java.io.File;
+import java.sql.Connection;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
  * @author Mirlu
  */
 public class frmVenta extends javax.swing.JFrame {
-    public static String idtrabajador = "26866008";
+    public static String idtrabajador;
     public static String CodDetalleIngreso;
     public static String idProveedor;
     /**
@@ -291,6 +301,8 @@ public class frmVenta extends javax.swing.JFrame {
         jLabel18 = new javax.swing.JLabel();
         lblTotalP = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
+        btnAnular = new javax.swing.JButton();
+        btnImprimir = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
@@ -298,8 +310,6 @@ public class frmVenta extends javax.swing.JFrame {
         tablalistado = new javax.swing.JTable();
         jLabel10 = new javax.swing.JLabel();
         btnBuscar = new javax.swing.JButton();
-        btnAnular = new javax.swing.JButton();
-        btnImprimir = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         lblTotal = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
@@ -437,7 +447,7 @@ public class frmVenta extends javax.swing.JFrame {
                         .addComponent(jLabel17)
                         .addGap(18, 18, 18)
                         .addComponent(txtcantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 86, Short.MAX_VALUE)
                         .addComponent(btnAgregar)))
                 .addGap(32, 32, 32))
         );
@@ -493,8 +503,6 @@ public class frmVenta extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(jTable1);
 
-        TxtClienteCedula.setEditable(false);
-
         jLabel6.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(0, 51, 0));
         jLabel6.setText("Cliente:");
@@ -540,6 +548,23 @@ public class frmVenta extends javax.swing.JFrame {
         jLabel19.setForeground(new java.awt.Color(0, 51, 0));
         jLabel19.setText("Total:");
 
+        btnAnular.setBackground(new java.awt.Color(255, 255, 255));
+        btnAnular.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Files/eliminar.png"))); // NOI18N
+        btnAnular.setText("Anular");
+        btnAnular.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAnularActionPerformed(evt);
+            }
+        });
+
+        btnImprimir.setBackground(new java.awt.Color(255, 255, 255));
+        btnImprimir.setText("Imprimir");
+        btnImprimir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnImprimirActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -553,20 +578,21 @@ public class frmVenta extends javax.swing.JFrame {
                         .addComponent(btnGuardar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(58, 58, 58)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnAnular, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnImprimir, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel15)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblSubtotal, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(lblSubtotal)
-                        .addGap(18, 18, 18)
                         .addComponent(jLabel19)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(lblTotalP)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jScrollPane2))
-                        .addGap(105, 105, 105))))
+                        .addComponent(lblTotalP, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addGap(105, 105, 105))
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
@@ -628,17 +654,18 @@ public class frmVenta extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(lblTotalP, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(btnGuardar)
                         .addComponent(btnCancelar)
                         .addComponent(btnNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblTotalP, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(lblSubtotal, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(lblSubtotal, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnAnular, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnImprimir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(26, Short.MAX_VALUE))
         );
 
         jPanel2Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnCancelar, btnGuardar, btnNuevo});
@@ -684,18 +711,6 @@ public class frmVenta extends javax.swing.JFrame {
             }
         });
 
-        btnAnular.setBackground(new java.awt.Color(255, 255, 255));
-        btnAnular.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Files/eliminar.png"))); // NOI18N
-        btnAnular.setText("Anular");
-        btnAnular.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAnularActionPerformed(evt);
-            }
-        });
-
-        btnImprimir.setBackground(new java.awt.Color(255, 255, 255));
-        btnImprimir.setText("Imprimir");
-
         jLabel1.setForeground(new java.awt.Color(204, 255, 204));
         jLabel1.setText("Cantidad de Registros: ");
 
@@ -734,10 +749,6 @@ public class frmVenta extends javax.swing.JFrame {
                         .addComponent(dateChooserCombo3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnBuscar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnAnular)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnImprimir, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(btnSalir2, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(34, Short.MAX_VALUE))
@@ -767,8 +778,6 @@ public class frmVenta extends javax.swing.JFrame {
                             .addContainerGap()
                             .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(btnBuscar)
-                                .addComponent(btnAnular)
-                                .addComponent(btnImprimir)
                                 .addComponent(btnSalir2)))))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 325, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -966,11 +975,20 @@ public class frmVenta extends javax.swing.JFrame {
             }
             else
             {
-                JOptionPane.showMessageDialog(rootPane,"Acceso Denegado","Acceso al Sistema", JOptionPane.ERROR_MESSAGE);
+                if(TxtClienteCedula.getComponentCount()==0)
+                {
+                     JOptionPane.showMessageDialog(rootPane,"Introduzca la Cedula","Acceso al Sistema", JOptionPane.INFORMATION_MESSAGE);
+                }
+                else
+                {
+                                    
+                JOptionPane.showMessageDialog(rootPane,"El Cliente no está registrado","Acceso al Sistema", JOptionPane.ERROR_MESSAGE);
                 frmvistacliente frm = new frmvistacliente();
                 frm.txtCedulaCliente.setText(TxtClienteCedula.getText());
                 frm.toFront();
                 frm.setVisible(true);
+                }
+
             }
             
             
@@ -1088,24 +1106,56 @@ public class frmVenta extends javax.swing.JFrame {
         ActualizarTotalPagado();
         mostrar();
         
+                //reporte
+        if(FV.Obteneridentity()==0)
+        {
+            JOptionPane.showMessageDialog(rootPane, "No existe ningúna factura");
+        }
+        else{
+
+                Map p = new HashMap();
+                p.put("idventa", FV.Obteneridentity());
+                JasperReport report;
+                JasperPrint print;
+
+                try {
+                    report = JasperCompileManager.compileReport(new File("").getAbsolutePath() + "/src/Reportes/rptfactura.jrxml");
+
+                    print = JasperFillManager.fillReport(report, p, connection);
+
+                    JasperViewer view = new JasperViewer(print, false);
+
+                    view.setTitle("Factura de Venta");
+
+                    view.setVisible(true);
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+        }
+        
+         
     }//GEN-LAST:event_btnGuardarActionPerformed
 
+    private void btnSalir2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalir2ActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_btnSalir2ActionPerformed
+
+    
+            private Connection connection=new conexion().conectar();
+   
+   
     private void btnAnularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnularActionPerformed
         // TODO add your handling code here:
         if(accion.equals("Anular")){
-            fventa FV =  new fventa();
-            vventa VV = new vventa();
-            
-            VV.setId_venta(idventa);
-            
-            FV.Anular(VV);
-            
-            for(int i = 0; i < ListIDs.size(); i++){
-                vdetalle_venta VDV = new vdetalle_venta();
-                VDV.setId_detalle_ingreso(ListIDs.get(i));
-                FV.ActualizarStock(VDV,Integer.parseInt(jTable1.getValueAt(i,1).toString()));
-            }
-            
+            fventa FI =  new fventa();
+            vventa VI = new vventa();
+
+            VI.setId_venta(idventa);
+
+            FI.Anular(VI);
+
             limpiar();
             limpiardetalle();
             inhabilitar();
@@ -1117,19 +1167,53 @@ public class frmVenta extends javax.swing.JFrame {
             jTable1.setModel(Detalles);
             accion="";
             btnNuevo.setEnabled(true);
-            
+
             mostrar();
             btnAnular.setEnabled(false);
             btnImprimir.setEnabled(false);
 
         }
-        
+
     }//GEN-LAST:event_btnAnularActionPerformed
 
-    private void btnSalir2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalir2ActionPerformed
+    private void btnImprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImprimirActionPerformed
         // TODO add your handling code here:
-        this.dispose();
-    }//GEN-LAST:event_btnSalir2ActionPerformed
+
+        fventa func=new fventa();
+
+        try {
+
+            func.ObtenerComprobante(idventa);
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(rootPane, "Error en la conexion");
+            return;
+        }
+
+        //reporte
+        Map p = new HashMap();
+        p.put("idventa", idventa);
+        JasperReport report;
+        JasperPrint print;
+
+        try {
+            report = JasperCompileManager.compileReport(new File("").getAbsolutePath() + "/src/Reportes/rptfactura.jrxml");
+
+            print = JasperFillManager.fillReport(report, p, connection);
+
+            JasperViewer view = new JasperViewer(print, false);
+
+            view.setTitle("Factura de Venta");
+
+            view.setVisible(true);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        btnImprimir.setEnabled(false);
+
+    }//GEN-LAST:event_btnImprimirActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1181,8 +1265,6 @@ public class frmVenta extends javax.swing.JFrame {
     private javax.swing.JButton btnImprimir;
     private javax.swing.JButton btnNuevo;
     private javax.swing.JButton btnQuitar;
-    private javax.swing.JButton btnSalir;
-    private javax.swing.JButton btnSalir1;
     private javax.swing.JButton btnSalir2;
     private datechooser.beans.DateChooserCombo dateChooserCombo1;
     private datechooser.beans.DateChooserCombo dateChooserCombo2;

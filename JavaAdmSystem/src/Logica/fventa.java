@@ -404,6 +404,43 @@ public class fventa {
                 return false;
             }
         }
+        
+            public int ObtenerComprobante(int Buscar)
+    {
+        DefaultTableModel modelo;
+        
+        String [] titulos = {"ID"};
+        
+        int registro = 0;
+        
+        totalregistros=0;
+        
+        modelo= new DefaultTableModel(null, titulos);
+        
+        sSQL="SELECT id_venta FROM venta WHERE id_venta ='"+Buscar+"'";
+        
+        try {
+            Statement st= cn.createStatement();
+            ResultSet rs=st.executeQuery(sSQL);
+            
+                 
+            while(rs.next())
+            {
+                registro = rs.getInt("id_venta");
+            }
+                 
+                 
+            
+            return registro;
+            
+        } catch (Exception e) {
+            JOptionPane.showConfirmDialog(null, e);
+            return 0;
+        }
+        
+        
+        
+       } 
     }
         
         

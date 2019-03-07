@@ -1064,12 +1064,12 @@ public class frmIngreso extends javax.swing.JFrame {
                     view.setTitle("Comprobante de Ingreso");
 
                     view.setVisible(true);
-
+                    
                 } catch (Exception e) {
                     e.printStackTrace();
                 } 
         
-        btnImprimir.setEnabled(false);
+
         
         
         

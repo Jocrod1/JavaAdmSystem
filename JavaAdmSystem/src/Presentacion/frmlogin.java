@@ -245,6 +245,7 @@ public class frmlogin extends javax.swing.JFrame {
                 frmInicio.lblAcceso.setText(tablalistado.getValueAt(0, 3).toString());
                 
                 frmIngreso.idtrabajador= (tablalistado.getValueAt(0, 0).toString());
+                frmVenta.idtrabajador=(tablalistado.getValueAt(0, 0).toString());
                 
             }
             else

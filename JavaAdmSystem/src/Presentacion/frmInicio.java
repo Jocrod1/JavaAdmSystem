@@ -129,6 +129,11 @@ public class frmInicio extends javax.swing.JFrame {
 
         mnuVentas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Files/dolar.png"))); // NOI18N
         mnuVentas.setText("Ventas");
+        mnuVentas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuVentasActionPerformed(evt);
+            }
+        });
         jMenu3.add(mnuVentas);
 
         menuBar.add(jMenu3);
@@ -369,6 +374,15 @@ public class frmInicio extends javax.swing.JFrame {
         
         
     }//GEN-LAST:event_jMenuReporteProveedoresActionPerformed
+
+    private void mnuVentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuVentasActionPerformed
+        // TODO add your handling code here:
+        frmVenta form =new frmVenta();
+        form.toFront();
+        form.setVisible(true);
+        
+        
+    }//GEN-LAST:event_mnuVentasActionPerformed
 
     /**
      * @param args the command line arguments

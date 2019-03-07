@@ -81,7 +81,7 @@ WHERE
 				<textField>
 					<reportElement x="395" y="10" width="180" height="20" forecolor="#FFFFFF" uuid="025101d3-9aed-4789-b00f-d5ca0eac0e60"/>
 					<textElement textAlignment="Right">
-						<font fontName="Arial Narrow" size="14"/>
+						<font fontName="Arial Narrow" size="14" isBold="true"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{ingreso_estado}]]></textFieldExpression>
 				</textField>
