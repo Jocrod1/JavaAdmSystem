@@ -19,13 +19,13 @@ import javax.swing.table.DefaultTableModel;
  * @author Raimon
  */
 public class ftrabajador {
-    
+    //se hace la conexion a la BD
     private conexion mysql=new conexion();
     private Connection cn=mysql.conectar();
     private String sSQL="";
     public Integer totalregistros;
     
-    
+    //esta funcion coloca todos los datos en la tabla que aparece en el formulario
     public DefaultTableModel mostrar(String buscar)
     {
         DefaultTableModel modelo;
@@ -38,13 +38,14 @@ public class ftrabajador {
         
         modelo= new DefaultTableModel(null, titulos);
         
+        //se busca el trabajador por el comienzo de su cedula o la cedula completa, ordenandola
         sSQL="select * from trabajador where id_trabajador like '%" + buscar + "%' order  by id_trabajador";
         
         try {
             Statement st= cn.createStatement();
             ResultSet rs=st.executeQuery(sSQL);
             
-                 
+            //se revisa uno a uno los que tiene la cedula igual o parecida
             while(rs.next())
             {
                 registro [0]= rs.getString("id_trabajador");
@@ -63,7 +64,7 @@ public class ftrabajador {
             }
                  
                  
-            
+            //retorna la tabla, si no muestra ninguna, da error
             return modelo;
             
         } catch (Exception e) {
@@ -72,7 +73,7 @@ public class ftrabajador {
         }  
     }
     
-            
+        //aca inserta los datos del trabajador en el mismo orden que en el sql
         public boolean insertar (vtrabajador dts)
         {
             sSQL="Insert into trabajador (id_trabajador, nombre, direccion, sexo, acceso, contraseña, telefono, correo, pregunta, respuesta)" + "values (?,?,?,?,?,?,?,?,?,?)";
@@ -92,6 +93,7 @@ public class ftrabajador {
                 
                 int n=pst.executeUpdate();
                 
+                //si ocurre el ejecute, la funcion devuelve true, sino false
                 if(n!=0)
                 {
                    return true; 
@@ -107,6 +109,7 @@ public class ftrabajador {
             }
         }
     
+        //en esta funcion edita los datos del trabajador comparandolo con la cedula que es el id
         public boolean editar (vtrabajador dts)
         {
             sSQL= "Update trabajador set nombre=?, direccion=?, sexo=?,acceso=?, contraseña=?, telefono=?, correo=?, pregunta=?, respuesta=?" + "where id_trabajador=?";
@@ -127,6 +130,7 @@ public class ftrabajador {
                 
                 int n=pst.executeUpdate();
                 
+                //si ocurre el ejecute, la funcion devuelve true, sino false
                 if(n!=0)
                 {
                    return true; 
@@ -142,7 +146,8 @@ public class ftrabajador {
                 return false;
             }
         }
-                
+        
+        //en esta funcion elimina el registro del trabajador buscandola por la cedula de ella
         public boolean eliminar (vtrabajador dts)
         {
             sSQL="delete from trabajador where id_trabajador=?";
@@ -153,6 +158,7 @@ public class ftrabajador {
 
                 int n=pst.executeUpdate();
                 
+                //si ocurre el ejecute, la funcion devuelve true, sino false
                 if(n!=0)
                 {
                    return true; 
@@ -170,7 +176,7 @@ public class ftrabajador {
         
         
         
-
+//esta funcion es la del login del programa, obteniendo la cedula y contraseña de la misma
     public DefaultTableModel usuario(String id_trabajador, String contraseña){
         DefaultTableModel modelo;
         
@@ -188,7 +194,7 @@ public class ftrabajador {
             Statement st= cn.createStatement();
             ResultSet rs=st.executeQuery(sSQL);
             
-                 
+            //busca una por una, y si encuentra una con los dos datos iguales, ingresa al sistema
             while(rs.next())
             {
                 registro [0]= rs.getString("id_trabajador");

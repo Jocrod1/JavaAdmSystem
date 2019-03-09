@@ -20,12 +20,13 @@ import javax.swing.table.DefaultTableModel;
  * @author Raimon
  */
 public class fproveedor {
-    
+    //se hace la conexion
     private conexion mysql=new conexion();
     private Connection cn=mysql.conectar();
     private String sSQL="";
     public Integer totalregistros;
     
+    //la tabla mostrar que se verá en el formulario, para cualquier usuario
         public DefaultTableModel mostrar(String buscar)
     {
         DefaultTableModel modelo;
@@ -38,12 +39,14 @@ public class fproveedor {
         
         modelo= new DefaultTableModel(null, titulos);
         
+        //al principio se mostrarán todos los registros pero cuando se coloque un dato en buscar, solo mostrara el registro comun de ese dato
         sSQL="select * from proveedor where cedula like '%" + buscar + "%' order  by cedula";
         
         try {
             Statement st= cn.createStatement();
             ResultSet rs=st.executeQuery(sSQL);
             
+            //se repite para ver cuantos registros hay con ese dato
             while(rs.next())
             {
                 registro [0]= rs.getString("id_proveedor");
@@ -59,6 +62,7 @@ public class fproveedor {
                 modelo.addRow(registro);
             }
             
+            //retorna la tabla, puede ser llena por no colocar ningun dato, o tambien puede ser vacia por ningun dato en comun, mostrando un error
             return modelo;
             
         } catch (Exception e) {
@@ -67,12 +71,12 @@ public class fproveedor {
         }  
     }
         
-        
+        //se insertan los datos de un proveedor nuevo
         public boolean insertar (vproveedor dts)
         {
             sSQL="Insert into proveedor (id_proveedor,cedula, nombre, direccion, rif, empresa, telefono, correo)" + "values (?,?,?,?,?,?,?,?)";
             try {
-                
+                //se obtienen los datos del formulario a la BD
                 PreparedStatement pst=cn.prepareStatement(sSQL);
                 pst.setInt(1, dts.getId_proveedor());
                 pst.setString(2, dts.getCedula());
@@ -85,6 +89,8 @@ public class fproveedor {
                 
                 int n=pst.executeUpdate();
                 
+                
+                //si ejecuta el update, muestra true la funcion, si no, da error
                 if(n!=0)
                 {
                    return true; 
@@ -100,12 +106,13 @@ public class fproveedor {
             }
         }
         
+        //esta funcion edita el registro usando la comparacion del id del proveedor
         public boolean editar (vproveedor dts)
         {
             sSQL= "Update proveedor set cedula=?, nombre=?, direccion=?, rif=?, empresa=?, telefono=?, correo=?" + "where id_proveedor=?";
             
             try {
-                
+                //se colocan en el mismo orden que en el sql
                 PreparedStatement pst=cn.prepareStatement(sSQL);
                 pst.setString(1, dts.getCedula());
                 pst.setString(2, dts.getNombre());
@@ -118,6 +125,7 @@ public class fproveedor {
                 
                 int n=pst.executeUpdate();
                 
+                //si ejecuta el update devuelve true la funcion, si no da error
                 if(n!=0)
                 {
                    return true; 
@@ -134,17 +142,17 @@ public class fproveedor {
             }
         }
         
-        
+        //esta funcion busca el id del proveedor para luego eliminar el registro
         public boolean eliminar (vproveedor dts)
         {
             sSQL="delete from proveedor where id_proveedor=?";
             try {
-                
+                //se busca un unico dato y de ahi lo facilita para eliminarlo por completo
                 PreparedStatement pst=cn.prepareStatement(sSQL);
                 pst.setInt(1, dts.getId_proveedor());
 
                 int n=pst.executeUpdate();
-                
+                //si ejecuta el update devuelve true la funcion, si no da error
                 if(n!=0)
                 {
                    return true; 

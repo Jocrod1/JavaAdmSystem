@@ -25,14 +25,14 @@ import javax.swing.table.DefaultTableModel;
  * @author Raimon
  */
 public class fventa {
-    
+    //aca se realiza la conexion a la BD
     private conexion mysql=new conexion();
     private Connection cn=mysql.conectar();
     private String sSQL="";
     public Integer totalregistros;
     public List<Integer> ListIDs = new ArrayList<>();
     
-    
+    //esta es la tabla de venta que se mostrará en el formulario, con los datos ordenados de la BD
     public DefaultTableModel mostrar()
     {
         DefaultTableModel modelo;
@@ -45,6 +45,7 @@ public class fventa {
         
         modelo= new DefaultTableModel(null, titulos);
         
+        //el codigo que busca de distintas tablas y las agrupa
         sSQL="select v.id_venta, t.nombre as trabajador, c.nombre as Cliente, v.fecha, v.estado,\n" +
 "v.subtotal, v.impuesto, v.total \n" +
 "from venta v inner join cliente c on v.id_cliente = c.id_cliente\n" +
@@ -55,7 +56,7 @@ public class fventa {
             Statement st= cn.createStatement();
             ResultSet rs=st.executeQuery(sSQL);
             
-                 
+             //muestra una a una cada fila de la BD y la muestra   
             while(rs.next())
             {
                 registro [0]= rs.getString("id_venta");
@@ -81,6 +82,7 @@ public class fventa {
         }  
     }
     
+    //esta funcion busca entre 2 fechas y muestra los resultados
     public DefaultTableModel buscarentrefechas(String Buscar, String Buscar2)
     {
         DefaultTableModel modelo;
@@ -93,6 +95,7 @@ public class fventa {
         
         modelo= new DefaultTableModel(null, titulos);
         
+        //este es el sql que busca entre la fecha 1 y la 2
         sSQL="select v.id_venta, t.nombre as trabajador, c.nombre as Cliente, v.fecha, v.estado,\n" +
 "v.subtotal, v.impuesto, v.total \n" +
 "from venta v inner join cliente c on v.id_cliente = c.id_cliente\n" +
@@ -129,6 +132,7 @@ public class fventa {
         }  
     }
     
+    //esta es la tabla que muestra cada detalle de la venta
     public DefaultTableModel MostrarDetalle(int Buscar)
     {
         DefaultTableModel modelo;
@@ -174,6 +178,7 @@ public class fventa {
         }  
     }
     
+    //esta funcion busca la venta por el articulo
     public DefaultTableModel BuscarArticuloNombre(String Buscar)
     {
         DefaultTableModel modelo;
@@ -222,6 +227,8 @@ public class fventa {
         }  
     }
     
+    
+    //esta tabla muestra la venta por el cliente ingresado
     public DefaultTableModel BuscarCliente(String IdCliente){
         DefaultTableModel modelo;
         
@@ -260,6 +267,7 @@ public class fventa {
         
         }
     
+    //es esta funcion se muestra el numero de venta que se esta ingresando al momento, osea, el maximo
     public int Obteneridentity()
     {
         DefaultTableModel modelo;
@@ -272,6 +280,7 @@ public class fventa {
         
         modelo= new DefaultTableModel(null, titulos);
         
+        //se selecciona el id maximo, osea, el actual y se muestra
         sSQL="SELECT id_venta FROM venta WHERE id_venta =(SELECT MAX(id_venta)FROM venta)";
         
         try {
@@ -293,7 +302,8 @@ public class fventa {
             return 0;
         }  
     }
-            
+          
+    //en esta funcion se insertan los datos en la BD
         public boolean insertar (vventa dts)
         {
             sSQL="insert into venta (id_cliente,id_trabajador, fecha, subtotal, impuesto, total, estado)" + "values (?,?,?,?,?,?,'APROBADO')";
@@ -308,6 +318,7 @@ public class fventa {
                 pst.setDouble(6, dts.getTotal());
                 int n=pst.executeUpdate();
                 
+                //si retorna true la funcion, se actualizo, si no, no
                 if(n!=0)
                 {
                    return true; 
@@ -323,6 +334,7 @@ public class fventa {
             }
         }
     
+        //en esta funcion se inserta los detalles varios de cada venta
         public boolean insertarDetalle (vdetalle_venta dts)
         {
             sSQL="insert into detalle_venta (id_venta, id_detalle_ingreso, cantidad, precio)"
@@ -337,6 +349,7 @@ public class fventa {
                 
                 int n=pst.executeUpdate();
                 
+                //si retorna true la funcion, se actualizo, si no, no
                 if(n!=0)
                 {
                    return true; 
@@ -351,7 +364,8 @@ public class fventa {
                 return false;
             }
         }
-                
+           
+        //en esta funcion se anula la venta, osea, en el estado de la tabla, se coloca alunado y la venta se cancela, pero no se elimina
         public boolean Anular (vventa dts)
         {
             sSQL="update venta set estado = 'ANULADO'\n" +
@@ -405,6 +419,7 @@ public class fventa {
             }
         }
         
+        //en esta funcion se obtiene el comprobante de venta y se muestra, buscandolo por el numero de comprobante
             public int ObtenerComprobante(int Buscar)
     {
         DefaultTableModel modelo;
