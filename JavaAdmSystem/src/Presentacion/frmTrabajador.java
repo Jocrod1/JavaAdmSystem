@@ -735,6 +735,8 @@ public class frmTrabajador extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(rootPane, "Debes ingresar la contraseña de nuevo");
             txtDireccionTrabajador.requestFocus();
             return;
+            
+            
         }
         
         

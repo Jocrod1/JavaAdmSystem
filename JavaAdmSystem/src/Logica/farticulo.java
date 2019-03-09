@@ -158,6 +158,44 @@ public class farticulo {
                 return false;
             }
         }
+            
+            
+             public DefaultTableModel usuariorepetido(String id_articulo)
+    {
+        DefaultTableModel modelo;
+        
+        String [] titulos = {"Codigo"};
+        
+        String [] registro = new String [1];
+        
+        totalregistros=0;
+        
+        modelo= new DefaultTableModel(null, titulos);
+        
+        sSQL="select id_articulo from articulo where id_articulo='" + id_articulo+"'";
+        
+        try {
+            Statement st= cn.createStatement();
+            ResultSet rs=st.executeQuery(sSQL);
+            
+                 
+            while(rs.next())
+            {
+                registro [0]= rs.getString("id_articulo");
+                
+                totalregistros= totalregistros+1;
+                modelo.addRow(registro);
+            }
+                 
+                 
+            
+            return modelo;
+            
+        } catch (Exception e) {
+            JOptionPane.showConfirmDialog(null, e);
+            return null;
+        }  
+    }
     
     
     
