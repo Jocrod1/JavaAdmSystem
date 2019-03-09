@@ -59,9 +59,9 @@ WHERE
 			<frame>
 				<reportElement mode="Opaque" x="-20" y="-20" width="595" height="92" backcolor="#009900" uuid="5d616b16-31ee-4fdb-b7f0-1ec45f7cb505"/>
 				<staticText>
-					<reportElement x="20" y="0" width="362" height="92" forecolor="#FFFFFF" uuid="f3df07fd-6755-4d06-bf78-b7445474b45b"/>
+					<reportElement x="20" y="0" width="362" height="66" forecolor="#FFFFFF" uuid="f3df07fd-6755-4d06-bf78-b7445474b45b"/>
 					<textElement>
-						<font size="66" isBold="true"/>
+						<font size="48" isBold="true"/>
 					</textElement>
 					<text><![CDATA[Green Leaf]]></text>
 				</staticText>
@@ -86,6 +86,20 @@ WHERE
 					</textElement>
 					<textFieldExpression><![CDATA[$F{venta_estado}]]></textFieldExpression>
 				</textField>
+				<staticText>
+					<reportElement x="20" y="66" width="121" height="20" forecolor="#FFFFFF" uuid="d8c066d1-be3a-4f47-9a25-d8113feed4dd"/>
+					<textElement>
+						<font fontName="Arial Narrow" size="16" isBold="true"/>
+					</textElement>
+					<text><![CDATA[RIF: 13720332-0]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="261" y="66" width="121" height="20" forecolor="#FFFFFF" uuid="1db92990-929c-4cd3-b161-275d7c9aa86d"/>
+					<textElement>
+						<font fontName="Arial Narrow" size="16" isBold="true"/>
+					</textElement>
+					<text><![CDATA[TLF: 0414-4932514]]></text>
+				</staticText>
 			</frame>
 		</band>
 	</title>

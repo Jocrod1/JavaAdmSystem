@@ -168,6 +168,43 @@ public class fproveedor {
             }
         }
         
+                 public DefaultTableModel usuariorepetido(String id_proveedor)
+    {
+        DefaultTableModel modelo;
+        
+        String [] titulos = {"Cedula"};
+        
+        String [] registro = new String [1];
+        
+        totalregistros=0;
+        
+        modelo= new DefaultTableModel(null, titulos);
+        
+        sSQL="select cedula from proveedor where cedula='" + id_proveedor+"'";
+        
+        try {
+            Statement st= cn.createStatement();
+            ResultSet rs=st.executeQuery(sSQL);
+            
+            //se repite en cada uno de los registro para asegurar que no haya una cedula igual     
+            while(rs.next())
+            {
+                registro [0]= rs.getString("cedula");
+                
+                totalregistros= totalregistros+1;
+                modelo.addRow(registro);
+            }
+                 
+                 
+            
+            return modelo;
+            
+        } catch (Exception e) {
+            JOptionPane.showConfirmDialog(null, e);
+            return null;
+        }  
+    }
+        
         
         
         

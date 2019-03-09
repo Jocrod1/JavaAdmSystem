@@ -74,12 +74,12 @@ public class frmInicio extends javax.swing.JFrame {
         lblNombre.setForeground(new java.awt.Color(204, 255, 204));
         lblNombre.setText("Nombre");
         escritorio.add(lblNombre);
-        lblNombre.setBounds(10, 260, 260, 14);
+        lblNombre.setBounds(10, 10, 260, 14);
 
         lblAcceso.setForeground(new java.awt.Color(204, 255, 204));
         lblAcceso.setText("Acceso");
         escritorio.add(lblAcceso);
-        lblAcceso.setBounds(10, 280, 230, 14);
+        lblAcceso.setBounds(10, 30, 230, 14);
 
         mnuSistema.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Files/Inicio.png"))); // NOI18N
         mnuSistema.setText("Sistema");
@@ -104,6 +104,11 @@ public class frmInicio extends javax.swing.JFrame {
 
         mnuTrabajadores.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Files/trabajadores.png"))); // NOI18N
         mnuTrabajadores.setText("Trabajadores");
+        mnuTrabajadores.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuTrabajadoresActionPerformed(evt);
+            }
+        });
         mnuRegistros.add(mnuTrabajadores);
 
         mnuProveedores.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Files/proveedores.png"))); // NOI18N
@@ -383,6 +388,12 @@ public class frmInicio extends javax.swing.JFrame {
         
         
     }//GEN-LAST:event_mnuVentasActionPerformed
+
+    private void mnuTrabajadoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuTrabajadoresActionPerformed
+        // TODO add your handling code here:
+        
+        
+    }//GEN-LAST:event_mnuTrabajadoresActionPerformed
 
     /**
      * @param args the command line arguments
