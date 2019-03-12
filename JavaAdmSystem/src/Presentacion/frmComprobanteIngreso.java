@@ -22,7 +22,7 @@ import net.sf.jasperreports.view.JasperViewer;
  *
  * @author Raimon
  */
-public class frmComprobanteIngreso extends javax.swing.JFrame {
+public class frmComprobanteIngreso extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form frmComprobanteIngreso
@@ -30,7 +30,6 @@ public class frmComprobanteIngreso extends javax.swing.JFrame {
     public frmComprobanteIngreso() {
         initComponents();
         //("");
-        this.setLocationRelativeTo(null);
     }
 
     /**

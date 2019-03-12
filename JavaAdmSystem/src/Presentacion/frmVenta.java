@@ -34,7 +34,7 @@ import net.sf.jasperreports.view.JasperViewer;
  *
  * @author Mirlu
  */
-public class frmVenta extends javax.swing.JFrame {
+public class frmVenta extends javax.swing.JInternalFrame {
     public static String idtrabajador;
     public static String CodDetalleIngreso;
     public static String idProveedor;
@@ -317,7 +317,10 @@ public class frmVenta extends javax.swing.JFrame {
         dateChooserCombo3 = new datechooser.beans.DateChooserCombo();
         btnSalir2 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setClosable(true);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setIconifiable(true);
+        setMaximizable(true);
 
         jPanel2.setBackground(new java.awt.Color(204, 255, 204));
 
@@ -326,6 +329,7 @@ public class frmVenta extends javax.swing.JFrame {
         jLabel5.setText("Ventas");
 
         btnNuevo.setBackground(new java.awt.Color(255, 255, 255));
+        btnNuevo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Files/nuevo.GIF"))); // NOI18N
         btnNuevo.setText("Nuevo");
         btnNuevo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

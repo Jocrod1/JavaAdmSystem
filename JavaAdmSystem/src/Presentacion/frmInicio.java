@@ -28,8 +28,11 @@ public class frmInicio extends javax.swing.JFrame {
     public frmInicio() {
         initComponents();
         this.setExtendedState(frmInicio.MAXIMIZED_BOTH);
-        this.setTitle("Sistema de gestion de ventas - Farmacia Green leaf");
-    
+        this.setTitle("Sistema de gestion de ventas - Tienda Green leaf");
+        
+        
+
+        
     }
 
     /**
@@ -44,6 +47,10 @@ public class frmInicio extends javax.swing.JFrame {
         escritorio = new javax.swing.JDesktopPane();
         lblNombre = new javax.swing.JLabel();
         lblAcceso = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
         menuBar = new javax.swing.JMenuBar();
         mnuSistema = new javax.swing.JMenu();
         mnuSalir = new javax.swing.JMenuItem();
@@ -55,10 +62,6 @@ public class frmInicio extends javax.swing.JFrame {
         jMenu3 = new javax.swing.JMenu();
         mnuIngreso = new javax.swing.JMenuItem();
         mnuVentas = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
-        mnuVentasporfecha = new javax.swing.JMenuItem();
-        mnuIngresosporfecha = new javax.swing.JMenuItem();
-        mnuInventario = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
         jMenuReporteCliente = new javax.swing.JMenuItem();
         jMenuReporteTrabajador = new javax.swing.JMenuItem();
@@ -68,24 +71,50 @@ public class frmInicio extends javax.swing.JFrame {
         mnuAcercade = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
-        escritorio.setBackground(new java.awt.Color(0, 51, 51));
+        escritorio.setBackground(new java.awt.Color(0, 51, 0));
 
         lblNombre.setForeground(new java.awt.Color(204, 255, 204));
         lblNombre.setText("Nombre");
         escritorio.add(lblNombre);
-        lblNombre.setBounds(10, 10, 260, 14);
+        lblNombre.setBounds(10, 10, 260, 16);
 
         lblAcceso.setForeground(new java.awt.Color(204, 255, 204));
         lblAcceso.setText("Acceso");
         escritorio.add(lblAcceso);
-        lblAcceso.setBounds(10, 30, 230, 14);
+        lblAcceso.setBounds(10, 30, 230, 16);
+
+        jLabel3.setFont(new java.awt.Font("Dialog", 3, 48)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(204, 255, 204));
+        jLabel3.setText("GREEN LEAF C.A.");
+        escritorio.add(jLabel3);
+        jLabel3.setBounds(160, 300, 560, 210);
+        escritorio.add(jLabel1);
+        jLabel1.setBounds(610, 110, 0, 0);
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Files/newleaflogo.png"))); // NOI18N
+        escritorio.add(jLabel2);
+        jLabel2.setBounds(670, 240, 580, 370);
+
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Files/fondo.jpg"))); // NOI18N
+        escritorio.add(jLabel4);
+        jLabel4.setBounds(1, -10, 1380, 830);
 
         mnuSistema.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Files/Inicio.png"))); // NOI18N
         mnuSistema.setText("Sistema");
 
         mnuSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Files/Salir.png"))); // NOI18N
-        mnuSalir.setText("Salir");
+        mnuSalir.setText("Cerrar Sesión");
+        mnuSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuSalirActionPerformed(evt);
+            }
+        });
         mnuSistema.add(mnuSalir);
 
         menuBar.add(mnuSistema);
@@ -113,14 +142,25 @@ public class frmInicio extends javax.swing.JFrame {
 
         mnuProveedores.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Files/proveedores.png"))); // NOI18N
         mnuProveedores.setText("Proveedores");
+        mnuProveedores.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuProveedoresActionPerformed(evt);
+            }
+        });
         mnuRegistros.add(mnuProveedores);
 
         mnuArticulos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Files/icono_paquetes.png"))); // NOI18N
         mnuArticulos.setText("Artículos");
+        mnuArticulos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuArticulosActionPerformed(evt);
+            }
+        });
         mnuRegistros.add(mnuArticulos);
 
         menuBar.add(mnuRegistros);
 
+        jMenu3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Files/pagos.png"))); // NOI18N
         jMenu3.setText("Procesos");
 
         mnuIngreso.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Files/Add_to_Cart-512.png"))); // NOI18N
@@ -143,28 +183,7 @@ public class frmInicio extends javax.swing.JFrame {
 
         menuBar.add(jMenu3);
 
-        jMenu2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Files/Consultas.png"))); // NOI18N
-        jMenu2.setText("Consultas");
-
-        mnuVentasporfecha.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Files/pagos.png"))); // NOI18N
-        mnuVentasporfecha.setText("Ventas por fecha");
-        jMenu2.add(mnuVentasporfecha);
-
-        mnuIngresosporfecha.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Files/chart.png"))); // NOI18N
-        mnuIngresosporfecha.setText("Ingresos por fecha");
-        jMenu2.add(mnuIngresosporfecha);
-
-        mnuInventario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Files/mercancia.png"))); // NOI18N
-        mnuInventario.setText("Inventario de mercancía");
-        mnuInventario.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mnuInventarioActionPerformed(evt);
-            }
-        });
-        jMenu2.add(mnuInventario);
-
-        menuBar.add(jMenu2);
-
+        jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Files/Consultas.png"))); // NOI18N
         jMenu1.setText("Reportes");
 
         jMenuReporteCliente.setText("Cliente");
@@ -205,6 +224,11 @@ public class frmInicio extends javax.swing.JFrame {
         jMenu5.setText("Ayuda");
 
         mnuAcercade.setText("Acerca de...");
+        mnuAcercade.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuAcercadeActionPerformed(evt);
+            }
+        });
         jMenu5.add(mnuAcercade);
 
         menuBar.add(jMenu5);
@@ -229,20 +253,30 @@ public class frmInicio extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    
+    
+        
+        private Connection connection=new conexion().conectar();
+        
+        
+        
+        
+        
+        
+    
     private void mnuIngresoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuIngresoActionPerformed
         // TODO add your handling code here:
         
         frmIngreso form =new frmIngreso();
+        escritorio.add(form);
         form.toFront();
         form.setVisible(true);
         
         
     }//GEN-LAST:event_mnuIngresoActionPerformed
 
-    private void mnuInventarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuInventarioActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_mnuInventarioActionPerformed
-
+        
+    
     private void mnuClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuClientesActionPerformed
         // TODO add your handling code here:
         frmCliente form =new frmCliente();
@@ -250,8 +284,12 @@ public class frmInicio extends javax.swing.JFrame {
         form.toFront();
         form.setVisible(true);
     }//GEN-LAST:event_mnuClientesActionPerformed
+    
+    
+  
+            
+    
 
-        private Connection connection=new conexion().conectar();
     
     
     private void jMenuReporteClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuReporteClienteActionPerformed
@@ -383,6 +421,7 @@ public class frmInicio extends javax.swing.JFrame {
     private void mnuVentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuVentasActionPerformed
         // TODO add your handling code here:
         frmVenta form =new frmVenta();
+        escritorio.add(form);
         form.toFront();
         form.setVisible(true);
         
@@ -391,9 +430,63 @@ public class frmInicio extends javax.swing.JFrame {
 
     private void mnuTrabajadoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuTrabajadoresActionPerformed
         // TODO add your handling code here:
-        
+        frmTrabajador form =new frmTrabajador();
+        escritorio.add(form);
+        form.toFront();
+        form.setVisible(true);
         
     }//GEN-LAST:event_mnuTrabajadoresActionPerformed
+
+    private void mnuProveedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuProveedoresActionPerformed
+        // TODO add your handling code here:
+        
+        
+        frmProveedor form =new frmProveedor();
+        escritorio.add(form);
+        form.toFront();
+        form.setVisible(true);
+    }//GEN-LAST:event_mnuProveedoresActionPerformed
+
+    private void mnuArticulosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuArticulosActionPerformed
+        // TODO add your handling code here:
+        
+        frmArticulo form =new frmArticulo();
+        escritorio.add(form);
+        form.toFront();
+        form.setVisible(true);
+    }//GEN-LAST:event_mnuArticulosActionPerformed
+
+    private void mnuAcercadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuAcercadeActionPerformed
+        // TODO add your handling code here:
+        
+        Acercade form =new Acercade();
+        escritorio.add(form);
+        form.toFront();
+        form.setVisible(true);
+        
+        
+    }//GEN-LAST:event_mnuAcercadeActionPerformed
+
+    private void mnuSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuSalirActionPerformed
+        // TODO add your handling code here:
+        frmlogin form = new frmlogin();
+        form.setVisible(true);
+        this.dispose();
+
+    }//GEN-LAST:event_mnuSalirActionPerformed
+
+    
+    //este evento es cuando se abre la ventana, en ese momento, se tomara en cuenta lo que dice en lblAcceso, 
+    //para inhabilitar los itemmenu correspondiente a su nivel de acceso
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        // TODO add your handling code here:
+         //esto es para ocultar las funciones del admin, a los usuarios        
+        if (lblAcceso.getText().equals("Usuario")){
+
+                jMenu1.setEnabled(false); //reportes
+                mnuTrabajadores.setEnabled(false); //trabajadores
+        }
+    }//GEN-LAST:event_formWindowOpened
 
     /**
      * @param args the command line arguments
@@ -428,12 +521,22 @@ public class frmInicio extends javax.swing.JFrame {
                 new frmInicio().setVisible(true);
             }
         });
+        
+        
+        
+                
+        
+        
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane escritorio;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenuItem jMenuReporteArticulo;
@@ -447,15 +550,12 @@ public class frmInicio extends javax.swing.JFrame {
     private javax.swing.JMenuItem mnuArticulos;
     private javax.swing.JMenuItem mnuClientes;
     private javax.swing.JMenuItem mnuIngreso;
-    private javax.swing.JMenuItem mnuIngresosporfecha;
-    private javax.swing.JMenuItem mnuInventario;
     private javax.swing.JMenuItem mnuProveedores;
     private javax.swing.JMenu mnuRegistros;
     private javax.swing.JMenuItem mnuSalir;
     private javax.swing.JMenu mnuSistema;
     private javax.swing.JMenuItem mnuTrabajadores;
     private javax.swing.JMenuItem mnuVentas;
-    private javax.swing.JMenuItem mnuVentasporfecha;
     // End of variables declaration//GEN-END:variables
 
 }
