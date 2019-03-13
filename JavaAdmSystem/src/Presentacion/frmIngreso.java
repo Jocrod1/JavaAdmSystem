@@ -217,11 +217,11 @@ public class frmIngreso extends javax.swing.JInternalFrame {
             }
         }
     }
-    boolean PuedeAgregar(int idarticulo){
+    boolean PuedeAgregar(String idarticulo){
         if(Detalles.getRowCount()<= 0)
             return true;
         for(int i = 0; i < ListDetalles.size(); i++){
-            int a = ListDetalles.get(i).getId_articulo();
+            String a = ListDetalles.get(i).getId_articulo();
             if(a == idarticulo)
                 return false;
         }
@@ -780,7 +780,7 @@ public class frmIngreso extends javax.swing.JInternalFrame {
             txtStockInicial.requestFocus();
             return;
         }
-        if(!PuedeAgregar(Integer.parseInt(CodArticulo)) && accion.equals("Guardar")){
+        if(!PuedeAgregar(CodArticulo) && accion.equals("Guardar")){
             JOptionPane.showConfirmDialog(rootPane, "Debes Selecciar un articulo no este ya agregado");
             BtnBuscarArticulo.requestFocus();
             return;
@@ -789,7 +789,7 @@ public class frmIngreso extends javax.swing.JInternalFrame {
         vdetalle_ingreso DI = new vdetalle_ingreso();
         
         Registrar[0] = txtArticulo.getText();
-        DI.setId_articulo(Integer.parseInt(CodArticulo));
+        DI.setId_articulo(CodArticulo);
         Registrar[1] = txtPrecioCompra.getText();
         DI.setPrecio_compra(Double.parseDouble(Registrar[1]));
         Registrar[2] = txtPrecioVenta.getText();
@@ -837,7 +837,7 @@ public class frmIngreso extends javax.swing.JInternalFrame {
         txtPrecioCompra.setText(Double.toString(ListDetalles.get(Row).getPrecio_compra()));
         txtPrecioVenta.setText(Double.toString(ListDetalles.get(Row).getPrecio_venta()));
         txtStockInicial.setText(jTable1.getValueAt(Row,3).toString());
-        CodArticulo = Integer.toString(ListDetalles.get(Row).getId_articulo());
+        CodArticulo = ListDetalles.get(Row).getId_articulo();
         
         accion = "Editar";
         btnQuitar.setEnabled(true);

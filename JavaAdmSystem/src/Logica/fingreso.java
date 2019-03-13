@@ -257,7 +257,7 @@ public class fingreso {
                 
                 PreparedStatement pst=cn.prepareStatement(sSQL);
                 pst.setInt(1, dts.getId_ingreso());
-                pst.setInt(2, dts.getId_articulo());
+                pst.setString(2, dts.getId_articulo());
                 pst.setDouble(3, dts.getPrecio_compra());
                 pst.setDouble(4, dts.getPrecio_venta());
                 pst.setInt(5, dts.getStock_inicial());

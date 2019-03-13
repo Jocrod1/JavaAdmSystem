@@ -242,8 +242,7 @@ public class frmlogin extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(rootPane,"Bienvenido al Sistema","Acceso al Sistema", JOptionPane.INFORMATION_MESSAGE);
 
                 
-                //se cierra el form aca
-                this.dispose();
+                
                 frmInicio form=new frmInicio();
                 form.toFront();
                 form.setVisible(true);
@@ -255,7 +254,8 @@ public class frmlogin extends javax.swing.JFrame {
                 
                 frmIngreso.idtrabajador= (tablalistado.getValueAt(0, 0).toString());
                 frmVenta.idtrabajador=(tablalistado.getValueAt(0, 0).toString());
-                
+                //se cierra el form aca
+                this.dispose();
                
                 
             }

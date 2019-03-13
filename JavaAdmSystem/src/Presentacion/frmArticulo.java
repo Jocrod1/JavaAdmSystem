@@ -8,6 +8,7 @@ package Presentacion;
 import Datos.varticulo;
 import Logica.conexion;
 import Logica.farticulo;
+import java.awt.event.KeyEvent;
 import java.io.File;
 import java.sql.Connection;
 import java.util.HashMap;
@@ -36,7 +37,7 @@ public class frmArticulo extends javax.swing.JInternalFrame {
         
         inhabilitar();
         
-        txtIdArticulo.requestFocus();
+        txtBuscarTrabajador.requestFocus();
         tablalistado.setEnabled(false);
     }
 
@@ -165,6 +166,12 @@ public class frmArticulo extends javax.swing.JInternalFrame {
             }
         });
         jScrollPane1.setViewportView(tablalistado);
+
+        txtBuscarTrabajador.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtBuscarTrabajadorKeyPressed(evt);
+            }
+        });
 
         jLabel10.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(204, 255, 204));
@@ -332,6 +339,11 @@ public class frmArticulo extends javax.swing.JInternalFrame {
                 txtIdArticuloActionPerformed(evt);
             }
         });
+        txtIdArticulo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtIdArticuloKeyPressed(evt);
+            }
+        });
 
         jLabel4.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(0, 51, 0));
@@ -429,7 +441,7 @@ public class frmArticulo extends javax.swing.JInternalFrame {
         btnEliminar.setEnabled(false);
         btnGuardar.setText("Guardar");
         accion="Guardar";
-        
+        txtIdArticulo.requestFocus();
         
     }//GEN-LAST:event_btnNuevoActionPerformed
 
@@ -572,10 +584,27 @@ public class frmArticulo extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         
         mostrar(txtBuscarTrabajador.getText());
+        String txt =  tablalistado.getValueAt(0, 0).toString();
         
         if (lblTotal.getText().equals("0")){
             
             JOptionPane.showMessageDialog(rootPane, "No hay registros que coincidan con ese nombre");
+        } else if(txtBuscarTrabajador.getText().equals(txt)){
+            btnGuardar.setText("Editar");
+            habilitar();
+            txtIdArticulo.setEnabled(false);
+        
+        
+        
+            btnEliminar.setEnabled(true);
+        
+            accion="Editar";
+        
+            //esto es para pasar los datos de la tabla a los txtbox del form
+        
+            txtIdArticulo.setText(tablalistado.getValueAt(0,0).toString());
+            txtNombreArticulo.setText(tablalistado.getValueAt(0,1).toString());
+            txtDescripcionArticulo.setText(tablalistado.getValueAt(0,2).toString());
         }
        
         
@@ -637,7 +666,22 @@ public class frmArticulo extends javax.swing.JInternalFrame {
 
     private void txtIdArticuloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdArticuloActionPerformed
         // TODO add your handling code here:
+        txtIdArticulo.transferFocus();
     }//GEN-LAST:event_txtIdArticuloActionPerformed
+
+    private void txtIdArticuloKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtIdArticuloKeyPressed
+        // TODO add your handling code here:
+        if(evt.getKeyCode()== KeyEvent.VK_ENTER){
+            txtIdArticulo.transferFocus();
+        }
+    }//GEN-LAST:event_txtIdArticuloKeyPressed
+
+    private void txtBuscarTrabajadorKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarTrabajadorKeyPressed
+        // TODO add your handling code here:
+        if(evt.getKeyCode()== KeyEvent.VK_ENTER){
+            btnBuscar.doClick();
+        }
+    }//GEN-LAST:event_txtBuscarTrabajadorKeyPressed
 
     
    
