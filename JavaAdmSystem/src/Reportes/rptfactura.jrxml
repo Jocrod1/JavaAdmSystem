@@ -23,7 +23,7 @@
      detalle_venta.`cantidad` AS detalle_venta_cantidad,
      detalle_venta.`precio` AS detalle_venta_precio,
      detalle_ingreso.`precio_venta` AS detalle_ingreso_precio_venta,
-(detalle_venta.`cantidad` * detalle_venta.`precio`) as Subtotal
+(detalle_venta.`cantidad` * detalle_ingreso.`precio_venta`) AS Subtotal
 FROM
      `venta` venta INNER JOIN `detalle_venta` detalle_venta ON venta.`id_venta` = detalle_venta.`id_venta`
      INNER JOIN `trabajador` trabajador ON venta.`id_trabajador` = trabajador.`id_trabajador`
@@ -245,12 +245,12 @@ WHERE
 				</textElement>
 				<textFieldExpression><![CDATA[$F{detalle_ingreso_precio_venta}]]></textFieldExpression>
 			</textField>
-			<textField pattern="Bs, ##0.00">
-				<reportElement x="455" y="10" width="89" height="20" uuid="4b931b74-530e-4893-bf13-3c2a1d8cf618"/>
+			<textField pattern="Bs,##0.00">
+				<reportElement x="455" y="10" width="72" height="20" uuid="f24a1e94-796c-43ff-8ea4-a5e81c3f89e6"/>
 				<textElement textAlignment="Right">
 					<font fontName="Arial Narrow" size="14"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{Subtotal}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{detalle_venta_cantidad}*$F{detalle_venta_precio}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
