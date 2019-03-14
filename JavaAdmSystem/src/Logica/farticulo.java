@@ -25,8 +25,48 @@ public class farticulo {
     private String sSQL="";
     public Integer totalregistros;
     
+    public DefaultTableModel mostrar(String buscar) 
+    { 
+        DefaultTableModel modelo; 
+         
+        //se colocan los titulos que tendrá la tabla 
+        String [] titulos = {"Codigo del Articulo", "Nombre del Articulo", "Descripcion del Articulo"}; 
+         
+        String [] registro = new String [3]; 
+         
+        totalregistros=0; 
+         
+        modelo= new DefaultTableModel(null, titulos); 
+         
+        //este es el código que se enviará a la BD, el cua se ordenará por el id del articulo y se regresará al programa 
+        sSQL="select * from articulo where id_articulo like '%" + buscar + "%' order  by id_articulo"; 
+     
+            try { 
+            Statement st= cn.createStatement(); 
+            ResultSet rs=st.executeQuery(sSQL); 
+             
+            while(rs.next()) 
+            { 
+                //los parámetros que regresará de la BD 
+                registro [0]= rs.getString("id_articulo"); 
+                registro [1]= rs.getString("nombre"); 
+                registro [2]= rs.getString("descripcion"); 
+                 
+                totalregistros= totalregistros+1; 
+                modelo.addRow(registro); 
+            } 
+             
+            return modelo; 
+             
+        } catch (Exception e) { 
+            //muestra un error si no se conecta bien la BD o si no recibe los parámetros 
+            JOptionPane.showConfirmDialog(null, e); 
+            return null; 
+        }  
+    } 
+    
     //esta es la tabla en la que se mostrarán todos los datos que se van a poder ver para el usuario
-    public DefaultTableModel mostrar(String buscar)
+    public DefaultTableModel mostrarstocks(String buscar)
     {
         DefaultTableModel modelo;
         

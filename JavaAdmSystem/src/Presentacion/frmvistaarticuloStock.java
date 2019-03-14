@@ -6,23 +6,22 @@
 package Presentacion;
 
 import Logica.farticulo;
-import Logica.fventa;
+import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
+import javax.swing.JRootPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author Usuario
  */
-public class frmvistaarticuloventa extends javax.swing.JFrame {
+public class frmvistaarticuloStock extends javax.swing.JFrame {
 
-    /**
-     * Creates new form frmvistaarticulo
-     */
-    public frmvistaarticuloventa() {
+
+    public frmvistaarticuloStock() {
         initComponents();
         mostrar("");
-        this.setLocationRelativeTo(null);
+        
     }
 
     /**
@@ -46,6 +45,7 @@ public class frmvistaarticuloventa extends javax.swing.JFrame {
         btnSalir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setFocusableWindowState(false);
 
         jPanel1.setBackground(new java.awt.Color(0, 102, 0));
         jPanel1.setForeground(new java.awt.Color(204, 255, 204));
@@ -71,6 +71,12 @@ public class frmvistaarticuloventa extends javax.swing.JFrame {
             }
         });
         jScrollPane1.setViewportView(tablalistado);
+
+        txtBuscarTrabajador.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtBuscarTrabajadorKeyPressed(evt);
+            }
+        });
 
         jLabel10.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(204, 255, 204));
@@ -126,7 +132,7 @@ public class frmvistaarticuloventa extends javax.swing.JFrame {
                             .addComponent(btnBuscar)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                             .addComponent(btnSalir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGap(252, 252, 252)))))
+                            .addGap(233, 233, 233)))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -152,21 +158,17 @@ public class frmvistaarticuloventa extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 799, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 787, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 787, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 447, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addContainerGap()))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
@@ -176,8 +178,8 @@ public class frmvistaarticuloventa extends javax.swing.JFrame {
         
         try {
             DefaultTableModel modelo;
-            fventa func= new fventa();
-            modelo = func.BuscarArticuloNombre(buscar);
+            farticulo func= new farticulo();
+            modelo = func.mostrarstocks(buscar);
             
             tablalistado.setModel(modelo);
             //ocultar_columnas();
@@ -205,25 +207,6 @@ public class frmvistaarticuloventa extends javax.swing.JFrame {
 
     private void tablalistadoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablalistadoMousePressed
         // TODO add your handling code here:
-        if(evt.getClickCount() == 2){
-            int fila = tablalistado.getSelectedRow();
-            
-            String id, articulo, disponible, precioC, precioV;
-            
-            id = tablalistado.getValueAt(fila, 0).toString();
-            articulo = tablalistado.getValueAt(fila, 1).toString();
-            disponible = tablalistado.getValueAt(fila, 3).toString();
-            precioC = tablalistado.getValueAt(fila, 4).toString();
-            precioV = tablalistado.getValueAt(fila, 5).toString();
-            
-            frmVenta.CodDetalleIngreso = id;
-            frmVenta.txtCodigoArticulo.setText(articulo);
-            frmVenta.txtStockInicial.setText(disponible);
-            frmVenta.txtPrecioCompra.setText(precioC);
-            frmVenta.txtPrecioVenta.setText(precioV);
-            
-            this.setVisible(false);
-        }
     }//GEN-LAST:event_tablalistadoMousePressed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
@@ -231,6 +214,13 @@ public class frmvistaarticuloventa extends javax.swing.JFrame {
 
         this.dispose();
     }//GEN-LAST:event_btnSalirActionPerformed
+
+    private void txtBuscarTrabajadorKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarTrabajadorKeyPressed
+        // TODO add your handling code here:
+        if(evt.getKeyCode()== KeyEvent.VK_ENTER){
+            btnBuscar.doClick();
+        }
+    }//GEN-LAST:event_txtBuscarTrabajadorKeyPressed
 
     /**
      * @param args the command line arguments
@@ -249,13 +239,13 @@ public class frmvistaarticuloventa extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(frmvistaarticuloventa.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmvistaarticuloStock.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(frmvistaarticuloventa.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmvistaarticuloStock.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(frmvistaarticuloventa.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmvistaarticuloStock.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(frmvistaarticuloventa.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmvistaarticuloStock.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>
@@ -263,7 +253,7 @@ public class frmvistaarticuloventa extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new frmvistaarticuloventa().setVisible(true);
+                new frmvistaarticuloStock().setVisible(true);
             }
         });
     }

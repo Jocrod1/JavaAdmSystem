@@ -177,6 +177,44 @@ public class fingreso {
         }  
     }
     
+    public DefaultTableModel BuscarArticulo(String IdCliente){
+        DefaultTableModel modelo;
+        
+        String [] titulos = {"ID", "Nombre"};
+        
+        String [] registro = new String [2];
+        
+        totalregistros=0;
+        
+        modelo= new DefaultTableModel(null, titulos);
+        
+        sSQL="select id_articulo, nombre from articulo where id_articulo ='" + IdCliente+ "'";
+        
+        try {
+            Statement st= cn.createStatement();
+            ResultSet rs=st.executeQuery(sSQL);
+            
+                 
+            while(rs.next())
+            {
+                registro [0]= rs.getString("id_articulo");
+                registro [1]= rs.getString("nombre");
+                
+                totalregistros= totalregistros+1;
+                modelo.addRow(registro);
+            }
+                 
+                 
+            
+            return modelo;
+            
+        } catch (Exception e) {
+            JOptionPane.showConfirmDialog(null, e);
+            return null;
+        }  
+        
+        }
+    
     
     //en esta funcion se obtiene el id del ingreso actual, el que se hace en el momento
     public int Obteneridentity()

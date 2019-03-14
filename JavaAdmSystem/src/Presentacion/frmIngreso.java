@@ -9,6 +9,7 @@ import Datos.vdetalle_ingreso;
 import Datos.vingreso;
 import Logica.conexion;
 import Logica.fingreso;
+import java.awt.event.KeyEvent;
 import java.io.File;
 import java.sql.Connection;
 import java.text.SimpleDateFormat;
@@ -108,7 +109,8 @@ public class frmIngreso extends javax.swing.JInternalFrame {
     }
     
     void habilitardetalle(){
-        txtArticulo.setEnabled(true);
+        txtCodigoArticulo.setEnabled(true);
+        txtNombreArticulo.setEnabled(true);
         txtPrecioCompra.setEnabled(true);
         txtPrecioVenta.setEnabled(true);
         txtStockInicial.setEnabled(true);
@@ -118,7 +120,8 @@ public class frmIngreso extends javax.swing.JInternalFrame {
         BtnBuscarArticulo.setEnabled(true);
     }
     void inhabilitardetalle(){
-        txtArticulo.setEnabled(false);
+        txtCodigoArticulo.setEnabled(false);
+        txtNombreArticulo.setEnabled(false);
         txtPrecioCompra.setEnabled(false);
         txtPrecioVenta.setEnabled(false);
         txtStockInicial.setEnabled(false);
@@ -128,7 +131,8 @@ public class frmIngreso extends javax.swing.JInternalFrame {
         BtnBuscarArticulo.setEnabled(false);
     }
     void limpiardetalle(){
-        txtArticulo.setText("");
+        txtCodigoArticulo.setText("");
+        txtNombreArticulo.setText("");
         txtPrecioCompra.setText("");
         txtPrecioVenta.setText("");
         txtStockInicial.setText("");
@@ -248,7 +252,7 @@ public class frmIngreso extends javax.swing.JInternalFrame {
         jPanel3 = new javax.swing.JPanel();
         txtStockInicial = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
-        txtArticulo = new javax.swing.JTextField();
+        txtCodigoArticulo = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         BtnBuscarArticulo = new javax.swing.JButton();
         txtPrecioVenta = new javax.swing.JTextField();
@@ -257,6 +261,9 @@ public class frmIngreso extends javax.swing.JInternalFrame {
         jLabel14 = new javax.swing.JLabel();
         btnAgregar = new javax.swing.JButton();
         btnQuitar = new javax.swing.JButton();
+        txtNombreArticulo = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         txtProveedor = new javax.swing.JTextField();
@@ -339,11 +346,15 @@ public class frmIngreso extends javax.swing.JInternalFrame {
         jLabel8.setForeground(new java.awt.Color(0, 51, 0));
         jLabel8.setText("Stock Inicial");
 
-        txtArticulo.setEditable(false);
+        txtCodigoArticulo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtCodigoArticuloKeyPressed(evt);
+            }
+        });
 
         jLabel4.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(0, 51, 0));
-        jLabel4.setText("Artículo");
+        jLabel4.setText("Codigo");
 
         BtnBuscarArticulo.setText("Buscar");
         BtnBuscarArticulo.addActionListener(new java.awt.event.ActionListener() {
@@ -376,30 +387,49 @@ public class frmIngreso extends javax.swing.JInternalFrame {
             }
         });
 
+        txtNombreArticulo.setEditable(false);
+
+        jLabel7.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(0, 51, 0));
+        jLabel7.setText("Nombre");
+
+        jLabel12.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        jLabel12.setForeground(new java.awt.Color(0, 51, 0));
+        jLabel12.setText("Artículo:");
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel8))
+                .addGap(10, 10, 10)
+                .addComponent(jLabel12)
                 .addGap(18, 18, 18)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(txtArticulo)
-                    .addComponent(txtStockInicial, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(BtnBuscarArticulo)
-                .addGap(36, 36, 36)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtCodigoArticulo, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(BtnBuscarArticulo))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel7)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtNombreArticulo)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel14)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel8)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtStockInicial, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel14))
                     .addComponent(jLabel13))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(txtPrecioCompra)
                     .addComponent(txtPrecioVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 320, Short.MAX_VALUE)
+                .addGap(69, 69, 69)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnAgregar, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(btnQuitar, javax.swing.GroupLayout.Alignment.TRAILING))
@@ -411,13 +441,8 @@ public class frmIngreso extends javax.swing.JInternalFrame {
                 .addGap(21, 21, 21)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(txtPrecioCompra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGap(4, 4, 4)
-                                .addComponent(btnAgregar)))
+                        .addGap(4, 4, 4)
+                        .addComponent(btnAgregar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -425,14 +450,22 @@ public class frmIngreso extends javax.swing.JInternalFrame {
                                 .addComponent(txtPrecioVenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(btnQuitar)))
                     .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtStockInicial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtCodigoArticulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(BtnBuscarArticulo)
+                                .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtArticulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(BtnBuscarArticulo))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtStockInicial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtNombreArticulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtPrecioCompra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(25, Short.MAX_VALUE))
         );
 
@@ -471,6 +504,8 @@ public class frmIngreso extends javax.swing.JInternalFrame {
         jLabel11.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(0, 51, 0));
         jLabel11.setText("Fecha");
+
+        dateChooserCombo1.setCalendarPreferredSize(new java.awt.Dimension(333, 200));
 
         jLabel15.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         jLabel15.setForeground(new java.awt.Color(0, 51, 0));
@@ -523,7 +558,7 @@ public class frmIngreso extends javax.swing.JInternalFrame {
                         .addComponent(btnAnular, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnImprimir, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 181, Short.MAX_VALUE)
                         .addComponent(jLabel15)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lblTotalPagado, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -616,6 +651,10 @@ public class frmIngreso extends javax.swing.JInternalFrame {
         jLabel16.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         jLabel16.setForeground(new java.awt.Color(204, 255, 204));
         jLabel16.setText("Fecha Fin:");
+
+        dateChooserCombo2.setCalendarPreferredSize(new java.awt.Dimension(300, 180));
+
+        dateChooserCombo3.setCalendarPreferredSize(new java.awt.Dimension(333, 200));
 
         btnSalir.setBackground(new java.awt.Color(255, 255, 255));
         btnSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Files/salir.gif"))); // NOI18N
@@ -753,78 +792,6 @@ public class frmIngreso extends javax.swing.JInternalFrame {
         btnNuevo.setEnabled(true);
     }//GEN-LAST:event_btnCancelarActionPerformed
 
-    private void txtStockInicialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtStockInicialActionPerformed
-        // TODO add your handling code here:
-        txtStockInicial.transferFocus();
-    }//GEN-LAST:event_txtStockInicialActionPerformed
-
-    private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
-        // TODO add your handling code here:
-        if(txtArticulo.getText().length() == 0){
-            JOptionPane.showConfirmDialog(rootPane, "Debes Seleccionar un Articulo");
-            BtnBuscarArticulo.requestFocus();
-            return;
-        }
-        if(txtPrecioCompra.getText().length() == 0){
-            JOptionPane.showConfirmDialog(rootPane, "Debes Especificar un Precio de Compra");
-            txtPrecioCompra.requestFocus();
-            return;
-        }
-        if(txtPrecioVenta.getText().length() == 0){
-            JOptionPane.showConfirmDialog(rootPane, "Debes Especificar un Precio de Venta");
-            txtPrecioVenta.requestFocus();
-            return;
-        }
-        if(txtStockInicial.getText().length() == 0){
-            JOptionPane.showConfirmDialog(rootPane, "Debes Especificar un Stock Inicial");
-            txtStockInicial.requestFocus();
-            return;
-        }
-        if(!PuedeAgregar(CodArticulo) && accion.equals("Guardar")){
-            JOptionPane.showConfirmDialog(rootPane, "Debes Selecciar un articulo no este ya agregado");
-            BtnBuscarArticulo.requestFocus();
-            return;
-        }
-        
-        vdetalle_ingreso DI = new vdetalle_ingreso();
-        
-        Registrar[0] = txtArticulo.getText();
-        DI.setId_articulo(CodArticulo);
-        Registrar[1] = txtPrecioCompra.getText();
-        DI.setPrecio_compra(Double.parseDouble(Registrar[1]));
-        Registrar[2] = txtPrecioVenta.getText();
-        DI.setPrecio_venta(Double.parseDouble(Registrar[2]));
-        Registrar[3] = txtStockInicial.getText();
-        DI.setStock_inicial(Integer.parseInt(Registrar[3]));
-        DI.setStock_actual(Integer.parseInt(Registrar[3]));
-        Registrar[4] = Registrar[3];
-        double a = DI.getPrecio_compra() * DI.getStock_inicial();
-        Registrar[5] = Double.toString(a);
-        
-        if(DI.getPrecio_venta() < DI.getPrecio_compra()){
-            JOptionPane.showConfirmDialog(rootPane, "Debes Especificar un Precio de venta mayor al de Compra");
-            txtPrecioVenta.requestFocus();
-            return;
-        }
-        
-        if(accion.equals("Guardar")){
-        Detalles.addRow(Registrar);
-        ListDetalles.add(DI);
-        }
-        else if (accion.equals("Editar")){
-            jTable1.setValueAt(Registrar[0], Row, 0);
-            jTable1.setValueAt(Registrar[1], Row, 1);
-            jTable1.setValueAt(Registrar[2], Row, 2);
-            jTable1.setValueAt(Registrar[3], Row, 3);
-            jTable1.setValueAt(Registrar[4], Row, 4);
-            jTable1.setValueAt(Registrar[5], Row, 5);
-            ListDetalles.set(Row, DI);
-        }
-        limpiardetalle();
-        ActualizarTotalPagado();
-        accion = "Guardar";
-    }//GEN-LAST:event_btnAgregarActionPerformed
-
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         // TODO add your handling code here:
         if(Detalles.getRowCount()<= 0)
@@ -833,7 +800,7 @@ public class frmIngreso extends javax.swing.JInternalFrame {
                 return;
         Row = jTable1.rowAtPoint(evt.getPoint());
         
-        txtArticulo.setText(jTable1.getValueAt(Row,0).toString());
+        txtNombreArticulo.setText(jTable1.getValueAt(Row,0).toString());
         txtPrecioCompra.setText(Double.toString(ListDetalles.get(Row).getPrecio_compra()));
         txtPrecioVenta.setText(Double.toString(ListDetalles.get(Row).getPrecio_venta()));
         txtStockInicial.setText(jTable1.getValueAt(Row,3).toString());
@@ -842,25 +809,6 @@ public class frmIngreso extends javax.swing.JInternalFrame {
         accion = "Editar";
         btnQuitar.setEnabled(true);
     }//GEN-LAST:event_jTable1MouseClicked
-
-    private void btnQuitarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuitarActionPerformed
-        // TODO add your handling code here:
-        if(accion.equals("Editar")){
-            Detalles.removeRow(Row);
-            limpiardetalle();
-            accion = "Guardar";
-            btnQuitar.setEnabled(false);
-            ListDetalles.remove(Row);
-        }
-    }//GEN-LAST:event_btnQuitarActionPerformed
-
-    private void BtnBuscarArticuloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBuscarArticuloActionPerformed
-        // TODO add your handling code here:
-        btnQuitar.setEnabled(false);
-        frmvistaarticulo frm = new frmvistaarticulo();
-        frm.toFront();
-        frm.setVisible(true);
-    }//GEN-LAST:event_BtnBuscarArticuloActionPerformed
 
     private void BtnBuscarProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBuscarProveedorActionPerformed
         // TODO add your handling code here:
@@ -947,6 +895,7 @@ public class frmIngreso extends javax.swing.JInternalFrame {
         inhabilitardetalle();
         ActualizarTotalPagado();
         mostrar();
+        btnNuevo.setEnabled(true);
         
         //reporte
         if(FI.Obteneridentity()==0)
@@ -1083,6 +1032,129 @@ public class frmIngreso extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_btnSalirActionPerformed
+
+    private void btnQuitarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuitarActionPerformed
+        // TODO add your handling code here:
+        if(accion.equals("Editar")){
+            Detalles.removeRow(Row);
+            limpiardetalle();
+            accion = "Guardar";
+            btnQuitar.setEnabled(false);
+            ListDetalles.remove(Row);
+        }
+    }//GEN-LAST:event_btnQuitarActionPerformed
+
+    private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
+        // TODO add your handling code here:
+        if(txtCodigoArticulo.getText().length() == 0){
+            JOptionPane.showConfirmDialog(rootPane, "Debes Seleccionar un Articulo");
+            BtnBuscarArticulo.requestFocus();
+            return;
+        }
+        if(txtPrecioCompra.getText().length() == 0){
+            JOptionPane.showConfirmDialog(rootPane, "Debes Especificar un Precio de Compra");
+            txtPrecioCompra.requestFocus();
+            return;
+        }
+        if(txtPrecioVenta.getText().length() == 0){
+            JOptionPane.showConfirmDialog(rootPane, "Debes Especificar un Precio de Venta");
+            txtPrecioVenta.requestFocus();
+            return;
+        }
+        if(txtStockInicial.getText().length() == 0){
+            JOptionPane.showConfirmDialog(rootPane, "Debes Especificar un Stock Inicial");
+            txtStockInicial.requestFocus();
+            return;
+        }
+        if(!PuedeAgregar(CodArticulo) && accion.equals("Guardar")){
+            JOptionPane.showConfirmDialog(rootPane, "Debes Selecciar un articulo no este ya agregado");
+            BtnBuscarArticulo.requestFocus();
+            return;
+        }
+
+        vdetalle_ingreso DI = new vdetalle_ingreso();
+
+        Registrar[0] = txtNombreArticulo.getText();
+        DI.setId_articulo(CodArticulo);
+        Registrar[1] = txtPrecioCompra.getText();
+        DI.setPrecio_compra(Double.parseDouble(Registrar[1]));
+        Registrar[2] = txtPrecioVenta.getText();
+        DI.setPrecio_venta(Double.parseDouble(Registrar[2]));
+        Registrar[3] = txtStockInicial.getText();
+        DI.setStock_inicial(Integer.parseInt(Registrar[3]));
+        DI.setStock_actual(Integer.parseInt(Registrar[3]));
+        Registrar[4] = Registrar[3];
+        double a = DI.getPrecio_compra() * DI.getStock_inicial();
+        Registrar[5] = Double.toString(a);
+
+        if(DI.getPrecio_venta() < DI.getPrecio_compra()){
+            JOptionPane.showConfirmDialog(rootPane, "Debes Especificar un Precio de venta mayor al de Compra");
+            txtPrecioVenta.requestFocus();
+            return;
+        }
+
+        if(accion.equals("Guardar")){
+            Detalles.addRow(Registrar);
+            ListDetalles.add(DI);
+        }
+        else if (accion.equals("Editar")){
+            jTable1.setValueAt(Registrar[0], Row, 0);
+            jTable1.setValueAt(Registrar[1], Row, 1);
+            jTable1.setValueAt(Registrar[2], Row, 2);
+            jTable1.setValueAt(Registrar[3], Row, 3);
+            jTable1.setValueAt(Registrar[4], Row, 4);
+            jTable1.setValueAt(Registrar[5], Row, 5);
+            ListDetalles.set(Row, DI);
+        }
+        limpiardetalle();
+        ActualizarTotalPagado();
+        accion = "Guardar";
+        txtCodigoArticulo.requestFocus();
+    }//GEN-LAST:event_btnAgregarActionPerformed
+
+    private void BtnBuscarArticuloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBuscarArticuloActionPerformed
+        // TODO add your handling code here:
+
+        try {
+
+            DefaultTableModel modelo;
+            fingreso func= new fingreso();
+
+            modelo=func.BuscarArticulo(txtCodigoArticulo.getText());
+
+            if(func.totalregistros>0)
+            {
+                txtNombreArticulo.setText(modelo.getValueAt(0, 1).toString());
+                btnQuitar.setEnabled(false);
+                CodArticulo = txtCodigoArticulo.getText();
+            }
+            else
+            {
+                if(txtCodigoArticulo.getText().equals(""))
+                {
+                    JOptionPane.showMessageDialog(rootPane,"Introduzca el Codigo","Acceso al Sistema", JOptionPane.INFORMATION_MESSAGE);
+                }
+                else{
+                    JOptionPane.showMessageDialog(rootPane,"No existe un articulo con este Codigo","Acceso al Sistema", JOptionPane.INFORMATION_MESSAGE);
+                }
+
+            }
+
+        } catch (Exception e) {
+        }
+    }//GEN-LAST:event_BtnBuscarArticuloActionPerformed
+
+    private void txtStockInicialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtStockInicialActionPerformed
+        // TODO add your handling code here:
+        txtStockInicial.transferFocus();
+    }//GEN-LAST:event_txtStockInicialActionPerformed
+
+    private void txtCodigoArticuloKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodigoArticuloKeyPressed
+        // TODO add your handling code here:
+        if(evt.getKeyCode()== KeyEvent.VK_ENTER){
+            BtnBuscarArticulo.doClick();
+        }
+    }//GEN-LAST:event_txtCodigoArticuloKeyPressed
     
     /**
      * @param args the command line arguments
@@ -1138,6 +1210,7 @@ public class frmIngreso extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
@@ -1145,6 +1218,7 @@ public class frmIngreso extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
@@ -1158,7 +1232,8 @@ public class frmIngreso extends javax.swing.JInternalFrame {
     private javax.swing.JLabel lblTotal;
     private javax.swing.JLabel lblTotalPagado;
     public static javax.swing.JTable tablalistado;
-    public static javax.swing.JTextField txtArticulo;
+    private javax.swing.JTextField txtCodigoArticulo;
+    private javax.swing.JTextField txtNombreArticulo;
     private javax.swing.JTextField txtPrecioCompra;
     private javax.swing.JTextField txtPrecioVenta;
     public static javax.swing.JTextField txtProveedor;

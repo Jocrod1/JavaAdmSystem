@@ -209,7 +209,7 @@ public class frmvistaarticulo extends javax.swing.JFrame {
             Nombre = tablalistado.getValueAt(fila, 1).toString();
             
             frmIngreso.CodArticulo = cod;
-            frmIngreso.txtArticulo.setText(Nombre);
+            //frmIngreso.txtCodigoArticulo.setText(Nombre);
             
             this.setVisible(false);
         }

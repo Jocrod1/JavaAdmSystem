@@ -175,7 +175,7 @@ public class frmArticulo extends javax.swing.JInternalFrame {
 
         jLabel10.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(204, 255, 204));
-        jLabel10.setText("Buscar por nombre:");
+        jLabel10.setText("Buscar por codigo:");
 
         btnBuscar.setBackground(new java.awt.Color(255, 255, 255));
         btnBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Files/buscar.png"))); // NOI18N
@@ -605,6 +605,7 @@ public class frmArticulo extends javax.swing.JInternalFrame {
             txtIdArticulo.setText(tablalistado.getValueAt(0,0).toString());
             txtNombreArticulo.setText(tablalistado.getValueAt(0,1).toString());
             txtDescripcionArticulo.setText(tablalistado.getValueAt(0,2).toString());
+            txtBuscarTrabajador.setText("");
         }
        
         
