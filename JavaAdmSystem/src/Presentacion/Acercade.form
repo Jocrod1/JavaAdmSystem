@@ -86,7 +86,7 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Acerca de New Leaf, c.a"/>
+            <Property name="text" type="java.lang.String" value="Acerca de Green Leaf, C.A."/>
           </Properties>
         </Component>
         <Container class="javax.swing.JScrollPane" name="jScrollPane1">
@@ -109,7 +109,7 @@
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
                 </Property>
                 <Property name="rows" type="int" value="5"/>
-                <Property name="text" type="java.lang.String" value="Green Leaf busca brindar con profesionalismo y calidad, la orientaci&#xf3;n, &#xa;los bienes y los servicios en el &#xe1;rea de la salud, necesarios para una vida&#xa;saludable y natural de manera integral, creando un v&#xed;nculo permanente&#xa;con sus clientes. La finalidad de Green Leaf es generar en el consumidor&#xa;un bienestar en todas la molestias que lo aquejan todo esto basados en &#xa;su m&#xe9;todo homeop&#xe1;tico.&#xa;&#xa;Programadores:&#xa;&#xa;Jos&#xe9; Pereira&#xa;C.I.: 26.866.008&#xa;&#xa;Raimon Koudsi&#xa;C.I.: 26.038.078&#xa;&#xa;Mirla Monta&#xf1;o&#xa;C.I: 27.289.678&#xa;"/>
+                <Property name="text" type="java.lang.String" value="Green Leaf C.A. busca brindar con profesionalismo y calidad, la orientaci&#xf3;n, &#xa;los bienes y los servicios en el &#xe1;rea de la salud, necesarios para una vida&#xa;saludable y natural de manera integral, creando un v&#xed;nculo permanente&#xa;con sus clientes. La finalidad de Green Leaf es generar en el consumidor&#xa;un bienestar en todas la molestias que lo aquejan todo esto basados en &#xa;su m&#xe9;todo homeop&#xe1;tico.&#xa;&#xa;Programadores:&#xa;&#xa;Jos&#xe9; Pereira&#xa;C.I.: 26.866.008&#xa;&#xa;Raimon Koudsi&#xa;C.I.: 26.038.078&#xa;&#xa;Mirla Monta&#xf1;o&#xa;C.I: 27.289.678&#xa;"/>
                 <Property name="enabled" type="boolean" value="false"/>
                 <Property name="focusable" type="boolean" value="false"/>
               </Properties>

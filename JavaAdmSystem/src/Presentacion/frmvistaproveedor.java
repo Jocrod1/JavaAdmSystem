@@ -183,6 +183,7 @@ public class frmvistaproveedor extends javax.swing.JFrame {
 
             frmIngreso.idProveedor = ID;
             frmIngreso.txtProveedor.setText(Nombre);
+            frmIngreso.txtCodigoArticulo.requestFocus();
 
             this.setVisible(false);
         }

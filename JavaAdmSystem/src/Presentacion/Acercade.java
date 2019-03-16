@@ -43,14 +43,14 @@ public class Acercade extends javax.swing.JInternalFrame {
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Acerca de New Leaf, c.a");
+        jLabel1.setText("Acerca de Green Leaf, C.A.");
 
         jTextArea1.setBackground(new java.awt.Color(0, 102, 0));
         jTextArea1.setColumns(20);
         jTextArea1.setFont(new java.awt.Font("Century", 1, 12)); // NOI18N
         jTextArea1.setForeground(new java.awt.Color(255, 255, 255));
         jTextArea1.setRows(5);
-        jTextArea1.setText("Green Leaf busca brindar con profesionalismo y calidad, la orientación, \nlos bienes y los servicios en el área de la salud, necesarios para una vida\nsaludable y natural de manera integral, creando un vínculo permanente\ncon sus clientes. La finalidad de Green Leaf es generar en el consumidor\nun bienestar en todas la molestias que lo aquejan todo esto basados en \nsu método homeopático.\n\nProgramadores:\n\nJosé Pereira\nC.I.: 26.866.008\n\nRaimon Koudsi\nC.I.: 26.038.078\n\nMirla Montaño\nC.I: 27.289.678\n");
+        jTextArea1.setText("Green Leaf C.A. busca brindar con profesionalismo y calidad, la orientación, \nlos bienes y los servicios en el área de la salud, necesarios para una vida\nsaludable y natural de manera integral, creando un vínculo permanente\ncon sus clientes. La finalidad de Green Leaf es generar en el consumidor\nun bienestar en todas la molestias que lo aquejan todo esto basados en \nsu método homeopático.\n\nProgramadores:\n\nJosé Pereira\nC.I.: 26.866.008\n\nRaimon Koudsi\nC.I.: 26.038.078\n\nMirla Montaño\nC.I: 27.289.678\n");
         jTextArea1.setEnabled(false);
         jTextArea1.setFocusable(false);
         jScrollPane1.setViewportView(jTextArea1);

@@ -145,7 +145,8 @@ public class frmIngreso extends javax.swing.JInternalFrame {
                     TotalPagado += Double.parseDouble(jTable1.getValueAt(i,5).toString());
             }
         }
-        lblTotalPagado.setText(Double.toString(TotalPagado) + "BsS");
+        TotalPagado = Math.floor(TotalPagado * 100) / 100;
+        lblTotalPagado.setText(Double.toString(TotalPagado) + "Bs");
     }
     void limpiartabladetalles(){
         if(Detalles.getRowCount()> 0){
@@ -288,10 +289,7 @@ public class frmIngreso extends javax.swing.JInternalFrame {
         dateChooserCombo3 = new datechooser.beans.DateChooserCombo();
         btnSalir = new javax.swing.JButton();
 
-        setClosable(true);
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setIconifiable(true);
-        setMaximizable(true);
 
         jPanel2.setBackground(new java.awt.Color(204, 255, 204));
 
@@ -336,6 +334,7 @@ public class frmIngreso extends javax.swing.JInternalFrame {
 
         jPanel3.setBackground(new java.awt.Color(204, 255, 153));
 
+        txtStockInicial.setNextFocusableComponent(txtPrecioCompra);
         txtStockInicial.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtStockInicialActionPerformed(evt);
@@ -346,6 +345,7 @@ public class frmIngreso extends javax.swing.JInternalFrame {
         jLabel8.setForeground(new java.awt.Color(0, 51, 0));
         jLabel8.setText("Stock Inicial");
 
+        txtCodigoArticulo.setNextFocusableComponent(txtStockInicial);
         txtCodigoArticulo.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtCodigoArticuloKeyPressed(evt);
@@ -363,9 +363,17 @@ public class frmIngreso extends javax.swing.JInternalFrame {
             }
         });
 
+        txtPrecioVenta.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtPrecioVentaKeyPressed(evt);
+            }
+        });
+
         jLabel13.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(0, 51, 0));
         jLabel13.setText("Precio Venta");
+
+        txtPrecioCompra.setNextFocusableComponent(txtPrecioVenta);
 
         jLabel14.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         jLabel14.setForeground(new java.awt.Color(0, 51, 0));
@@ -558,10 +566,11 @@ public class frmIngreso extends javax.swing.JInternalFrame {
                         .addComponent(btnAnular, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnImprimir, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 181, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel15)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblTotalPagado, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(lblTotalPagado, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addGap(105, 105, 105))
@@ -587,13 +596,15 @@ public class frmIngreso extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnImprimir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnAnular, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(btnImprimir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnAnular, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnGuardar)
+                            .addComponent(btnCancelar)
+                            .addComponent(btnNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btnGuardar)
-                        .addComponent(btnCancelar)
-                        .addComponent(btnNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(lblTotalPagado, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -652,7 +663,7 @@ public class frmIngreso extends javax.swing.JInternalFrame {
         jLabel16.setForeground(new java.awt.Color(204, 255, 204));
         jLabel16.setText("Fecha Fin:");
 
-        dateChooserCombo2.setCalendarPreferredSize(new java.awt.Dimension(300, 180));
+        dateChooserCombo2.setCalendarPreferredSize(new java.awt.Dimension(333, 200));
 
         dateChooserCombo3.setCalendarPreferredSize(new java.awt.Dimension(333, 200));
 
@@ -816,8 +827,6 @@ public class frmIngreso extends javax.swing.JInternalFrame {
         frmvistaproveedor frm = new frmvistaproveedor();
         frm.toFront();
         frm.setVisible(true);
-        
-        
         
     }//GEN-LAST:event_BtnBuscarProveedorActionPerformed
 
@@ -1155,6 +1164,13 @@ public class frmIngreso extends javax.swing.JInternalFrame {
             BtnBuscarArticulo.doClick();
         }
     }//GEN-LAST:event_txtCodigoArticuloKeyPressed
+
+    private void txtPrecioVentaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPrecioVentaKeyPressed
+        // TODO add your handling code here:
+        if(evt.getKeyCode()== KeyEvent.VK_ENTER){
+            btnAgregar.doClick();
+        }
+    }//GEN-LAST:event_txtPrecioVentaKeyPressed
     
     /**
      * @param args the command line arguments
@@ -1232,8 +1248,8 @@ public class frmIngreso extends javax.swing.JInternalFrame {
     private javax.swing.JLabel lblTotal;
     private javax.swing.JLabel lblTotalPagado;
     public static javax.swing.JTable tablalistado;
-    private javax.swing.JTextField txtCodigoArticulo;
-    private javax.swing.JTextField txtNombreArticulo;
+    public static javax.swing.JTextField txtCodigoArticulo;
+    public static javax.swing.JTextField txtNombreArticulo;
     private javax.swing.JTextField txtPrecioCompra;
     private javax.swing.JTextField txtPrecioVenta;
     public static javax.swing.JTextField txtProveedor;
