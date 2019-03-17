@@ -169,6 +169,7 @@ public class frmTrabajador extends javax.swing.JInternalFrame {
         cbPreguntaSeguridad = new javax.swing.JComboBox<>();
         jLabel15 = new javax.swing.JLabel();
         txtRespuesta = new javax.swing.JTextField();
+        cbCi = new javax.swing.JComboBox<>();
         jPanel1 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -182,6 +183,7 @@ public class frmTrabajador extends javax.swing.JInternalFrame {
         lblTotal = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tablarepetida = new javax.swing.JTable();
+        cbCiTipo = new javax.swing.JComboBox<>();
 
         setClosable(true);
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -332,6 +334,8 @@ public class frmTrabajador extends javax.swing.JInternalFrame {
             }
         });
 
+        cbCi.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "V-", "E-" }));
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -357,7 +361,10 @@ public class frmTrabajador extends javax.swing.JInternalFrame {
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(txtNombreTrabajador, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 280, Short.MAX_VALUE)
                             .addComponent(txtDireccionTrabajador)
-                            .addComponent(txtCedulaTrabajador)))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(cbCi, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtCedulaTrabajador, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -416,7 +423,8 @@ public class frmTrabajador extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtCedulaTrabajador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtCedulaTrabajador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbCi, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -545,6 +553,8 @@ public class frmTrabajador extends javax.swing.JInternalFrame {
         ));
         jScrollPane2.setViewportView(tablarepetida);
 
+        cbCiTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "V-", "E-" }));
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -559,14 +569,16 @@ public class frmTrabajador extends javax.swing.JInternalFrame {
                 .addGap(23, 23, 23)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel9)
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel10)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(txtBuscarTrabajador, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(5, 5, 5)
+                                .addComponent(cbCiTipo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtBuscarTrabajador, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btnBuscar)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -578,7 +590,7 @@ public class frmTrabajador extends javax.swing.JInternalFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 702, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                        .addGap(0, 46, Short.MAX_VALUE))))
         );
 
         jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnBuscar, btnEliminar, btnSalir});
@@ -596,7 +608,8 @@ public class frmTrabajador extends javax.swing.JInternalFrame {
                     .addComponent(txtBuscarTrabajador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnBuscar)
                     .addComponent(btnEliminar)
-                    .addComponent(btnSalir))
+                    .addComponent(btnSalir)
+                    .addComponent(cbCiTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(33, 33, 33)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -770,8 +783,10 @@ public class frmTrabajador extends javax.swing.JInternalFrame {
             
             
             
+            String TipoCi = cbCi.getSelectedItem().toString();
+            String NumCi = txtCedulaTrabajador.getText();
             
-            dts.setId_trabajador(txtCedulaTrabajador.getText());
+            dts.setId_trabajador(TipoCi+NumCi);
             
             modelo=func.usuariorepetido(dts.getId_trabajador());
             
@@ -803,7 +818,10 @@ public class frmTrabajador extends javax.swing.JInternalFrame {
         vtrabajador dts = new vtrabajador();
         ftrabajador func = new ftrabajador();
         
-        dts.setId_trabajador(txtCedulaTrabajador.getText());
+        String TipoCi = cbCi.getSelectedItem().toString();
+        String NumCi = txtCedulaTrabajador.getText();
+        
+        dts.setId_trabajador(TipoCi+NumCi);
         dts.setNombre(txtNombreTrabajador.getText());
         dts.setDireccion(txtDireccionTrabajador.getText());
         dts.setTelefono(txtTelefonoTrabajador.getText());
@@ -831,10 +849,9 @@ public class frmTrabajador extends javax.swing.JInternalFrame {
                 inhabilitar();
             }
         }else if(accion.equals("Editar")){
-            dts.setId_trabajador(txtCedulaTrabajador.getText());
             
+            dts.setId_trabajador(cbCi.getSelectedItem()+txtCedulaTrabajador.getText());
             
-        
             if (func.editar(dts)) {
                 JOptionPane.showMessageDialog(rootPane, "El trabajador fue editado exitosamente");
                 mostrar("");
@@ -850,6 +867,12 @@ public class frmTrabajador extends javax.swing.JInternalFrame {
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
 
+        
+        String TipoCi = cbCi.getSelectedItem().toString();
+        String NumCi = txtCedulaTrabajador.getText();
+        
+        String Cedula = TipoCi+NumCi;
+        
         if (!txtCedulaTrabajador.getText().equals("")) {
             int confirmacion = JOptionPane.showConfirmDialog(rootPane,"Estas seguro de eliminar este trabajador?");
             
@@ -857,7 +880,7 @@ public class frmTrabajador extends javax.swing.JInternalFrame {
                 ftrabajador func = new ftrabajador();
                 vtrabajador dts = new vtrabajador();
                 
-                dts.setId_trabajador(txtCedulaTrabajador.getText());
+                dts.setId_trabajador(Cedula);
                 func.eliminar(dts); //se envian los datos para la elimacion, osea solo la id
                 mostrar(""); //se envia una cadena en blanco para que se muestren todos
                 limpiar();
@@ -874,13 +897,16 @@ public class frmTrabajador extends javax.swing.JInternalFrame {
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
 
-        mostrar(txtBuscarTrabajador.getText());
+        String TipoCi = cbCiTipo.getSelectedItem().toString();
+        String NumCi = txtBuscarTrabajador.getText();
         
+        
+        mostrar(TipoCi+NumCi);
+
         if (lblTotal.getText().equals("0")){
-            
+
             JOptionPane.showMessageDialog(rootPane, "No hay registros que coincidan con ese número de cedula");
         }
-        
         
         
         
@@ -936,7 +962,29 @@ public class frmTrabajador extends javax.swing.JInternalFrame {
         
         int fila = tablalistado.rowAtPoint(evt.getPoint());
         
-        txtCedulaTrabajador.setText(tablalistado.getValueAt(fila,0).toString());
+
+        String NumCi = tablalistado.getValueAt(fila,0).toString();
+        
+
+        
+        txtCedulaTrabajador.setText(NumCi.substring(2)); //se le pone el substring para eliminar el V- o el E- de la ci
+
+        txtCedulaTrabajador.setEnabled(false);
+        cbCi.setEnabled(false);
+
+        String firstLetter  = "";
+        
+        firstLetter = String.valueOf(NumCi.charAt(0)); //evalua la primera letra de la ci
+        
+        if (firstLetter.equals("E")){ //para ver si comienza con E o con V
+        
+            cbCi.setSelectedItem("E-");
+        }
+        if (firstLetter.equals("V")){ //para ver si comienza con V
+        
+            cbCi.setSelectedItem("V-");
+        }        
+        
         
         txtCedulaTrabajador.setEnabled(false);
         
@@ -1027,6 +1075,8 @@ public class frmTrabajador extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnNuevo;
     private javax.swing.JButton btnSalir;
     private javax.swing.JComboBox<String> cbAcceso;
+    private javax.swing.JComboBox<String> cbCi;
+    private javax.swing.JComboBox<String> cbCiTipo;
     private javax.swing.JComboBox<String> cbPreguntaSeguridad;
     private javax.swing.JComboBox<String> cbSexo;
     private javax.swing.JLabel jLabel1;

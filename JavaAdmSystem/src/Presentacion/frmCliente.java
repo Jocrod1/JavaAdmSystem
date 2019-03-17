@@ -729,6 +729,8 @@ public class frmCliente extends javax.swing.JInternalFrame {
 
         txtCedulaCliente.setEnabled(false);
 
+        cbCi.setEnabled(false);
+        
         String firstLetter  = "";
         
         firstLetter = String.valueOf(NumCi.charAt(0)); //evalua la primera letra de la ci
@@ -770,6 +772,11 @@ public class frmCliente extends javax.swing.JInternalFrame {
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
 
+        String TipoCi = cbCi.getSelectedItem().toString();
+        String NumCi = txtCedulaCliente.getText();
+        
+        String Cedula = TipoCi+NumCi;
+        
         if (!txtCedulaCliente.getText().equals("")) {
             int confirmacion = JOptionPane.showConfirmDialog(rootPane,"Estas seguro de eliminar este cliente?");
 
@@ -777,7 +784,7 @@ public class frmCliente extends javax.swing.JInternalFrame {
                 fcliente func = new fcliente();
                 vcliente dts = new vcliente();
 
-                dts.setId_cliente(txtCedulaCliente.getText());
+                dts.setId_cliente(Cedula);
                 func.eliminar(dts); //se envian los datos para la elimacion, osea solo la id
                 mostrar(""); //se envia una cadena en blanco para que se muestren todos
                 limpiar();

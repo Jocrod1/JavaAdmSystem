@@ -20,6 +20,7 @@ public class frmvistaarticulo extends javax.swing.JFrame {
     public frmvistaarticulo() {
         initComponents();
         mostrar("");
+        this.setLocationRelativeTo(null);
         
     }
 
@@ -45,6 +46,7 @@ public class frmvistaarticulo extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setFocusableWindowState(false);
+        setUndecorated(true);
 
         jPanel1.setBackground(new java.awt.Color(0, 102, 0));
         jPanel1.setForeground(new java.awt.Color(204, 255, 204));
