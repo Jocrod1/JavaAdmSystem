@@ -10,6 +10,7 @@ import java.io.File;
 import java.sql.Connection;
 import java.util.HashMap;
 import java.util.Map;
+import javax.swing.JOptionPane;
 import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
@@ -487,16 +488,13 @@ public class frmInicio extends javax.swing.JFrame {
 
     private void mnuSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuSalirActionPerformed
         // TODO add your handling code here:
-        
-        
-        
-        
-        
-        
-        frmlogin form = new frmlogin();
-        form.setVisible(true);
-        this.dispose();
-
+        int confirmacion = JOptionPane.showConfirmDialog(rootPane,"¿Estás Seguro de que Quieres Cerrar Sesión?");
+            
+        if (confirmacion==0) {  //significa que SI desea que se elimine
+            frmlogin form = new frmlogin();
+            form.setVisible(true);
+            this.dispose();
+        }
     }//GEN-LAST:event_mnuSalirActionPerformed
 
     

@@ -1250,29 +1250,32 @@ public class frmVenta extends javax.swing.JInternalFrame {
     private void btnAnularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnularActionPerformed
         // TODO add your handling code here:
         if(accion.equals("Anular")){
-            fventa FI =  new fventa();
-            vventa VI = new vventa();
+            int confirmacion = JOptionPane.showConfirmDialog(rootPane,"¿Estás seguro de que Quieres Anular Esta Venta?");
+            
+            if (confirmacion==0) {  //significa que SI desea que se elimine
+                fventa FI =  new fventa();
+                vventa VI = new vventa();
 
-            VI.setId_venta(idventa);
+                VI.setId_venta(idventa);
 
-            FI.Anular(VI);
+                FI.Anular(VI);
 
-            limpiar();
-            limpiardetalle();
-            inhabilitar();
-            inhabilitardetalle();
-            limpiartabladetalles();
-            ActualizarTotalPagado();
-            ListDetalles.clear();
-            limpiartabladetalles();
-            jTable1.setModel(Detalles);
-            accion="";
-            btnNuevo.setEnabled(true);
+                limpiar();
+                limpiardetalle();
+                inhabilitar();
+                inhabilitardetalle();
+                limpiartabladetalles();
+                ActualizarTotalPagado();
+                ListDetalles.clear();
+                limpiartabladetalles();
+                jTable1.setModel(Detalles);
+                accion="";
+                btnNuevo.setEnabled(true);
 
-            mostrar();
-            btnAnular.setEnabled(false);
-            btnImprimir.setEnabled(false);
-
+                mostrar();
+                btnAnular.setEnabled(false);
+                btnImprimir.setEnabled(false);
+            }
         }
 
     }//GEN-LAST:event_btnAnularActionPerformed

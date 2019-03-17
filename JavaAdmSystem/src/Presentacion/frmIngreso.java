@@ -956,29 +956,32 @@ public class frmIngreso extends javax.swing.JInternalFrame {
     private void btnAnularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnularActionPerformed
         // TODO add your handling code here:
         if(accion.equals("Anular")){
-            fingreso FI =  new fingreso();
-            vingreso VI = new vingreso();
+            int confirmacion = JOptionPane.showConfirmDialog(rootPane,"¿Estás Seguro de Anular este Ingreso?");
             
-            VI.setId_ingreso(idingreso);
+            if (confirmacion==0) {  //significa que SI desea que se elimine
+                fingreso FI =  new fingreso();
+                vingreso VI = new vingreso();
+                
+                VI.setId_ingreso(idingreso);
             
-            FI.Anular(VI);
+                FI.Anular(VI);
             
-            limpiar();
-            limpiardetalle();
-            inhabilitar();
-            inhabilitardetalle();
-            limpiartabladetalles();
-            ActualizarTotalPagado();
-            ListDetalles.clear();
-            limpiartabladetalles();
-            jTable1.setModel(Detalles);
-            accion="";
-            btnNuevo.setEnabled(true);
+                limpiar();
+                limpiardetalle();
+                inhabilitar();
+                inhabilitardetalle();
+                limpiartabladetalles();
+                ActualizarTotalPagado();
+                ListDetalles.clear();
+                limpiartabladetalles();
+                jTable1.setModel(Detalles);
+                accion="";
+                btnNuevo.setEnabled(true);
             
-            mostrar();
-            btnAnular.setEnabled(false);
-            btnImprimir.setEnabled(false);
-
+                mostrar();
+                btnAnular.setEnabled(false);
+                btnImprimir.setEnabled(false);
+            }
         }
         
     }//GEN-LAST:event_btnAnularActionPerformed
@@ -1071,7 +1074,7 @@ public class frmIngreso extends javax.swing.JInternalFrame {
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         // TODO add your handling code here:
-        if(txtCodigoArticulo.getText().length() == 0){
+        if(CodArticulo.length() == 0){
             JOptionPane.showConfirmDialog(rootPane, "Debes Seleccionar un Articulo");
             BtnBuscarArticulo.requestFocus();
             return;
