@@ -49,6 +49,7 @@ public class frmCliente extends javax.swing.JInternalFrame {
     
     
     void inhabilitar (){
+        cbCi.setEnabled(false);
         txtCedulaCliente.setEnabled(false);
         txtNombreCliente.setEnabled(false);
         txtDireccionCliente.setEnabled(false);
@@ -64,6 +65,7 @@ public class frmCliente extends javax.swing.JInternalFrame {
     
     
     void habilitar (){
+        cbCi.setEnabled(true);
         txtCedulaCliente.setEnabled(true);
         txtNombreCliente.setEnabled(true);
         txtDireccionCliente.setEnabled(true);
@@ -77,7 +79,7 @@ public class frmCliente extends javax.swing.JInternalFrame {
     }    
     
         void limpiar(){
-            
+            cbCi.setSelectedIndex(0);
             txtCedulaCliente.setText("");
             txtNombreCliente.setText("");
             txtDireccionCliente.setText("");
@@ -139,6 +141,7 @@ public class frmCliente extends javax.swing.JInternalFrame {
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         cbSexo = new javax.swing.JComboBox<>();
+        cbCi = new javax.swing.JComboBox<>();
         jPanel1 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -152,6 +155,8 @@ public class frmCliente extends javax.swing.JInternalFrame {
         lblTotal = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tablarepetida = new javax.swing.JTable();
+        cbCiTipo = new javax.swing.JComboBox<>();
+        btnTodos = new javax.swing.JButton();
 
         setClosable(true);
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -253,6 +258,8 @@ public class frmCliente extends javax.swing.JInternalFrame {
             }
         });
 
+        cbCi.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "V-", "E-" }));
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -265,17 +272,17 @@ public class frmCliente extends javax.swing.JInternalFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(60, 60, 60)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel4))
+                                    .addComponent(jLabel4)
+                                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel2)
+                                        .addComponent(jLabel3)))
+                                .addGap(2, 2, 2)
+                                .addComponent(cbCi, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(txtNombreCliente, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtCedulaCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtDireccionCliente, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 283, Short.MAX_VALUE)))
+                                .addComponent(txtCedulaCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addGroup(jPanel2Layout.createSequentialGroup()
                                     .addComponent(jLabel11)
@@ -291,7 +298,9 @@ public class frmCliente extends javax.swing.JInternalFrame {
                                             .addGap(17, 17, 17)))
                                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(txtCorreoCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(txtTelefonoCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                        .addComponent(txtTelefonoCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(txtDireccionCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(txtNombreCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(54, 54, 54)
                         .addComponent(btnNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -309,9 +318,11 @@ public class frmCliente extends javax.swing.JInternalFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel5)
-                .addGap(29, 29, 29)
+                .addGap(25, 25, 25)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cbCi, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(txtCedulaCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
@@ -420,6 +431,16 @@ public class frmCliente extends javax.swing.JInternalFrame {
         ));
         jScrollPane2.setViewportView(tablarepetida);
 
+        cbCiTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "V-", "E-" }));
+
+        btnTodos.setBackground(new java.awt.Color(255, 255, 255));
+        btnTodos.setText("Mostrar todos los registros");
+        btnTodos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTodosActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -428,7 +449,7 @@ public class frmCliente extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGap(0, 492, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
@@ -436,19 +457,26 @@ public class frmCliente extends javax.swing.JInternalFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(lblTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jScrollPane1)
                         .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addComponent(jLabel10)
-                            .addGap(17, 17, 17)
-                            .addComponent(txtBuscarClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addComponent(jLabel10)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(cbCiTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(txtBuscarClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jLabel9))
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(btnBuscar)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(btnEliminar)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(jLabel9)
-                        .addComponent(jScrollPane1)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addComponent(btnBuscar)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(btnEliminar)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(btnTodos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -456,14 +484,17 @@ public class frmCliente extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel9)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel9)
+                    .addComponent(btnTodos))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtBuscarClientes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnBuscar)
                     .addComponent(btnEliminar)
-                    .addComponent(btnSalir))
+                    .addComponent(btnSalir)
+                    .addComponent(cbCiTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -484,7 +515,7 @@ public class frmCliente extends javax.swing.JInternalFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 394, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
@@ -548,7 +579,7 @@ public class frmCliente extends javax.swing.JInternalFrame {
 
         if(txtNombreCliente.getText().length() == 0){
 
-            JOptionPane.showMessageDialog(rootPane, "Debes ingresar el nombre del trabajador");
+            JOptionPane.showMessageDialog(rootPane, "Debes ingresar el nombre del cliente");
             txtNombreCliente.requestFocus();
             return;
         }
@@ -556,7 +587,7 @@ public class frmCliente extends javax.swing.JInternalFrame {
 
         if(txtDireccionCliente.getText().length() == 0){
 
-            JOptionPane.showMessageDialog(rootPane, "Debes ingresar la direccion del trabajador");
+            JOptionPane.showMessageDialog(rootPane, "Debes ingresar la direccion del cliente");
             txtDireccionCliente.requestFocus();
             return;
         }
@@ -596,8 +627,10 @@ public class frmCliente extends javax.swing.JInternalFrame {
                 DefaultTableModel modelo;
                 fcliente func= new fcliente();
                 vcliente dts= new vcliente();
-
-                dts.setId_cliente(txtCedulaCliente.getText());
+                
+                String TipoCi = cbCi.getSelectedItem().toString();
+                String NumCi = txtCedulaCliente.getText();
+                dts.setId_cliente(TipoCi+NumCi);
 
                 modelo=func.usuariorepetido(dts.getId_cliente());
 
@@ -620,8 +653,11 @@ public class frmCliente extends javax.swing.JInternalFrame {
 
         vcliente dts = new vcliente();
         fcliente func = new fcliente();
-
-        dts.setId_cliente(txtCedulaCliente.getText());
+        
+        String TipoCi = cbCi.getSelectedItem().toString();
+        String NumCi = txtCedulaCliente.getText();
+        
+        dts.setId_cliente(TipoCi+NumCi);
         dts.setNombre(txtNombreCliente.getText());
         dts.setDireccion(txtDireccionCliente.getText());
         dts.setTelefono(txtTelefonoCliente.getText());
@@ -638,10 +674,10 @@ public class frmCliente extends javax.swing.JInternalFrame {
                 inhabilitar();
             }
         }else if(accion.equals("Editar")){
-            dts.setId_cliente(txtCedulaCliente.getText());
+            dts.setId_cliente(cbCi.getSelectedItem()+txtCedulaCliente.getText());
 
             if (func.editar(dts)) {
-                JOptionPane.showMessageDialog(rootPane, "El trabajador fue editado exitosamente");
+                JOptionPane.showMessageDialog(rootPane, "El cliente fue editado exitosamente");
                 mostrar("");
                 limpiar();
                 inhabilitar();
@@ -685,10 +721,29 @@ public class frmCliente extends javax.swing.JInternalFrame {
 
         int fila = tablalistado.rowAtPoint(evt.getPoint());
 
-        txtCedulaCliente.setText(tablalistado.getValueAt(fila,0).toString());
+        String NumCi = tablalistado.getValueAt(fila,0).toString();
+        
+
+        
+        txtCedulaCliente.setText(NumCi.substring(2)); //se le pone el substring para eliminar el V- o el E- de la ci
 
         txtCedulaCliente.setEnabled(false);
 
+        cbCi.setEnabled(false);
+        
+        String firstLetter  = "";
+        
+        firstLetter = String.valueOf(NumCi.charAt(0)); //evalua la primera letra de la ci
+        
+        if (firstLetter.equals("E")){ //para ver si comienza con E o con V
+        
+            cbCi.setSelectedItem("E-");
+        }
+        if (firstLetter.equals("V")){ //para ver si comienza con V
+        
+            cbCi.setSelectedItem("V-");
+        }
+        
         //vuelve la confirmacion falsa
 
         txtNombreCliente.setText(tablalistado.getValueAt(fila,1).toString());
@@ -696,12 +751,17 @@ public class frmCliente extends javax.swing.JInternalFrame {
         txtTelefonoCliente.setText(tablalistado.getValueAt(fila,3).toString());
         txtCorreoCliente.setText(tablalistado.getValueAt(fila,4).toString());
         cbSexo.setSelectedItem(tablalistado.getValueAt(fila,5).toString());
-
+        
     }//GEN-LAST:event_tablalistadoMouseClicked
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
 
-        mostrar(txtBuscarClientes.getText());
+        
+        String TipoCi = cbCiTipo.getSelectedItem().toString();
+        String NumCi = txtBuscarClientes.getText();
+        
+        
+        mostrar(TipoCi+NumCi);
 
         if (lblTotal.getText().equals("0")){
 
@@ -712,14 +772,19 @@ public class frmCliente extends javax.swing.JInternalFrame {
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
 
+        String TipoCi = cbCi.getSelectedItem().toString();
+        String NumCi = txtCedulaCliente.getText();
+        
+        String Cedula = TipoCi+NumCi;
+        
         if (!txtCedulaCliente.getText().equals("")) {
-            int confirmacion = JOptionPane.showConfirmDialog(rootPane,"Estas seguro de eliminar este trabajador?");
+            int confirmacion = JOptionPane.showConfirmDialog(rootPane,"Estas seguro de eliminar este cliente?");
 
             if (confirmacion==0) {  //significa que SI desea que se elimine
                 fcliente func = new fcliente();
                 vcliente dts = new vcliente();
 
-                dts.setId_cliente(txtCedulaCliente.getText());
+                dts.setId_cliente(Cedula);
                 func.eliminar(dts); //se envian los datos para la elimacion, osea solo la id
                 mostrar(""); //se envia una cadena en blanco para que se muestren todos
                 limpiar();
@@ -735,6 +800,13 @@ public class frmCliente extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_btnSalirActionPerformed
+
+    private void btnTodosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTodosActionPerformed
+        // TODO add your handling code here:
+        
+        mostrar(txtBuscarClientes.getText());
+        
+    }//GEN-LAST:event_btnTodosActionPerformed
 
     
     //conexion del reporte
@@ -784,6 +856,9 @@ public class frmCliente extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnNuevo;
     private javax.swing.JButton btnSalir;
+    private javax.swing.JButton btnTodos;
+    private javax.swing.JComboBox<String> cbCi;
+    private javax.swing.JComboBox<String> cbCiTipo;
     private javax.swing.JComboBox<String> cbSexo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;

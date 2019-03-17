@@ -145,11 +145,11 @@ public class fproveedor {
         //esta funcion busca el id del proveedor para luego eliminar el registro
         public boolean eliminar (vproveedor dts)
         {
-            sSQL="delete from proveedor where id_proveedor=?";
+            sSQL="delete from proveedor where cedula=?";
             try {
                 //se busca un unico dato y de ahi lo facilita para eliminarlo por completo
                 PreparedStatement pst=cn.prepareStatement(sSQL);
-                pst.setInt(1, dts.getId_proveedor());
+                pst.setString(1, dts.getCedula());
 
                 int n=pst.executeUpdate();
                 //si ejecuta el update devuelve true la funcion, si no da error
