@@ -50,7 +50,7 @@ public class frmComprobanteIngreso extends javax.swing.JInternalFrame {
         btnbuscar = new javax.swing.JButton();
         btnsalir = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(204, 255, 204));
 
@@ -73,6 +73,11 @@ public class frmComprobanteIngreso extends javax.swing.JInternalFrame {
         });
 
         btnsalir.setText("Salir");
+        btnsalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnsalirActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -183,6 +188,11 @@ public class frmComprobanteIngreso extends javax.swing.JInternalFrame {
         }
         
     }//GEN-LAST:event_btnbuscarActionPerformed
+
+    private void btnsalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsalirActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_btnsalirActionPerformed
 
     /**
      * @param args the command line arguments

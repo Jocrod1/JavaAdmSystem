@@ -67,6 +67,9 @@ public class frmInicio extends javax.swing.JFrame {
         jMenuReporteTrabajador = new javax.swing.JMenuItem();
         jMenuReporteArticulo = new javax.swing.JMenuItem();
         jMenuReporteProveedores = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
         mnuAcercade = new javax.swing.JMenuItem();
 
@@ -82,12 +85,12 @@ public class frmInicio extends javax.swing.JFrame {
         lblNombre.setForeground(new java.awt.Color(204, 255, 204));
         lblNombre.setText("Nombre");
         escritorio.add(lblNombre);
-        lblNombre.setBounds(10, 10, 260, 16);
+        lblNombre.setBounds(10, 10, 260, 14);
 
         lblAcceso.setForeground(new java.awt.Color(204, 255, 204));
         lblAcceso.setText("Acceso");
         escritorio.add(lblAcceso);
-        lblAcceso.setBounds(10, 30, 230, 16);
+        lblAcceso.setBounds(10, 30, 230, 14);
 
         jLabel3.setFont(new java.awt.Font("Dialog", 3, 48)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(204, 255, 204));
@@ -219,6 +222,21 @@ public class frmInicio extends javax.swing.JFrame {
         jMenu1.add(jMenuReporteProveedores);
 
         menuBar.add(jMenu1);
+
+        jMenu2.setText("Comprobantes");
+
+        jMenuItem1.setText("Ingresos");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem1);
+
+        jMenuItem2.setText("Ventas");
+        jMenu2.add(jMenuItem2);
+
+        menuBar.add(jMenu2);
 
         jMenu5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Files/Ayuda.png"))); // NOI18N
         jMenu5.setText("Ayuda");
@@ -469,6 +487,12 @@ public class frmInicio extends javax.swing.JFrame {
 
     private void mnuSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuSalirActionPerformed
         // TODO add your handling code here:
+        
+        
+        
+        
+        
+        
         frmlogin form = new frmlogin();
         form.setVisible(true);
         this.dispose();
@@ -487,6 +511,15 @@ public class frmInicio extends javax.swing.JFrame {
                 mnuTrabajadores.setEnabled(false); //trabajadores
         }
     }//GEN-LAST:event_formWindowOpened
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        // TODO add your handling code here:
+        frmComprobanteIngreso form =new frmComprobanteIngreso();
+        escritorio.add(form);
+        form.toFront();
+        form.setVisible(true);
+        
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -537,8 +570,11 @@ public class frmInicio extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu5;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuReporteArticulo;
     private javax.swing.JMenuItem jMenuReporteCliente;
     private javax.swing.JMenuItem jMenuReporteProveedores;
