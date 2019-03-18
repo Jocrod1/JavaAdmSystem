@@ -16,7 +16,7 @@ import javax.swing.table.DefaultTableModel;
 public class frmvistaproveedor extends javax.swing.JFrame {
 
     /**
-     * Creates new form rfmvistaproveedor
+     *
      */
     public frmvistaproveedor() {
         initComponents();

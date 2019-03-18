@@ -262,7 +262,7 @@ public class fingreso {
                 
                 //se coloca cada uno de los datos
                 PreparedStatement pst=cn.prepareStatement(sSQL);
-                pst.setInt(1, dts.getId_trabajador());
+                pst.setString(1, dts.getId_trabajador());
                 pst.setInt(2, dts.getId_proveedor());
                 pst.setString(3, dts.getFecha());
                 pst.setDouble(4, dts.getPrecio_total());

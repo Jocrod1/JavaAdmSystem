@@ -14,8 +14,8 @@ import java.sql.Date;
 public class vventa {
    
     private int id_venta;
-    private int id_cliente;
-    private int id_trabajador;
+    private String id_cliente;
+    private String id_trabajador;
     private String fecha;
     private Double Subtotal;
     private Double Impuesto;
@@ -24,7 +24,7 @@ public class vventa {
     public vventa() {
     }
 
-    public vventa(int id_venta, int id_cliente, int id_trabajador, String fecha, Double Subtotal, Double Impuesto, Double Total) {
+    public vventa(int id_venta, String id_cliente, String id_trabajador, String fecha, Double Subtotal, Double Impuesto, Double Total) {
         this.id_venta = id_venta;
         this.id_cliente = id_cliente;
         this.id_trabajador = id_trabajador;
@@ -52,19 +52,19 @@ public class vventa {
         this.id_venta = id_venta;
     }
 
-    public int getId_cliente() {
+    public String getId_cliente() {
         return id_cliente;
     }
 
-    public void setId_cliente(int id_cliente) {
+    public void setId_cliente(String id_cliente) {
         this.id_cliente = id_cliente;
     }
 
-    public int getId_trabajador() {
+    public String getId_trabajador() {
         return id_trabajador;
     }
 
-    public void setId_trabajador(int id_trabajador) {
+    public void setId_trabajador(String id_trabajador) {
         this.id_trabajador = id_trabajador;
     }
 

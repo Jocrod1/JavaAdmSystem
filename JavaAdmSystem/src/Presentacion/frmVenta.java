@@ -1213,8 +1213,8 @@ public class frmVenta extends javax.swing.JInternalFrame {
         
         vventa VV = new vventa();
         
-        VV.setId_trabajador(Integer.parseInt(idtrabajador));
-        VV.setId_cliente(Integer.parseInt(TxtClienteCedula.getText()));
+        VV.setId_trabajador(idtrabajador);
+        VV.setId_cliente(TxtClienteCedula.getText());
         Date fecha = new Date();
         fecha= dateChooserCombo1.getCurrent().getTime();
         DateFormat dateformat = new SimpleDateFormat("yyyy-MM-dd");

@@ -311,8 +311,8 @@ public class fventa {
             try {
                 
                 PreparedStatement pst=cn.prepareStatement(sSQL);
-                pst.setInt(1, dts.getId_cliente());
-                pst.setInt(2, dts.getId_trabajador());
+                pst.setString(1, dts.getId_cliente());
+                pst.setString(2, dts.getId_trabajador());
                 pst.setString(3, dts.getFecha());
                 pst.setDouble(4, dts.getSubtotal());
                 pst.setDouble(5, dts.getImpuesto());

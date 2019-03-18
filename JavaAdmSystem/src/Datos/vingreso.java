@@ -14,8 +14,8 @@ import java.sql.Date;
 public class vingreso {
     
     private int id_ingreso;
-    private int id_articulo;
-    private int id_trabajador;
+    private String id_articulo;
+    private String id_trabajador;
     private int id_proveedor;
     private String fecha;
     private String estado;
@@ -24,7 +24,7 @@ public class vingreso {
     public vingreso() {
     }
 
-    public vingreso(int id_ingreso, int id_articulo, int id_trabajador, int id_proveedor, String fecha, String estado, Double precio_total) {
+    public vingreso(int id_ingreso, String id_articulo, String id_trabajador, int id_proveedor, String fecha, String estado, Double precio_total) {
         this.id_ingreso = id_ingreso;
         this.id_articulo = id_articulo;
         this.id_trabajador = id_trabajador;
@@ -42,19 +42,19 @@ public class vingreso {
         this.id_ingreso = id_ingreso;
     }
 
-    public int getId_articulo() {
+    public String getId_articulo() {
         return id_articulo;
     }
 
-    public void setId_articulo(int id_articulo) {
+    public void setId_articulo(String id_articulo) {
         this.id_articulo = id_articulo;
     }
 
-    public int getId_trabajador() {
+    public String getId_trabajador() {
         return id_trabajador;
     }
 
-    public void setId_trabajador(int id_trabajador) {
+    public void setId_trabajador(String id_trabajador) {
         this.id_trabajador = id_trabajador;
     }
 
