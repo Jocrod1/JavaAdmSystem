@@ -940,12 +940,12 @@ public class frmVenta extends javax.swing.JInternalFrame {
             JOptionPane.showConfirmDialog(rootPane, "Debes Especificar una cantidad a vender");
             txtcantidad.requestFocus();
             return;
-        }
+        }/*
         if(!PuedeAgregar(Integer.parseInt(CodDetalleIngreso)) && accion.equals("Guardar")){
             JOptionPane.showConfirmDialog(rootPane, "Debes Selecciar un articulo que no este ya agregado");
             BtnBuscarArticulo.requestFocus();
             return;
-        }
+        }*/
         vdetalle_venta DV = new vdetalle_venta();
         vdetalle_ingreso DI = new vdetalle_ingreso();
         
@@ -959,6 +959,7 @@ public class frmVenta extends javax.swing.JInternalFrame {
         Registrar[3] = Double.toString(a);
         DI.setStock_actual(Integer.parseInt(txtStockInicial.getText()));
         DI.setPrecio_compra(Double.parseDouble(txtPrecioCompra.getText()));
+        DI.setId_articulo(txtCodigoArticulo.getText());
         
         
         if(DV.getCantidad() > DI.getStock_actual()){
@@ -995,6 +996,7 @@ public class frmVenta extends javax.swing.JInternalFrame {
         txtStockInicial.setText(Integer.toString(ListDetallesingreso.get(Row).getStock_actual()));
         txtPrecioCompra.setText(Double.toString(ListDetallesingreso.get(Row).getPrecio_compra()));
         CodDetalleIngreso = Integer.toString(ListDetalles.get(Row).getId_detalle_ingreso());
+        txtCodigoArticulo.setText(ListDetallesingreso.get(Row).getId_articulo());
         
         accion = "Editar";
         btnQuitar.setEnabled(true);
@@ -1040,6 +1042,13 @@ public class frmVenta extends javax.swing.JInternalFrame {
 
             if(func.totalregistros>0)
             {
+                if(accion.equals("Editar") && txtCodigoArticulo.getText().equals(CodDetalleIngreso)){
+                    JOptionPane.showConfirmDialog(rootPane, "Debes Selecciar un articulo diferente al que ya seleccionaste");
+                    BtnBuscarArticulo.requestFocus();
+                    return;
+                }
+                
+                
                 for(int i = 0; i < func.totalregistros; i++){
                     String id, articulo, disponible, precioC, precioV;
                 
@@ -1069,7 +1078,7 @@ public class frmVenta extends javax.swing.JInternalFrame {
                         return;
                     }
                 }
-              
+              JOptionPane.showMessageDialog(rootPane,"No existe un articulo en el stock con este Codigo","Acceso al Sistema", JOptionPane.INFORMATION_MESSAGE);
             }
             else{
                 if(txtCodigoArticulo.getText().equals(""))
