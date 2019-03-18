@@ -255,8 +255,12 @@ public class frmVenta extends javax.swing.JInternalFrame {
             return true;
         for(int i = 0; i < ListDetalles.size(); i++){
             int a = ListDetalles.get(i).getId_detalle_ingreso();
-            if(a == idarticulo)
+            
+            
+            
+            if(a == idarticulo){
                 return false;
+            }
         }
         return true;
     }
@@ -1008,10 +1012,26 @@ public class frmVenta extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_btnQuitarActionPerformed
 
+    int ObtenerIndex(int idarticulo){
+        if(Detalles.getRowCount()<= 0)
+            return 0;
+        for(int i = 0; i < ListDetalles.size(); i++){
+            int a = ListDetalles.get(i).getId_detalle_ingreso();
+            
+            int cant = ListDetalles.get(i).getCantidad();
+            int disp = ListDetallesingreso.get(i).getStock_actual();
+            
+            if(a == idarticulo){
+                return i;
+            }
+        }
+        return 0;
+    }
+    
     private void BtnBuscarArticuloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBuscarArticuloActionPerformed
         // TODO add your handling code here:
         
-        try {
+        try{
 
             DefaultTableModel modelo;
             fventa func= new fventa();
@@ -1020,35 +1040,50 @@ public class frmVenta extends javax.swing.JInternalFrame {
 
             if(func.totalregistros>0)
             {
-                String id, articulo, disponible, precioC, precioV;
-            
-                id = modelo.getValueAt(0, 0).toString();
-                articulo = modelo.getValueAt(0, 1).toString();
-                disponible = modelo.getValueAt(0, 3).toString();
-                precioC = modelo.getValueAt(0, 4).toString();
-                precioV = modelo.getValueAt(0, 5).toString();
-            
-                CodDetalleIngreso = id;
-                txtNombreArticulo.setText(articulo);
-                txtStockInicial.setText(disponible);
-                txtPrecioCompra.setText(precioC);
-                txtPrecioVenta.setText(precioV);           
-                btnQuitar.setEnabled(false);
-                txtcantidad.requestFocus();
+                for(int i = 0; i < func.totalregistros; i++){
+                    String id, articulo, disponible, precioC, precioV;
+                
+                    id = modelo.getValueAt(i, 0).toString();
+                    articulo = modelo.getValueAt(i, 1).toString();
+                    disponible = modelo.getValueAt(i, 3).toString();
+                    precioC = modelo.getValueAt(i, 4).toString();
+                    precioV = modelo.getValueAt(i, 5).toString();
+
+                    if(!PuedeAgregar(Integer.parseInt(id))){
+                        int a = ObtenerIndex(Integer.parseInt(id));
+                        int cant = ListDetalles.get(a).getCantidad();
+                        int disp = ListDetallesingreso.get(a).getStock_actual();
+                        if(cant != disp){
+                            JOptionPane.showConfirmDialog(rootPane, "Debes Selecciar un articulo que no este ya agregado");
+                            BtnBuscarArticulo.requestFocus();
+                            return;
+                        }
+                    }else{
+                        CodDetalleIngreso = id;
+                        txtNombreArticulo.setText(articulo);
+                        txtStockInicial.setText(disponible);
+                        txtPrecioCompra.setText(precioC);
+                        txtPrecioVenta.setText(precioV);           
+                        btnQuitar.setEnabled(false);
+                        txtcantidad.requestFocus();
+                        return;
+                    }
+                }
+              
             }
-            else
-            {
+            else{
                 if(txtCodigoArticulo.getText().equals(""))
                 {
                     JOptionPane.showMessageDialog(rootPane,"Introduzca el Codigo","Acceso al Sistema", JOptionPane.INFORMATION_MESSAGE);
                 }
-                else{
+                    else{
                     JOptionPane.showMessageDialog(rootPane,"No existe un articulo en el stock con este Codigo","Acceso al Sistema", JOptionPane.INFORMATION_MESSAGE);
                 }
 
             }
 
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             JOptionPane.showConfirmDialog(null, e);
         }
     }//GEN-LAST:event_BtnBuscarArticuloActionPerformed
