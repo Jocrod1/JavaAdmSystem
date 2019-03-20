@@ -804,7 +804,7 @@ public class frmCliente extends javax.swing.JInternalFrame {
     private void btnTodosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTodosActionPerformed
         // TODO add your handling code here:
         
-        mostrar(txtBuscarClientes.getText());
+        mostrar("");
         
     }//GEN-LAST:event_btnTodosActionPerformed
 

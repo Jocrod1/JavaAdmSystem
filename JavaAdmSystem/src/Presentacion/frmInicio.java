@@ -86,12 +86,12 @@ public class frmInicio extends javax.swing.JFrame {
         lblNombre.setForeground(new java.awt.Color(204, 255, 204));
         lblNombre.setText("Nombre");
         escritorio.add(lblNombre);
-        lblNombre.setBounds(10, 10, 260, 14);
+        lblNombre.setBounds(10, 10, 260, 16);
 
         lblAcceso.setForeground(new java.awt.Color(204, 255, 204));
         lblAcceso.setText("Acceso");
         escritorio.add(lblAcceso);
-        lblAcceso.setBounds(10, 30, 230, 14);
+        lblAcceso.setBounds(10, 30, 230, 16);
 
         jLabel3.setFont(new java.awt.Font("Dialog", 3, 48)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(204, 255, 204));
@@ -224,6 +224,7 @@ public class frmInicio extends javax.swing.JFrame {
 
         menuBar.add(jMenu1);
 
+        jMenu2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Files/comprobantes.png"))); // NOI18N
         jMenu2.setText("Comprobantes");
 
         jMenuItem1.setText("Ingresos");

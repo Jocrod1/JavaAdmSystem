@@ -589,6 +589,7 @@ public class frmArticulo extends javax.swing.JInternalFrame {
         if (lblTotal.getText().equals("0")){
             
             JOptionPane.showMessageDialog(rootPane, "No hay registros que coincidan con ese nombre");
+            
         } else if(txtBuscarTrabajador.getText().equals(txt)){
             btnGuardar.setText("Editar");
             habilitar();
