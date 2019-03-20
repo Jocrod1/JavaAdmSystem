@@ -71,16 +71,19 @@ public class farticulo {
         DefaultTableModel modelo;
         
         //se colocan los titulos que tendrá la tabla
-        String [] titulos = {"Codigo del Articulo", "Nombre del Articulo", "Descripcion del Articulo", "Stock Total"};
+        String [] titulos = {"Codigo del Articulo", "Nombre del Articulo", "Descripcion del Articulo", "Cantidad Total Ingresada", "Stock Total", "Cantidad Total Ventida"};
         
-        String [] registro = new String [4];
+        String [] registro = new String [6];
         
         totalregistros=0;
         
         modelo= new DefaultTableModel(null, titulos);
         
         //este es el código que se enviará a la BD, el cua se ordenará por el id del articulo y se regresará al programa
-        sSQL="SELECT a.id_articulo, a.nombre, a.descripcion, SUM(d.stock_actual) AS Stock_Total\n" +
+        sSQL="SELECT a.id_articulo, a.nombre, a.descripcion,\n" +
+                "SUM(d.stock_inicial) AS CantidadIngreso,\n" +
+                "SUM(d.stock_actual) AS Stock_Total,\n" +
+                "(SUM(d.stock_inicial) - SUM(d.stock_actual)) AS CantidadVenta\n" +
                 "FROM articulo a INNER JOIN detalle_ingreso d ON a.id_articulo = d.id_articulo\n" +
                 "INNER JOIN ingreso i ON d.id_ingreso = i.id_ingreso\n" +
                 "WHERE a.id_articulo LIKE '%"+ buscar +"%'\n" +
@@ -97,7 +100,9 @@ public class farticulo {
                 registro [0]= rs.getString("id_articulo");
                 registro [1]= rs.getString("nombre");
                 registro [2]= rs.getString("descripcion");
-                registro [3]= rs.getString("Stock_Total");
+                registro [3]= rs.getString("CantidadIngreso");
+                registro [4]= rs.getString("Stock_Total");
+                registro [5]= rs.getString("CantidadVenta");
                 
                 totalregistros= totalregistros+1;
                 modelo.addRow(registro);

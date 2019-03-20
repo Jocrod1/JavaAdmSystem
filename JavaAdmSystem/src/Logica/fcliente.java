@@ -31,7 +31,7 @@ public class fcliente {
         DefaultTableModel modelo;
         
         //los titulos de las columnas de la tabla
-        String [] titulos = {"ID", "Nombre", "Direccion", "Telefono", "Correo", "Sexo"};
+        String [] titulos = {"Cedula", "Nombre", "Direccion", "Telefono", "Correo", "Sexo"};
         
         String [] registro = new String [6];
         
