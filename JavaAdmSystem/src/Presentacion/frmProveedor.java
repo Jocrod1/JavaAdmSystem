@@ -82,6 +82,18 @@ public class frmProveedor extends javax.swing.JInternalFrame {
         
     }
 
+        void ocultar_columnas(){
+        //esto OCULTA LA CONTRASEÑA DE LA TABLA
+        tablalistado.getColumnModel().getColumn(0).setMaxWidth(0);
+        tablalistado.getColumnModel().getColumn(0).setMinWidth(0);
+        tablalistado.getColumnModel().getColumn(0).setPreferredWidth(0);
+
+        
+   } 
+    
+    
+    
+    
     
     
     void mostrar (String buscar){
@@ -92,7 +104,7 @@ public class frmProveedor extends javax.swing.JInternalFrame {
             modelo = func.mostrar(buscar);
             
             tablalistado.setModel(modelo);
-            //ocultar_columnas();
+            ocultar_columnas();
             lblTotal.setText(Integer.toString(func.totalregistros));
             
             

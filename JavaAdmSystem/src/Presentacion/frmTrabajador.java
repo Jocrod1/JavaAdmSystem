@@ -121,7 +121,7 @@ public class frmTrabajador extends javax.swing.JInternalFrame {
             modelo = func.mostrar(buscar);
             
             tablalistado.setModel(modelo);
-            //ocultar_columnas();
+            ocultar_columnas();
             lblTotal.setText(Integer.toString(func.totalregistros));
             
             
