@@ -8,6 +8,7 @@ package Presentacion;
 import Datos.vtrabajador;
 import Logica.ftrabajador;
 import java.awt.event.KeyEvent;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -26,7 +27,7 @@ public class frmlogin extends javax.swing.JFrame {
         this.setTitle("Acceso al Sistema");
         this.setLocationRelativeTo(null);
         
-        
+        setIconImage (new ImageIcon(getClass().getResource("/Files/newleaflogo.png")).getImage());
         
         
         //this.tablalistado.setVisible(false);
