@@ -247,6 +247,11 @@ public class frmProveedor extends javax.swing.JInternalFrame {
                 txtCiProveedorActionPerformed(evt);
             }
         });
+        txtCiProveedor.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtCiProveedorKeyTyped(evt);
+            }
+        });
 
         txtTelefono.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -673,7 +678,7 @@ public class frmProveedor extends javax.swing.JInternalFrame {
         
         
         
-        
+        try{
         
         vproveedor dts = new vproveedor();
         fproveedor func = new fproveedor();
@@ -699,7 +704,7 @@ public class frmProveedor extends javax.swing.JInternalFrame {
                 limpiar();
                 inhabilitar();
             }
-        }else if(accion.equals("Editar")){
+        }else{
             
             
         
@@ -711,6 +716,10 @@ public class frmProveedor extends javax.swing.JInternalFrame {
                 
             }
         
+        }
+        }
+        catch(Exception e){
+            JOptionPane.showConfirmDialog(null, e);
         }
         
         
@@ -847,8 +856,8 @@ public class frmProveedor extends javax.swing.JInternalFrame {
         txtEmpresa.setText(tablalistado.getValueAt(fila,5).toString());
         txtTelefono.setText(tablalistado.getValueAt(fila,6).toString());
         txtCorreo.setText(tablalistado.getValueAt(fila,7).toString());
-        
-        
+        accion="Editar";
+        btnGuardar.setText("Editar");
     }//GEN-LAST:event_tablalistadoMouseClicked
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
@@ -870,6 +879,16 @@ public class frmProveedor extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         mostrar("");
     }//GEN-LAST:event_btnTodosActionPerformed
+
+    private void txtCiProveedorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCiProveedorKeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        try{
+            int i = Integer.parseInt(Character.toString(c));
+        }catch(Exception e){
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtCiProveedorKeyTyped
 
     
     

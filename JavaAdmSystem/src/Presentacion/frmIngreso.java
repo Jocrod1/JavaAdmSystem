@@ -345,6 +345,11 @@ public class frmIngreso extends javax.swing.JInternalFrame {
                 txtStockInicialActionPerformed(evt);
             }
         });
+        txtStockInicial.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtStockInicialKeyTyped(evt);
+            }
+        });
 
         jLabel8.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(0, 51, 0));
@@ -354,6 +359,9 @@ public class frmIngreso extends javax.swing.JInternalFrame {
         txtCodigoArticulo.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtCodigoArticuloKeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtCodigoArticuloKeyTyped(evt);
             }
         });
 
@@ -372,6 +380,9 @@ public class frmIngreso extends javax.swing.JInternalFrame {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtPrecioVentaKeyPressed(evt);
             }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtPrecioVentaKeyTyped(evt);
+            }
         });
 
         jLabel13.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
@@ -379,6 +390,11 @@ public class frmIngreso extends javax.swing.JInternalFrame {
         jLabel13.setText("Precio Venta");
 
         txtPrecioCompra.setNextFocusableComponent(txtPrecioVenta);
+        txtPrecioCompra.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtPrecioCompraKeyTyped(evt);
+            }
+        });
 
         jLabel14.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         jLabel14.setForeground(new java.awt.Color(0, 51, 0));
@@ -628,7 +644,7 @@ public class frmIngreso extends javax.swing.JInternalFrame {
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(lblTotalPagado, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel2Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnCancelar, btnGuardar, btnNuevo});
@@ -1201,6 +1217,42 @@ public class frmIngreso extends javax.swing.JInternalFrame {
         limpiardetalle();
         accion="Guardar";
     }//GEN-LAST:event_btnLimpiarActionPerformed
+
+    private void txtStockInicialKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtStockInicialKeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        try{
+            int i = Integer.parseInt(Character.toString(c));
+        }catch(Exception e){
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtStockInicialKeyTyped
+
+    private void txtCodigoArticuloKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodigoArticuloKeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        try{
+            int i = Integer.parseInt(Character.toString(c));
+        }catch(Exception e){
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtCodigoArticuloKeyTyped
+
+    private void txtPrecioCompraKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPrecioCompraKeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        if(Character.isLetter(c) && !evt.isAltDown()){
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtPrecioCompraKeyTyped
+
+    private void txtPrecioVentaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPrecioVentaKeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        if(Character.isLetter(c) && !evt.isAltDown()){
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtPrecioVentaKeyTyped
     
     /**
      * @param args the command line arguments

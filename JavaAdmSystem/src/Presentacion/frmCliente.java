@@ -175,6 +175,11 @@ public class frmCliente extends javax.swing.JInternalFrame {
                 txtCedulaClienteActionPerformed(evt);
             }
         });
+        txtCedulaCliente.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtCedulaClienteKeyTyped(evt);
+            }
+        });
 
         txtDireccionCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -236,6 +241,11 @@ public class frmCliente extends javax.swing.JInternalFrame {
         txtTelefonoCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtTelefonoClienteActionPerformed(evt);
+            }
+        });
+        txtTelefonoCliente.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtTelefonoClienteKeyTyped(evt);
             }
         });
 
@@ -381,6 +391,12 @@ public class frmCliente extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(tablalistado);
 
+        txtBuscarClientes.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtBuscarClientesKeyTyped(evt);
+            }
+        });
+
         jLabel10.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(204, 255, 204));
         jLabel10.setText("Buscar por CI :");
@@ -515,7 +531,7 @@ public class frmCliente extends javax.swing.JInternalFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 394, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
@@ -807,6 +823,36 @@ public class frmCliente extends javax.swing.JInternalFrame {
         mostrar("");
         
     }//GEN-LAST:event_btnTodosActionPerformed
+
+    private void txtCedulaClienteKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCedulaClienteKeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        try{
+            int i = Integer.parseInt(Character.toString(c));
+        }catch(Exception e){
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtCedulaClienteKeyTyped
+
+    private void txtTelefonoClienteKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTelefonoClienteKeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        try{
+            int i = Integer.parseInt(Character.toString(c));
+        }catch(Exception e){
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtTelefonoClienteKeyTyped
+
+    private void txtBuscarClientesKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarClientesKeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        try{
+            int i = Integer.parseInt(Character.toString(c));
+        }catch(Exception e){
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtBuscarClientesKeyTyped
 
     
     //conexion del reporte

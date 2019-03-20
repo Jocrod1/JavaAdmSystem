@@ -73,6 +73,9 @@ public class frmlogin extends javax.swing.JFrame {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtusuarioKeyPressed(evt);
             }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtusuarioKeyTyped(evt);
+            }
         });
 
         txtcontraseña.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -354,6 +357,20 @@ public class frmlogin extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_btnsalirActionPerformed
+
+    private void txtusuarioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtusuarioKeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        try{
+            int i = Integer.parseInt(Character.toString(c));
+        }catch(Exception e){
+            evt.consume();
+        }
+        
+        if(Character.isLetter(c) && !evt.isAltDown()){
+            
+        }
+    }//GEN-LAST:event_txtusuarioKeyTyped
 
     /**
      * @param args the command line arguments

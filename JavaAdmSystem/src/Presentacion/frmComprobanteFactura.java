@@ -75,6 +75,11 @@ public class frmComprobanteFactura extends javax.swing.JInternalFrame {
         jLabel6.setText("Reportes de Comprobantes de Venta");
 
         txtbuscar.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        txtbuscar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtbuscarKeyTyped(evt);
+            }
+        });
         jScrollPane1.setViewportView(txtbuscar);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -195,6 +200,16 @@ public class frmComprobanteFactura extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_btnsalirActionPerformed
+
+    private void txtbuscarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtbuscarKeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        try{
+            int i = Integer.parseInt(Character.toString(c));
+        }catch(Exception e){
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtbuscarKeyTyped
 
     /**
      * @param args the command line arguments

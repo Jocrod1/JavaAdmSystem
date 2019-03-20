@@ -171,6 +171,9 @@ public class frmArticulo extends javax.swing.JInternalFrame {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtBuscarTrabajadorKeyPressed(evt);
             }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtBuscarTrabajadorKeyTyped(evt);
+            }
         });
 
         jLabel10.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
@@ -342,6 +345,9 @@ public class frmArticulo extends javax.swing.JInternalFrame {
         txtIdArticulo.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtIdArticuloKeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtIdArticuloKeyTyped(evt);
             }
         });
 
@@ -684,6 +690,26 @@ public class frmArticulo extends javax.swing.JInternalFrame {
             btnBuscar.doClick();
         }
     }//GEN-LAST:event_txtBuscarTrabajadorKeyPressed
+
+    private void txtIdArticuloKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtIdArticuloKeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        try{
+            int i = Integer.parseInt(Character.toString(c));
+        }catch(Exception e){
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtIdArticuloKeyTyped
+
+    private void txtBuscarTrabajadorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarTrabajadorKeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        try{
+            int i = Integer.parseInt(Character.toString(c));
+        }catch(Exception e){
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtBuscarTrabajadorKeyTyped
 
     
    
