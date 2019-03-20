@@ -6,6 +6,7 @@
 package Presentacion;
 
 import Logica.farticulo;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JRootPane;
 import javax.swing.table.DefaultTableModel;
@@ -21,7 +22,7 @@ public class frmvistaarticulo extends javax.swing.JFrame {
         initComponents();
         mostrar("");
         this.setLocationRelativeTo(null);
-        
+                setIconImage (new ImageIcon(getClass().getResource("/Files/newleaflogo.png")).getImage());
     }
 
     /**

@@ -43,6 +43,8 @@ public class frmcontraseña extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jPanel1.setBackground(new java.awt.Color(204, 255, 204));
+
         pregunta.setFont(new java.awt.Font("Verdana", 3, 12)); // NOI18N
         pregunta.setText("jLabel1");
 

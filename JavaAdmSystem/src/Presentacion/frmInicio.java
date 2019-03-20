@@ -75,7 +75,6 @@ public class frmInicio extends javax.swing.JFrame {
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
         mnuAcercade = new javax.swing.JMenuItem();
-        jMenu4 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -89,12 +88,12 @@ public class frmInicio extends javax.swing.JFrame {
         lblNombre.setForeground(new java.awt.Color(204, 255, 204));
         lblNombre.setText("Nombre");
         escritorio.add(lblNombre);
-        lblNombre.setBounds(10, 10, 260, 16);
+        lblNombre.setBounds(10, 10, 260, 14);
 
         lblAcceso.setForeground(new java.awt.Color(204, 255, 204));
         lblAcceso.setText("Acceso");
         escritorio.add(lblAcceso);
-        lblAcceso.setBounds(10, 30, 230, 16);
+        lblAcceso.setBounds(10, 30, 230, 14);
 
         jLabel3.setFont(new java.awt.Font("Dialog", 3, 48)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(204, 255, 204));
@@ -228,9 +227,9 @@ public class frmInicio extends javax.swing.JFrame {
         menuBar.add(jMenu1);
 
         jMenu2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Files/comprobantes.png"))); // NOI18N
-        jMenu2.setText("Comprobantes");
+        jMenu2.setText("Vistas");
 
-        jMenuItem1.setText("Comprovantes deIngresos");
+        jMenuItem1.setText("Comprovantes de Ingresos");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem1ActionPerformed(evt);
@@ -268,14 +267,6 @@ public class frmInicio extends javax.swing.JFrame {
         jMenu5.add(mnuAcercade);
 
         menuBar.add(jMenu5);
-
-        jMenu4.setText("Stock");
-        jMenu4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenu4ActionPerformed(evt);
-            }
-        });
-        menuBar.add(jMenu4);
 
         setJMenuBar(menuBar);
 
@@ -555,12 +546,6 @@ public class frmInicio extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
-    private void jMenu4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu4ActionPerformed
-        // TODO add your handling code here:
-
-        
-    }//GEN-LAST:event_jMenu4ActionPerformed
-
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
         // TODO add your handling code here:
         
@@ -622,7 +607,6 @@ public class frmInicio extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
-    private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;

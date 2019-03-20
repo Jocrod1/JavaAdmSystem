@@ -6,6 +6,7 @@
 package Presentacion;
 
 import Logica.fproveedor;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -22,6 +23,7 @@ public class frmvistaproveedor extends javax.swing.JFrame {
         initComponents();
         mostrar("");
         this.setLocationRelativeTo(null);
+                setIconImage (new ImageIcon(getClass().getResource("/Files/newleaflogo.png")).getImage());
     }
 
     /**

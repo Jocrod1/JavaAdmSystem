@@ -11,6 +11,7 @@ import java.util.regex.Matcher;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import java.util.regex.Pattern;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -24,6 +25,7 @@ public class frmvistacliente extends javax.swing.JFrame {
     public frmvistacliente() {
         initComponents();
         this.setLocationRelativeTo(null);
+                setIconImage (new ImageIcon(getClass().getResource("/Files/newleaflogo.png")).getImage());
     }
 
     /**

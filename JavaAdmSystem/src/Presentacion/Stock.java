@@ -60,9 +60,10 @@ public class Stock extends javax.swing.JInternalFrame {
         TotalVentas = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
 
+        setClosable(true);
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(0, 153, 0));
+        jPanel1.setBackground(new java.awt.Color(0, 102, 0));
         jPanel1.setForeground(new java.awt.Color(204, 255, 204));
 
         jLabel9.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
