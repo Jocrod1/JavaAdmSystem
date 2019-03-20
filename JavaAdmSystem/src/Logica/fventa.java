@@ -228,6 +228,54 @@ public class fventa {
         }  
     }
     
+    public DefaultTableModel MostrarDetalleByIngreso(int Buscar)
+    {
+        DefaultTableModel modelo;
+        
+        String [] titulos = {"id", "Articulo", "Cantidad", "Precio", "Subtotal"};
+        
+        String [] registro = new String [5];
+        
+        totalregistros=0;
+        
+        modelo= new DefaultTableModel(null, titulos);
+        
+        sSQL="select di.id_detalle_ingreso as IdDetalleIngreso, a.nombre as Articulo, d.cantidad ,d.precio,\n" +
+                "(d.precio * d.cantidad) as Subtotal\n" +
+                "from detalle_venta d inner join detalle_ingreso di on d.id_detalle_ingreso = di.id_detalle_ingreso\n" +
+                "inner join articulo a on di.id_articulo = a.id_articulo\n" +
+                "inner join venta v on v.id_venta = d.id_venta\n" +
+                "where di.id_detalle_ingreso = "+ Buscar +"\n" +
+                "and v.estado <> 'ANULADO'\n" +
+                "order by d.id_detalle_venta ASC";
+        
+        try {
+            Statement st= cn.createStatement();
+            ResultSet rs=st.executeQuery(sSQL);
+            
+                 
+            while(rs.next())
+            {
+                registro [0]= rs.getString("IdDetalleIngreso");
+                registro [1]= rs.getString("Articulo");
+                registro [2]= rs.getString("cantidad");
+                registro [3]= rs.getString("precio");
+                registro [4]= rs.getString("Subtotal");
+                
+                totalregistros= totalregistros+1;
+                modelo.addRow(registro);
+            }
+                 
+                 
+            
+            return modelo;
+            
+        } catch (Exception e) {
+            JOptionPane.showConfirmDialog(null, e);
+            return null;
+        }  
+    }
+    
     
     //esta tabla muestra la venta por el cliente ingresado
     public DefaultTableModel BuscarCliente(String IdCliente){
