@@ -10,6 +10,7 @@ import java.io.File;
 import java.sql.Connection;
 import java.util.HashMap;
 import java.util.Map;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperFillManager;
@@ -32,7 +33,7 @@ public class frmInicio extends javax.swing.JFrame {
         this.setTitle("Sistema de gestion de ventas - Tienda Green leaf");
         
         
-
+        setIconImage (new ImageIcon(getClass().getResource("/Files/newleaflogo.png")).getImage());
         
     }
 
@@ -71,8 +72,10 @@ public class frmInicio extends javax.swing.JFrame {
         jMenu2 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuItem3 = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
         mnuAcercade = new javax.swing.JMenuItem();
+        jMenu4 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -227,7 +230,7 @@ public class frmInicio extends javax.swing.JFrame {
         jMenu2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Files/comprobantes.png"))); // NOI18N
         jMenu2.setText("Comprobantes");
 
-        jMenuItem1.setText("Ingresos");
+        jMenuItem1.setText("Comprovantes deIngresos");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem1ActionPerformed(evt);
@@ -235,13 +238,21 @@ public class frmInicio extends javax.swing.JFrame {
         });
         jMenu2.add(jMenuItem1);
 
-        jMenuItem2.setText("Ventas");
+        jMenuItem2.setText("Facturas de Ventas");
         jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem2ActionPerformed(evt);
             }
         });
         jMenu2.add(jMenuItem2);
+
+        jMenuItem3.setText("Articulos");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem3);
 
         menuBar.add(jMenu2);
 
@@ -257,6 +268,14 @@ public class frmInicio extends javax.swing.JFrame {
         jMenu5.add(mnuAcercade);
 
         menuBar.add(jMenu5);
+
+        jMenu4.setText("Stock");
+        jMenu4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenu4ActionPerformed(evt);
+            }
+        });
+        menuBar.add(jMenu4);
 
         setJMenuBar(menuBar);
 
@@ -536,6 +555,22 @@ public class frmInicio extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
+    private void jMenu4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu4ActionPerformed
+        // TODO add your handling code here:
+
+        
+    }//GEN-LAST:event_jMenu4ActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        // TODO add your handling code here:
+        
+        Stock form =new Stock();
+        escritorio.add(form);
+        form.toFront();
+        form.setVisible(true);
+        
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -587,9 +622,11 @@ public class frmInicio extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuReporteArticulo;
     private javax.swing.JMenuItem jMenuReporteCliente;
     private javax.swing.JMenuItem jMenuReporteProveedores;
