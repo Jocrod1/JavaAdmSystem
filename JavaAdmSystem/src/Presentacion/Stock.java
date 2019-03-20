@@ -63,6 +63,8 @@ public class Stock extends javax.swing.JInternalFrame {
         setClosable(true);
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
+        jTabbedPane1.setFocusable(false);
+
         jPanel1.setBackground(new java.awt.Color(0, 102, 0));
         jPanel1.setForeground(new java.awt.Color(204, 255, 204));
 
