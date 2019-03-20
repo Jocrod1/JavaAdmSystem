@@ -5,6 +5,8 @@
  */
 package javaadmsystem;
 
+import Presentacion.frmlogin;
+
 /**
  *
  * @author Usuario
@@ -16,6 +18,7 @@ public class JavaAdmSystem {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        new frmlogin().setVisible(true);
     }
     
 }

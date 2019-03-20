@@ -1199,7 +1199,7 @@ public class frmIngreso extends javax.swing.JInternalFrame {
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
         // TODO add your handling code here:
         limpiardetalle();
-        
+        accion="Guardar";
     }//GEN-LAST:event_btnLimpiarActionPerformed
     
     /**

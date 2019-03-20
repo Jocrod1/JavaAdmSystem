@@ -39,7 +39,7 @@ public class ftrabajador {
         modelo= new DefaultTableModel(null, titulos);
         
         //se busca el trabajador por el comienzo de su cedula o la cedula completa, ordenandola
-        sSQL="select * from trabajador where id_trabajador like '%" + buscar + "%' order  by id_trabajador";
+        sSQL="select * from trabajador where id_trabajador like '" + buscar + "%' order  by id_trabajador";
         
         try {
             Statement st= cn.createStatement();

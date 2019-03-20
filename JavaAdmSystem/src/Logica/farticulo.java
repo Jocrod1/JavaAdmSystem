@@ -39,7 +39,7 @@ public class farticulo {
         modelo= new DefaultTableModel(null, titulos); 
          
         //este es el código que se enviará a la BD, el cua se ordenará por el id del articulo y se regresará al programa 
-        sSQL="select * from articulo where id_articulo like '%" + buscar + "%' order  by id_articulo"; 
+        sSQL="select * from articulo where id_articulo like '" + buscar + "%' order  by id_articulo"; 
      
             try { 
             Statement st= cn.createStatement(); 
@@ -86,7 +86,7 @@ public class farticulo {
                 "(SUM(d.stock_inicial) - SUM(d.stock_actual)) AS CantidadVenta\n" +
                 "FROM articulo a INNER JOIN detalle_ingreso d ON a.id_articulo = d.id_articulo\n" +
                 "INNER JOIN ingreso i ON d.id_ingreso = i.id_ingreso\n" +
-                "WHERE a.id_articulo LIKE '%"+ buscar +"%'\n" +
+                "WHERE a.id_articulo LIKE '"+ buscar +"%'\n" +
                 "GROUP BY a.id_articulo, a.nombre, a.descripcion\n" +
                 "ORDER BY SUM(d.stock_actual) ASC";
     

@@ -40,7 +40,7 @@ public class fproveedor {
         modelo= new DefaultTableModel(null, titulos);
         
         //al principio se mostrarán todos los registros pero cuando se coloque un dato en buscar, solo mostrara el registro comun de ese dato
-        sSQL="select * from proveedor where cedula like '%" + buscar + "%' order  by cedula";
+        sSQL="select * from proveedor where cedula like '" + buscar + "%' order  by cedula";
         
         try {
             Statement st= cn.createStatement();

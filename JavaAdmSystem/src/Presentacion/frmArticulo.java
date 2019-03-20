@@ -584,12 +584,13 @@ public class frmArticulo extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         
         mostrar(txtBuscarTrabajador.getText());
-        String txt =  tablalistado.getValueAt(0, 0).toString();
         
         if (lblTotal.getText().equals("0")){
             
             JOptionPane.showMessageDialog(rootPane, "No hay registros que coincidan con ese codigo de articulo");
-        } else if(txtBuscarTrabajador.getText().equals(txt)){
+        } else {
+            String txt =  tablalistado.getValueAt(0, 0).toString();
+            if(txtBuscarTrabajador.getText().equals(txt)){
             btnGuardar.setText("Editar");
             habilitar();
             txtIdArticulo.setEnabled(false);
@@ -607,7 +608,7 @@ public class frmArticulo extends javax.swing.JInternalFrame {
             txtDescripcionArticulo.setText(tablalistado.getValueAt(0,2).toString());
             txtBuscarTrabajador.setText("");
         }
-       
+        }
         
     }//GEN-LAST:event_btnBuscarActionPerformed
 

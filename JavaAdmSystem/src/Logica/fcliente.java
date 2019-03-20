@@ -40,7 +40,7 @@ public class fcliente {
         modelo= new DefaultTableModel(null, titulos);
         
         //se ordena la tabla por el id que busque el usuario
-        sSQL="select * from cliente where id_cliente like '%" + buscar + "%' order  by id_cliente";
+        sSQL="select * from cliente where id_cliente like '" + buscar + "%' order  by id_cliente";
         
         try {
             //se coloca un try para intentar conectar el query, si no lo hace muestra un error
