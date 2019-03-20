@@ -298,6 +298,7 @@
         <Component class="javax.swing.JTextField" name="txtCedulaTrabajador">
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtCedulaTrabajadorActionPerformed"/>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtCedulaTrabajadorKeyTyped"/>
           </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="txtDireccionTrabajador">
@@ -393,6 +394,7 @@
         <Component class="javax.swing.JTextField" name="txtTelefonoTrabajador">
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtTelefonoTrabajadorActionPerformed"/>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtTelefonoTrabajadorKeyTyped"/>
           </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel11">
@@ -642,6 +644,9 @@
           </SubComponents>
         </Container>
         <Component class="javax.swing.JTextField" name="txtBuscarTrabajador">
+          <Events>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtBuscarTrabajadorKeyTyped"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel10">
           <Properties>

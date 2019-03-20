@@ -225,6 +225,11 @@ public class frmTrabajador extends javax.swing.JInternalFrame {
                 txtCedulaTrabajadorActionPerformed(evt);
             }
         });
+        txtCedulaTrabajador.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtCedulaTrabajadorKeyTyped(evt);
+            }
+        });
 
         txtDireccionTrabajador.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -286,6 +291,11 @@ public class frmTrabajador extends javax.swing.JInternalFrame {
         txtTelefonoTrabajador.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtTelefonoTrabajadorActionPerformed(evt);
+            }
+        });
+        txtTelefonoTrabajador.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtTelefonoTrabajadorKeyTyped(evt);
             }
         });
 
@@ -505,6 +515,12 @@ public class frmTrabajador extends javax.swing.JInternalFrame {
             }
         });
         jScrollPane1.setViewportView(tablalistado);
+
+        txtBuscarTrabajador.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtBuscarTrabajadorKeyTyped(evt);
+            }
+        });
 
         jLabel10.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(204, 255, 204));
@@ -1054,6 +1070,36 @@ public class frmTrabajador extends javax.swing.JInternalFrame {
         mostrar("");
 
     }//GEN-LAST:event_btnTodosActionPerformed
+
+    private void txtCedulaTrabajadorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCedulaTrabajadorKeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        try{
+            int i = Integer.parseInt(Character.toString(c));
+        }catch(Exception e){
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtCedulaTrabajadorKeyTyped
+
+    private void txtTelefonoTrabajadorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTelefonoTrabajadorKeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        try{
+            int i = Integer.parseInt(Character.toString(c));
+        }catch(Exception e){
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtTelefonoTrabajadorKeyTyped
+
+    private void txtBuscarTrabajadorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarTrabajadorKeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        try{
+            int i = Integer.parseInt(Character.toString(c));
+        }catch(Exception e){
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtBuscarTrabajadorKeyTyped
 
     /**
      * @param args the command line arguments

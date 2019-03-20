@@ -258,6 +258,11 @@ public class frmProveedor extends javax.swing.JInternalFrame {
                 txtTelefonoActionPerformed(evt);
             }
         });
+        txtTelefono.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtTelefonoKeyTyped(evt);
+            }
+        });
 
         jLabel11.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(0, 51, 0));
@@ -393,6 +398,12 @@ public class frmProveedor extends javax.swing.JInternalFrame {
             }
         });
         jScrollPane1.setViewportView(tablalistado);
+
+        txtBuscarProveedor.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtBuscarProveedorKeyTyped(evt);
+            }
+        });
 
         jLabel10.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(204, 255, 204));
@@ -669,6 +680,7 @@ public class frmProveedor extends javax.swing.JInternalFrame {
                 }
 
             } catch (Exception e) {
+                JOptionPane.showConfirmDialog(null, e);
             }
         
             
@@ -889,6 +901,26 @@ public class frmProveedor extends javax.swing.JInternalFrame {
             evt.consume();
         }
     }//GEN-LAST:event_txtCiProveedorKeyTyped
+
+    private void txtTelefonoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTelefonoKeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        try{
+            int i = Integer.parseInt(Character.toString(c));
+        }catch(Exception e){
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtTelefonoKeyTyped
+
+    private void txtBuscarProveedorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarProveedorKeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        try{
+            int i = Integer.parseInt(Character.toString(c));
+        }catch(Exception e){
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtBuscarProveedorKeyTyped
 
     
     
