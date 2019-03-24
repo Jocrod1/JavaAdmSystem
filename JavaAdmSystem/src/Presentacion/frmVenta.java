@@ -56,6 +56,8 @@ public class frmVenta extends javax.swing.JInternalFrame {
     double Impuesto = 12d;
     double Total;
     
+    String fecha1completa;
+    
     int idventa;
     public List<Integer> ListIDs = new ArrayList<>();
     
@@ -75,6 +77,18 @@ public class frmVenta extends javax.swing.JInternalFrame {
         
         jTable1.setModel(Detalles);
         jTable1.setEnabled(false);
+        
+        
+        
+                
+        Date fechahoy= new Date();
+        
+        DateFormat dateformat = new SimpleDateFormat("yyyy-MM-dd");
+        
+        fecha1completa =dateformat.format(fechahoy);
+
+        
+        jLabel22.setText(fecha1completa);
     }
     
     
@@ -83,7 +97,6 @@ public class frmVenta extends javax.swing.JInternalFrame {
         cbCi.setEnabled(false);
         TxtClienteCedula.setEnabled(false);
         TxtClienteNombre.setEnabled(false);
-        dateChooserCombo1.setEnabled(false);
         TxtImpuesto.setEnabled(false);
         
         btnGuardar.setEnabled(false);
@@ -99,7 +112,6 @@ public class frmVenta extends javax.swing.JInternalFrame {
         cbCi.setEnabled(true);
         TxtClienteCedula.setEnabled(true);
         TxtClienteNombre.setEnabled(true);
-        dateChooserCombo1.setEnabled(true);
         TxtImpuesto.setEnabled(true);
         
         btnGuardar.setEnabled(true);
@@ -117,7 +129,6 @@ public class frmVenta extends javax.swing.JInternalFrame {
         TxtImpuesto.setText("");
         Calendar today = Calendar.getInstance();
         today.setTime(new Date());
-        dateChooserCombo1.setSelectedDate(today);
     }
     
     void habilitardetalle(){
@@ -155,6 +166,7 @@ public class frmVenta extends javax.swing.JInternalFrame {
         txtStockInicial.setText("");
         CodDetalleIngreso = "";
         txtcantidad.setText("");
+        Adver.setText("");
     }
     void ActualizarTotalPagado(){
         Subtotal = 0;
@@ -304,13 +316,13 @@ public class frmVenta extends javax.swing.JInternalFrame {
         jLabel21 = new javax.swing.JLabel();
         txtNombreArticulo = new javax.swing.JTextField();
         btnLimpiar = new javax.swing.JButton();
+        Adver = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         TxtClienteCedula = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         BtnBuscarProveedor = new javax.swing.JButton();
         jLabel11 = new javax.swing.JLabel();
-        dateChooserCombo1 = new datechooser.beans.DateChooserCombo();
         jLabel15 = new javax.swing.JLabel();
         lblSubtotal = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
@@ -323,6 +335,7 @@ public class frmVenta extends javax.swing.JInternalFrame {
         btnAnular = new javax.swing.JButton();
         btnImprimir = new javax.swing.JButton();
         cbCi = new javax.swing.JComboBox<>();
+        jLabel22 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
@@ -472,6 +485,9 @@ public class frmVenta extends javax.swing.JInternalFrame {
             }
         });
 
+        Adver.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        Adver.setForeground(new java.awt.Color(204, 0, 0));
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -502,15 +518,17 @@ public class frmVenta extends javax.swing.JInternalFrame {
                     .addComponent(txtPrecioVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel8)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtStockInicial, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
                         .addGap(48, 48, 48)
                         .addComponent(jLabel17)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtcantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(txtcantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel8)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(Adver, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtStockInicial, javax.swing.GroupLayout.DEFAULT_SIZE, 114, Short.MAX_VALUE))))
                 .addGap(18, 18, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnQuitar, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -551,6 +569,8 @@ public class frmVenta extends javax.swing.JInternalFrame {
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel21)
                                     .addComponent(txtNombreArticulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(Adver, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addContainerGap()
@@ -603,8 +623,6 @@ public class frmVenta extends javax.swing.JInternalFrame {
         jLabel11.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(0, 51, 0));
         jLabel11.setText("Fecha");
-
-        dateChooserCombo1.setCalendarPreferredSize(new java.awt.Dimension(333, 200));
 
         jLabel15.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         jLabel15.setForeground(new java.awt.Color(0, 51, 0));
@@ -660,6 +678,10 @@ public class frmVenta extends javax.swing.JInternalFrame {
         });
 
         cbCi.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "V-", "E-" }));
+
+        jLabel22.setFont(new java.awt.Font("Verdana", 3, 12)); // NOI18N
+        jLabel22.setForeground(new java.awt.Color(0, 51, 0));
+        jLabel22.setText("Cedula");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -718,8 +740,8 @@ public class frmVenta extends javax.swing.JInternalFrame {
                             .addComponent(jLabel18))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(dateChooserCombo1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(TxtImpuesto, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(TxtImpuesto, javax.swing.GroupLayout.DEFAULT_SIZE, 155, Short.MAX_VALUE)
+                            .addComponent(jLabel22, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -738,8 +760,9 @@ public class frmVenta extends javax.swing.JInternalFrame {
                         .addComponent(cbCi)
                         .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(dateChooserCombo1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(1, 1, 1)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -1114,6 +1137,8 @@ public class frmVenta extends javax.swing.JInternalFrame {
                         CodDetalleIngreso = id;
                         txtNombreArticulo.setText(articulo);
                         txtStockInicial.setText(disponible);
+                        if(Integer.parseInt(disponible) <6)
+                            Adver.setText("Hay poca cantidad disponible!");
                         txtPrecioCompra.setText(precioC);
                         txtPrecioVenta.setText(precioV);           
                         btnQuitar.setEnabled(false);
@@ -1275,11 +1300,7 @@ public class frmVenta extends javax.swing.JInternalFrame {
         
         VV.setId_trabajador(idtrabajador);
         VV.setId_cliente(TipoCi+NumCi);
-        Date fecha = new Date();
-        fecha= dateChooserCombo1.getCurrent().getTime();
-        DateFormat dateformat = new SimpleDateFormat("yyyy-MM-dd");
-        String fechacompleta =dateformat.format(fecha);
-        VV.setFecha(fechacompleta);
+        VV.setFecha(fecha1completa);
         VV.setSubtotal(Subtotal);
         VV.setImpuesto(Double.parseDouble(TxtImpuesto.getText()));
         VV.setTotal(Total);
@@ -1516,6 +1537,7 @@ public class frmVenta extends javax.swing.JInternalFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel Adver;
     private javax.swing.JButton BtnBuscarArticulo;
     private javax.swing.JButton BtnBuscarProveedor;
     public static javax.swing.JTextField TxtClienteCedula;
@@ -1532,7 +1554,6 @@ public class frmVenta extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnQuitar;
     private javax.swing.JButton btnSalir2;
     private javax.swing.JComboBox<String> cbCi;
-    private datechooser.beans.DateChooserCombo dateChooserCombo1;
     private datechooser.beans.DateChooserCombo dateChooserCombo2;
     private datechooser.beans.DateChooserCombo dateChooserCombo3;
     private javax.swing.JLabel jLabel1;
@@ -1548,6 +1569,7 @@ public class frmVenta extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;

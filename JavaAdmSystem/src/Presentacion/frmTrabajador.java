@@ -754,7 +754,7 @@ public class frmTrabajador extends javax.swing.JInternalFrame {
         }
         
         //valida si el tlfno tiene letras
-        if ( !(txtTelefonoTrabajador.getText().matches("[0-9]+")) ){
+        if ( !(txtTelefonoTrabajador.getText().matches("[0-9]+")) && !txtTelefonoTrabajador.getText().equals("")){
         JOptionPane.showMessageDialog(rootPane, "El numero de telefono solo puede contener numeros");
         txtTelefonoTrabajador.requestFocus();
         return;
@@ -773,7 +773,7 @@ public class frmTrabajador extends javax.swing.JInternalFrame {
             
         String email = txtCorreoTrabajador.getText();
         
-        if (!valEmail(email)){  
+        if (!valEmail(email) && !txtCorreoTrabajador.getText().equals("")){  
           JOptionPane.showMessageDialog(rootPane, "El correo no es valido, vuelva a escribirlo");
           txtCorreoTrabajador.requestFocus();
           return;

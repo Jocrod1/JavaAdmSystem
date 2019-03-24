@@ -57,7 +57,7 @@ public class frmvistacliente extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
 
-        jPanel2.setBackground(new java.awt.Color(204, 255, 204));
+        jPanel2.setBackground(new java.awt.Color(0, 153, 0));
 
         jLabel5.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(0, 51, 0));
@@ -306,7 +306,7 @@ public class frmvistacliente extends javax.swing.JFrame {
         }
 
         //valida si el tlfno tiene letras
-        if ( !(txtTelefonoCliente.getText().matches("[0-9]+")) ){
+        if ( !(txtTelefonoCliente.getText().matches("[0-9]+")) && !txtTelefonoCliente.getText().equals("")){
             JOptionPane.showMessageDialog(rootPane, "El numero de telefono solo puede contener numeros");
             txtTelefonoCliente.requestFocus();
             return;
@@ -323,7 +323,7 @@ public class frmvistacliente extends javax.swing.JFrame {
 
         String email = txtCorreoCliente.getText();
 
-        if (!valEmail(email)){
+        if (!valEmail(email) && !txtCorreoCliente.getText().equals("")){
             JOptionPane.showMessageDialog(rootPane, "El correo no es valido, vuelva a escribirlo");
             txtCorreoCliente.requestFocus();
             return;

@@ -109,19 +109,19 @@ public class fproveedor {
         //esta funcion edita el registro usando la comparacion del id del proveedor
         public boolean editar (vproveedor dts)
         {
-            sSQL= "Update proveedor set cedula=?, nombre=?, direccion=?, rif=?, empresa=?, telefono=?, correo=?" + "where id_proveedor=?";
+            sSQL= "Update proveedor set nombre=?, direccion=?, rif=?, empresa=?, telefono=?, correo=?" + "where cedula=?";
             
             try {
                 //se colocan en el mismo orden que en el sql
                 PreparedStatement pst=cn.prepareStatement(sSQL);
-                pst.setString(1, dts.getCedula());
-                pst.setString(2, dts.getNombre());
-                pst.setString(3, dts.getDireccion());
-                pst.setString(4, dts.getRif());
-                pst.setString(5, dts.getEmpresa());
-                pst.setString(6, dts.getTelefono());
-                pst.setString(7, dts.getCorreo());
-                pst.setInt(8, dts.getId_proveedor());
+                //pst.setString(1, dts.getCedula());
+                pst.setString(1, dts.getNombre());
+                pst.setString(2, dts.getDireccion());
+                pst.setString(3, dts.getRif());
+                pst.setString(4, dts.getEmpresa());
+                pst.setString(5, dts.getTelefono());
+                pst.setString(6, dts.getCorreo());
+                pst.setString(7, dts.getCedula());
                 
                 int n=pst.executeUpdate();
                 

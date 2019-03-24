@@ -144,6 +144,7 @@ public class frmProveedor extends javax.swing.JInternalFrame {
         txtCorreo = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
         cbCi = new javax.swing.JComboBox<>();
+        cbRif = new javax.swing.JComboBox<>();
         jPanel1 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -174,6 +175,11 @@ public class frmProveedor extends javax.swing.JInternalFrame {
         txtRif.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtRifActionPerformed(evt);
+            }
+        });
+        txtRif.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtRifKeyTyped(evt);
             }
         });
 
@@ -280,6 +286,8 @@ public class frmProveedor extends javax.swing.JInternalFrame {
 
         cbCi.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "V-", "E-" }));
 
+        cbRif.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "V-", "J-", "G-" }));
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -311,12 +319,17 @@ public class frmProveedor extends javax.swing.JInternalFrame {
                             .addComponent(txtDireccionProveedor)
                             .addComponent(txtNombreProveedor)
                             .addComponent(txtEmpresa)
-                            .addComponent(txtRif)
-                            .addComponent(txtCorreo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 433, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                                 .addComponent(cbCi, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtCiProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(txtCiProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 433, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                .addComponent(cbRif, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtRif, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addGap(10, 10, 10))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -350,7 +363,8 @@ public class frmProveedor extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
-                    .addComponent(txtRif, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtRif, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbRif, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -625,7 +639,7 @@ public class frmProveedor extends javax.swing.JInternalFrame {
         }        
         
         //valida si el tlfno tiene letras
-        if ( !(txtTelefono.getText().matches("[0-9]+")) ){
+        if ( !(txtTelefono.getText().matches("[0-9]+")) && !txtTelefono.getText().equals("")){
         JOptionPane.showMessageDialog(rootPane, "El numero de telefono solo puede contener numeros");
         txtTelefono.requestFocus();
         return;
@@ -643,7 +657,7 @@ public class frmProveedor extends javax.swing.JInternalFrame {
             
         String email = txtCorreo.getText();
         
-        if (!valEmail(email)){  
+        if (!valEmail(email) && !txtCorreo.getText().equals("")){  
           JOptionPane.showMessageDialog(rootPane, "El correo no es valido, vuelva a escribirlo");
           txtCorreo.requestFocus();
           return;
@@ -701,7 +715,7 @@ public class frmProveedor extends javax.swing.JInternalFrame {
         dts.setCedula(TipoCi+NumCi);
         dts.setNombre(txtNombreProveedor.getText());
         dts.setDireccion(txtDireccionProveedor.getText());
-        dts.setRif(txtRif.getText());
+        dts.setRif(cbRif.getSelectedItem().toString()+txtRif.getText());
         dts.setEmpresa(txtEmpresa.getText());
         dts.setCorreo(txtCorreo.getText());
         dts.setTelefono(txtTelefono.getText());
@@ -716,15 +730,23 @@ public class frmProveedor extends javax.swing.JInternalFrame {
                 limpiar();
                 inhabilitar();
             }
-        }else{
+        }else if(accion.equals("Editar")){
             
             
+            dts.setCedula(cbCi.getSelectedItem()+txtCiProveedor.getText());
+        
+          
         
             if (func.editar(dts)) {
                 JOptionPane.showMessageDialog(rootPane, "El proveedor fue editado exitosamente");
                 mostrar("");
                 limpiar();
                 inhabilitar();
+                
+            }
+            else
+            {
+                JOptionPane.showMessageDialog(rootPane, "ERROR");
                 
             }
         
@@ -922,6 +944,16 @@ public class frmProveedor extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_txtBuscarProveedorKeyTyped
 
+    private void txtRifKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtRifKeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        try{
+            int i = Integer.parseInt(Character.toString(c));
+        }catch(Exception e){
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtRifKeyTyped
+
     
     
 
@@ -972,6 +1004,7 @@ public class frmProveedor extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnTodos;
     private javax.swing.JComboBox<String> cbCi;
     private javax.swing.JComboBox<String> cbCiTipo;
+    public javax.swing.JComboBox<String> cbRif;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

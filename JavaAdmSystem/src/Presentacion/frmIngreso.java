@@ -58,7 +58,7 @@ public class frmIngreso extends javax.swing.JInternalFrame {
     double TotalPagado;
     int idingreso;
     
-    
+    String fecha1completa;
     
     
     public frmIngreso() {
@@ -71,13 +71,23 @@ public class frmIngreso extends javax.swing.JInternalFrame {
         
         jTable1.setModel(Detalles);
         jTable1.setEnabled(false);
+        
+        
+        
+        Date fechahoy= new Date();
+        
+        DateFormat dateformat = new SimpleDateFormat("yyyy-MM-dd");
+        
+        fecha1completa =dateformat.format(fechahoy);
+
+        
+        jLabel17.setText(fecha1completa);
 
     }
     
     
     void inhabilitar (){
         txtProveedor.setEnabled(false);
-        dateChooserCombo1.setEnabled(false);
         
         btnGuardar.setEnabled(false);
         btnCancelar.setEnabled(false);
@@ -90,7 +100,6 @@ public class frmIngreso extends javax.swing.JInternalFrame {
     
     void habilitar (){
         txtProveedor.setEnabled(true);
-        dateChooserCombo1.setEnabled(true);
         
         btnGuardar.setEnabled(true);
         btnCancelar.setEnabled(true);
@@ -105,7 +114,6 @@ public class frmIngreso extends javax.swing.JInternalFrame {
         txtProveedor.setText("");
         Calendar today = Calendar.getInstance();
         today.setTime(new Date());
-        dateChooserCombo1.setSelectedDate(today);
     }
     
     void habilitardetalle(){
@@ -274,10 +282,10 @@ public class frmIngreso extends javax.swing.JInternalFrame {
         jLabel6 = new javax.swing.JLabel();
         BtnBuscarProveedor = new javax.swing.JButton();
         jLabel11 = new javax.swing.JLabel();
-        dateChooserCombo1 = new datechooser.beans.DateChooserCombo();
         jLabel15 = new javax.swing.JLabel();
         btnAnular = new javax.swing.JButton();
         lblTotalPagado = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
@@ -550,8 +558,6 @@ public class frmIngreso extends javax.swing.JInternalFrame {
         jLabel11.setForeground(new java.awt.Color(0, 51, 0));
         jLabel11.setText("Fecha");
 
-        dateChooserCombo1.setCalendarPreferredSize(new java.awt.Dimension(333, 200));
-
         jLabel15.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         jLabel15.setForeground(new java.awt.Color(0, 51, 0));
         jLabel15.setText("Total pagado:");
@@ -569,6 +575,10 @@ public class frmIngreso extends javax.swing.JInternalFrame {
         lblTotalPagado.setForeground(new java.awt.Color(0, 51, 0));
         lblTotalPagado.setText("total");
 
+        jLabel17.setFont(new java.awt.Font("Verdana", 3, 12)); // NOI18N
+        jLabel17.setForeground(new java.awt.Color(0, 51, 0));
+        jLabel17.setText("Proveedor");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -584,12 +594,12 @@ public class frmIngreso extends javax.swing.JInternalFrame {
                         .addComponent(BtnBuscarProveedor)
                         .addGap(35, 35, 35)
                         .addComponent(jLabel11)
-                        .addGap(18, 18, 18)
-                        .addComponent(dateChooserCombo1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(301, 301, 301)
                         .addComponent(jLabel5)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(494, Short.MAX_VALUE))
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -626,8 +636,9 @@ public class frmIngreso extends javax.swing.JInternalFrame {
                         .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(txtProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(BtnBuscarProveedor))
-                    .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(dateChooserCombo1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(37, 37, 37)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -644,7 +655,7 @@ public class frmIngreso extends javax.swing.JInternalFrame {
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(lblTotalPagado, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
 
         jPanel2Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnCancelar, btnGuardar, btnNuevo});
@@ -917,11 +928,7 @@ public class frmIngreso extends javax.swing.JInternalFrame {
         
         VI.setId_trabajador(idtrabajador);
         VI.setId_proveedor(Integer.parseInt(idProveedor));
-        Date fecha = new Date();
-        fecha= dateChooserCombo1.getCurrent().getTime();
-        DateFormat dateformat = new SimpleDateFormat("yyyy-MM-dd");
-        String fechacompleta =dateformat.format(fecha);
-        VI.setFecha(fechacompleta);
+        VI.setFecha(fecha1completa);
         VI.setPrecio_total(TotalPagado);
         if(FI.insertar(VI)){
             JOptionPane.showMessageDialog(rootPane, "Se guardo correctamente, se mostrará el comprobante");
@@ -1303,7 +1310,6 @@ public class frmIngreso extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnNuevo;
     private javax.swing.JButton btnQuitar;
     private javax.swing.JButton btnSalir;
-    public static datechooser.beans.DateChooserCombo dateChooserCombo1;
     public static datechooser.beans.DateChooserCombo dateChooserCombo2;
     public static datechooser.beans.DateChooserCombo dateChooserCombo3;
     private javax.swing.JLabel jLabel1;
@@ -1314,6 +1320,7 @@ public class frmIngreso extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;

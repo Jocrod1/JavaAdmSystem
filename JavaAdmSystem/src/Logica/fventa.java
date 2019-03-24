@@ -183,22 +183,22 @@ public class fventa {
     {
         DefaultTableModel modelo;
         
-        String [] titulos = {"ID", "Articulo", "Descripcion", "En Stock", "Precio de Compra", "Precio de Venta"};
+        String [] titulos = {"ID", "Articulo", "Descripcion", "En Stock", "Precio de Compra", "Precio de Venta", "Vendido"};
         
-        String [] registro = new String [6];
+        String [] registro = new String [7];
         
         totalregistros=0;
         
         modelo= new DefaultTableModel(null, titulos);
         
         sSQL="select d.id_detalle_ingreso, a.nombre as Articulo, a.descripcion,\n" +
-                "d.stock_actual, d.precio_compra, d.precio_venta\n" +
-                "from articulo a inner join detalle_ingreso d on a.id_articulo = d.id_articulo\n" +
-                "inner join ingreso i on d.id_ingreso = i.id_ingreso\n" +
-                "where a.id_articulo = '"+ Buscar +"'\n" +
-                "and d.stock_actual>0\n" +
-                "and i.estado <> 'ANULADO'\n" +
-                "ORDER BY d.id_detalle_ingreso ASC";
+"d.stock_actual, d.precio_compra, d.precio_venta, (D.stock_inicial- D.stock_actual) AS Vendido\n" +
+"from articulo a inner join detalle_ingreso d on a.id_articulo = d.id_articulo\n" +
+"inner join ingreso i on d.id_ingreso = i.id_ingreso\n" +
+"where a.id_articulo = '"+ Buscar +"'\n" +
+"and d.stock_actual>0\n" +
+"and i.estado <> 'ANULADO'\n" +
+"ORDER BY d.id_detalle_ingreso ASC";
         
         try {
             Statement st= cn.createStatement();
@@ -213,6 +213,7 @@ public class fventa {
                 registro [3]= rs.getString("stock_actual");
                 registro [4]= rs.getString("precio_compra");
                 registro [5]= rs.getString("precio_venta");
+                registro [6]= rs.getString("Vendido");
                 
                 totalregistros= totalregistros+1;
                 modelo.addRow(registro);

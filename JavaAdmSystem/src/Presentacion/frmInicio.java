@@ -8,6 +8,9 @@ package Presentacion;
 import Logica.conexion;
 import java.io.File;
 import java.sql.Connection;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import javax.swing.ImageIcon;
@@ -35,6 +38,14 @@ public class frmInicio extends javax.swing.JFrame {
         
         setIconImage (new ImageIcon(getClass().getResource("/Files/newleaflogo.png")).getImage());
         
+        Date fecha= new Date();
+        
+        DateFormat dateformat = new SimpleDateFormat("dd-MM-yyyy");
+        
+        String fecha1completa =dateformat.format(fecha);
+
+        
+        jLabel5.setText(fecha1completa);
     }
 
     /**
@@ -52,7 +63,9 @@ public class frmInicio extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
         menuBar = new javax.swing.JMenuBar();
         mnuSistema = new javax.swing.JMenu();
         mnuSalir = new javax.swing.JMenuItem();
@@ -88,12 +101,12 @@ public class frmInicio extends javax.swing.JFrame {
         lblNombre.setForeground(new java.awt.Color(204, 255, 204));
         lblNombre.setText("Nombre");
         escritorio.add(lblNombre);
-        lblNombre.setBounds(10, 10, 260, 14);
+        lblNombre.setBounds(10, 10, 260, 16);
 
         lblAcceso.setForeground(new java.awt.Color(204, 255, 204));
         lblAcceso.setText("Acceso");
         escritorio.add(lblAcceso);
-        lblAcceso.setBounds(10, 30, 230, 14);
+        lblAcceso.setBounds(10, 30, 230, 16);
 
         jLabel3.setFont(new java.awt.Font("Dialog", 3, 48)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(204, 255, 204));
@@ -107,9 +120,25 @@ public class frmInicio extends javax.swing.JFrame {
         escritorio.add(jLabel2);
         jLabel2.setBounds(670, 240, 580, 370);
 
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setText("jLabel5");
+        escritorio.add(jLabel5);
+        jLabel5.setBounds(10, 60, 270, 16);
+
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Files/fondo.jpg"))); // NOI18N
         escritorio.add(jLabel4);
         jLabel4.setBounds(1, -10, 1380, 830);
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
 
         mnuSistema.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Files/Inicio.png"))); // NOI18N
         mnuSistema.setText("Sistema");
@@ -229,7 +258,7 @@ public class frmInicio extends javax.swing.JFrame {
         jMenu2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Files/comprobantes.png"))); // NOI18N
         jMenu2.setText("Vistas");
 
-        jMenuItem1.setText("Comprovantes de Ingresos");
+        jMenuItem1.setText("Comprobantes de Ingresos");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem1ActionPerformed(evt);
@@ -523,6 +552,7 @@ public class frmInicio extends javax.swing.JFrame {
 
                 jMenu1.setEnabled(false); //reportes
                 mnuTrabajadores.setEnabled(false); //trabajadores
+                mnuRegistros.setEnabled(false);
         }
     }//GEN-LAST:event_formWindowOpened
 
@@ -604,6 +634,7 @@ public class frmInicio extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
@@ -615,6 +646,7 @@ public class frmInicio extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuReporteCliente;
     private javax.swing.JMenuItem jMenuReporteProveedores;
     private javax.swing.JMenuItem jMenuReporteTrabajador;
+    private javax.swing.JPanel jPanel1;
     public static javax.swing.JLabel lblAcceso;
     public static javax.swing.JLabel lblNombre;
     private javax.swing.JMenuBar menuBar;
